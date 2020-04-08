@@ -6,6 +6,7 @@ public class Temp {
 		System.out.println("Hello Team");
 		System.out.println("Sebastien Says hey");
 		System.out.println("Taylor's commit");
+		System.out.println("Omar was here");
 	}
 
 }
