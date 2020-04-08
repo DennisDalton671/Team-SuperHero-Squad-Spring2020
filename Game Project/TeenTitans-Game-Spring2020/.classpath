@@ -2,11 +2,20 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path="src"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/TayTa/Documents/GGC/Spring 2020/ITEC 3860/Eclipse/FinalProject/UCanAccess-4.0.1-bin/lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TayTa/Documents/GGC/Spring 2020/ITEC 3860/Eclipse/FinalProject/UCanAccess-4.0.1-bin/lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TayTa/Documents/GGC/Spring 2020/ITEC 3860/Eclipse/FinalProject/UCanAccess-4.0.1-bin/lib/hsqldb.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TayTa/Documents/GGC/Spring 2020/ITEC 3860/Eclipse/FinalProject/UCanAccess-4.0.1-bin/lib/jackcess-2.1.6.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TayTa/Documents/GGC/Spring 2020/ITEC 3860/Eclipse/FinalProject/UCanAccess-4.0.1-bin/ucanaccess-4.0.1.jar"/>
 	<classpathentry kind="lib" path="C:/Users/TayTa/Documents/GGC/Spring 2020/ITEC 3860/Eclipse/FinalProject/UCanAccess-4.0.1-bin/loader/ucanload.jar"/>
+=======
+	<classpathentry kind="lib" path="Resource/ucanload.jar"/>
+	<classpathentry kind="lib" path="Resource/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="Resource/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="Resource/hsqldb.jar"/>
+	<classpathentry kind="lib" path="Resource/jackcess-2.1.6.jar"/>
+	<classpathentry kind="lib" path="Resource/ucanaccess-4.0.1.jar"/>
+>>>>>>> 59b67cc0a954b4d22539573756e11783e6acfaa9
 	<classpathentry kind="output" path="bin"/>
 </classpath>
