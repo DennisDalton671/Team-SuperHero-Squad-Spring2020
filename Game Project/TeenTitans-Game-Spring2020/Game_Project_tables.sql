@@ -15,7 +15,7 @@ item_use VARCHAR(50)
 
 create TABLE monsters(
 monster_id VARCHAR(10) PRIMARY KEY NOT NULL,
-monster VARCHAR(20) NOT NULL,
+monster VARCHAR(30) NOT NULL,
 monster_desc VARCHAR(300) NOT NULL,
 health_point NUMBER NOT NULL,
 attack_point NUMBER NOT NULL,
@@ -26,9 +26,9 @@ item_reward_2 VARCHAR(20)
 
 CREATE TABLE rooms(
 room_ID VARCHAR(10) PRIMARY KEY NOT NULL,
-room VARCHAR(10) NOT NULL,
+room VARCHAR(30) NOT NULL,
 room_desc VARCHAR(300) NOT NULL,
-monster_id varchar(10) REFERENCES monsters(monster_id),
+monster_id varchar(30) REFERENCES monsters(monster_id),
 item_id varchar(30) REFERENCES items(item_id),
 north_id varchar(10),
 east_id varchar(10),
@@ -64,3 +64,14 @@ INSERT INTO items(item_id, item, item_desc, aquired, additive_prereq, item_boost
 VALUES('AR_VP2', 'Garlic', 'A bundle of white garlic cloves', 'RM_19', NULL, NULL, 'Kill Vampire');
 INSERT INTO items(item_id, item, item_desc, aquired, additive_prereq, item_boost, item_use)
 VALUES('AR_HP', 'Health potion', 'A small glass container filled with red liquid', 'Dropped by monsters and found around house', NULL, NULL, 'Kill Vampire');
+
+INSERT INTO rooms
+VALUES('RM_1', 'Dungeon', 'You wake up on a cold, hard floor. There is a dead body next to you on the ground. The cell door is open to the north, and there are stairs that lead up. There is a rusty crowbar laying on theground next to the door. You notice scuff marks on the ground next to the wall to the west.',NULL, 'AR_WP1', NULL, NULL, NULL, 'RM_2', NULL);
+INSERT INTO rooms
+VALUES('RM_2', 'Secret Hallway', 'A small, dusty hallway where the only light is coming from 1 candle. There is a door to the east and a door to the west.', NULL, NULL, NULL, 'RM_1', NULL, 'RM_3', NULL);
+INSERT INTO rooms
+VALUES('RM_3', 'Torture Chamber', 'This room is dark and has a wretched odor. There is a cage with a skeleton in it, and a table with straps and blood stains. There is a small, green goblin down here too. They heard you when you fell down and lunged at you. It attacks you first. The only door in here is to the east.', 'MN4_GB', 'AR_HP', NUll, 'RM_2', NULL, NULL, 'AR_PUZ3');
+INSERT INTO monsters
+VALUES('MN_WW', 'Werewolf', 'A tall, hairy man-like creature is growling at you.', 70, 10, 'The werewolf whimpers and falls to the ground.', 'AR_HP', 'AR_KEY3');
+
+
