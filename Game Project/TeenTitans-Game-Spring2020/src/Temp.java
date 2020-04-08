@@ -24,7 +24,6 @@ public class Temp {
 		}
 		
 
-
 		System.out.println("Taylor's commit");
 		System.out.println("Omar was here");
 
