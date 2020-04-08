@@ -7,6 +7,7 @@ public class Temp {
 		System.out.println("Hello Team");
 		System.out.println("Sebastien Says hey");
 
+
 		
 		String url = "jdbc:ucanaccess://Resource/DatabasePractice.accdb";
 		//String url = "jdbc:ucanaccess://D://School//Database//DatabasePractice.accdb";
@@ -22,6 +23,9 @@ public class Temp {
 			e.printStackTrace();
 		}
 		
+
+
+		System.out.println("Taylor's commit");
 
 		System.out.println("Omar was here");
 
