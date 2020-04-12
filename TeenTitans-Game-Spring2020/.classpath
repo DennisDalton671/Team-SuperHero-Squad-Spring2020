@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="Resource/|src/" kind="src" path=""/>
-	<classpathentry kind="src" path="Resource"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/CDC-1.0%Foundation-1.0">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_191"/>
-	<classpathentry kind="lib" path="D:/School/Database/UCanAccess-4.0.1-bin/ucanaccess-4.0.1.jar"/>
-	<classpathentry kind="lib" path="D:/School/Database/UCanAccess-4.0.1-bin/loader/ucanload.jar"/>
-	<classpathentry kind="lib" path="D:/School/Database/UCanAccess-4.0.1-bin/lib/commons-lang-2.6.jar"/>
-	<classpathentry kind="lib" path="D:/School/Database/UCanAccess-4.0.1-bin/lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="D:/School/Database/UCanAccess-4.0.1-bin/lib/hsqldb.jar"/>
-	<classpathentry kind="lib" path="D:/School/Database/UCanAccess-4.0.1-bin/lib/jackcess-2.1.6.jar"/>
+	<classpathentry kind="lib" path="Resource/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="Resource/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="Resource/hsqldb.jar"/>
+	<classpathentry kind="lib" path="Resource/jackcess-2.1.6.jar"/>
+	<classpathentry kind="lib" path="Resource/ucanaccess-4.0.1.jar"/>
+	<classpathentry kind="lib" path="Resource/ucanload.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/CDC-1.0%Foundation-1.0"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

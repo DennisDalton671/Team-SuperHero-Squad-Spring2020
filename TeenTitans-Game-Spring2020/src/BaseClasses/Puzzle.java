@@ -1,7 +1,5 @@
 package BaseClasses;
 
-import java.util.ArrayList;
-
 public class Puzzle {
 
     private int id;
