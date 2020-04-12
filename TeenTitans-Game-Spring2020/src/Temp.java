@@ -23,12 +23,6 @@ public class Temp {
 			e.printStackTrace();
 		}
 
-
-
-
-
-
-
 	}
 
 }
