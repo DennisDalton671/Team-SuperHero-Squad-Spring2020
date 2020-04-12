@@ -1,3 +1,5 @@
+package BaseClasses;
+
 public class Room {
 
     private int id;
@@ -6,32 +8,35 @@ public class Room {
     private int monsterID;
     private int itemID;
     private int puzzleID;
+    private int floor;
     private int NorthID;
     private int SouthID;
     private int EastID;
     private int WestID;
 
-    //Room with everything
-    public Room (int id, String name, String description, int monsterID, int itemID, int puzzleID, int NorthID, int SouthID, int EastID, int WestID) {
+    //BaseClasses.Room with everything
+    public Room (int id, String name, String description, int monsterID, int itemID, int puzzleID,int floor, int NorthID, int SouthID, int EastID, int WestID) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.monsterID = monsterID;
         this.itemID = itemID;
         this.puzzleID = puzzleID;
+        this.floor = floor;
         this.NorthID = NorthID;
         this.SouthID = SouthID;
         this.EastID = EastID;
         this.WestID = WestID;
     }
 
-    //Room without Puzzle
-    public Room (int id, String name, String description, int monsterID, int itemID, int NorthID, int SouthID, int EastID, int WestID) {
+    //BaseClasses.Room without BaseClasses.Puzzle
+    public Room (int id, String name, String description, int monsterID, int itemID,int floor, int NorthID, int SouthID, int EastID, int WestID) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.monsterID = monsterID;
         this.itemID = itemID;
+        this.floor = floor;
         this.NorthID = NorthID;
         this.SouthID = SouthID;
         this.EastID = EastID;
@@ -45,6 +50,7 @@ public class Room {
     public int getMonsterID() { return monsterID; }
     public int getItemID() { return itemID; }
     public int getPuzzleID() { return puzzleID; }
+    public int getFloor() { return floor; }
     public int getNorthID() { return NorthID; }
     public int getSouthID() { return SouthID; }
     public int getEastID() { return EastID; }
@@ -57,6 +63,7 @@ public class Room {
     public void setMonsterID(int monsterID) { this.monsterID = monsterID; }
     public void setItemID(int itemID) { this.itemID = itemID; }
     public void setPuzzleID(int puzzleID) { this.puzzleID = puzzleID; }
+    public void setFloor(int floor) { this.floor = floor; }
     public void setNorthID(int northID) { NorthID = northID; }
     public void setSouthID(int southID) { SouthID = southID; }
     public void setEastID(int eastID) { EastID = eastID; }

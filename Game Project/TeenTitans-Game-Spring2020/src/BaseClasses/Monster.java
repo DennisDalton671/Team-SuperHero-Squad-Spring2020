@@ -1,3 +1,5 @@
+package BaseClasses;
+
 public class Monster {
 
     private int id;
