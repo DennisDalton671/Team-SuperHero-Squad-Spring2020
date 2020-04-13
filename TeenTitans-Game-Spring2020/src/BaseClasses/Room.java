@@ -106,6 +106,8 @@ public class Room {
 			rlist.add(rs.getString(9));
 			rlist.add(rs.getString(10));
 			rlist.add(rs.getString(11));
+			rlist.add(rs.getString(12));
+			rlist.add(rs.getString(13));
 			System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2) + "\t\t\t" + rs.getString(3) + "\t\t\t" + rs.getString(4)+ "\t\t\t" + rs.getString(5)
 								+ "\t\t\t" + rs.getString(6) + "\t\t\t" + rs.getString(6) + "\t\t\t" + rs.getString(7) + "\t\t\t" + rs.getString(8)
 								+ "\t\t\t" + rs.getString(9) + "\t\t\t" + rs.getString(10) + "\t\t\t" + rs.getString(11));

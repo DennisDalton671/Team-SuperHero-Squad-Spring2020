@@ -48,7 +48,7 @@ public class Item {
     			ilist.add(rs.getString(3));
     			ilist.add(rs.getString(4));
     			ilist.add(rs.getString(5));
-    			ilist.add(rs.getString(5));
+    			ilist.add(rs.getString(6));
     			System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2) + "\t\t\t" + rs.getString(3) + "\t\t\t" + rs.getString(4));
     		}
     	} catch (SQLException e) {
