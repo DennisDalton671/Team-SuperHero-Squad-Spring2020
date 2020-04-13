@@ -1,26 +1,37 @@
 package BaseClasses;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+
 public class Room {
 
-    private int id;
+    private String id;
     private String name;
     private String description;
-    private int monsterID;
-    private int itemID;
-    private int puzzleID;
+    private String monsterID;
+    private String itemID;
+    private String itemID2;
+    private String itemID3;
+    private String puzzleID;
     private int floor;
-    private int NorthID;
-    private int SouthID;
-    private int EastID;
-    private int WestID;
+    private String NorthID;
+    private String SouthID;
+    private String EastID;
+    private String WestID;
 
     //BaseClasses.Room with everything
-    public Room (int id, String name, String description, int monsterID, int itemID, int puzzleID,int floor, int NorthID, int SouthID, int EastID, int WestID) {
+    public Room (String id, String name, String description, String monsterID, String itemID, String itemID2, String itemID3, String puzzleID,int floor, String NorthID, String SouthID, String EastID, String WestID) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.monsterID = monsterID;
         this.itemID = itemID;
+        this.itemID2 = itemID2;
+        this.itemID3 = itemID3;
         this.puzzleID = puzzleID;
         this.floor = floor;
         this.NorthID = NorthID;
@@ -30,12 +41,14 @@ public class Room {
     }
 
     //BaseClasses.Room without BaseClasses.Puzzle
-    public Room (int id, String name, String description, int monsterID, int itemID,int floor, int NorthID, int SouthID, int EastID, int WestID) {
+    public Room (String id, String name, String description, String monsterID, String itemID, String itemID2, String itemID3, int floor, String NorthID, String SouthID, String EastID, String WestID) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.monsterID = monsterID;
         this.itemID = itemID;
+        this.itemID2 = itemID2;
+        this.itemID3 = itemID3;
         this.floor = floor;
         this.NorthID = NorthID;
         this.SouthID = SouthID;
@@ -44,35 +57,62 @@ public class Room {
     }
 
     // Getters
-    public int getId() { return id; }
+    public String getId() { return id; }
     public String getName() { return name; }
     public String getDescription() { return description; }
-    public int getMonsterID() { return monsterID; }
-    public int getItemID() { return itemID; }
-    public int getPuzzleID() { return puzzleID; }
+    public String getMonsterID() { return monsterID; }
+    public String getItemID() { return itemID; }
+    public String getPuzzleID() { return puzzleID; }
     public int getFloor() { return floor; }
-    public int getNorthID() { return NorthID; }
-    public int getSouthID() { return SouthID; }
-    public int getEastID() { return EastID; }
-    public int getWestID() { return WestID; }
+    public String getNorthID() { return NorthID; }
+    public String getSouthID() { return SouthID; }
+    public String getEastID() { return EastID; }
+    public String getWestID() { return WestID; }
 
     // Setters
-    public void setId(int id) { this.id = id; }
+    public void setId(String id) { this.id = id; }
     public void setName(String name) { this.name = name; }
     public void setDescription(String description) { this.description = description; }
-    public void setMonsterID(int monsterID) { this.monsterID = monsterID; }
-    public void setItemID(int itemID) { this.itemID = itemID; }
-    public void setPuzzleID(int puzzleID) { this.puzzleID = puzzleID; }
+    public void setMonsterID(String monsterID) { this.monsterID = monsterID; }
+    public void setItemID(String itemID) { this.itemID = itemID; }
+    public void setItemI2D(String itemID2) { this.itemID2 = itemID2; }
+    public void setItemID3(String itemID3) { this.itemID3 = itemID3; }
+    public void setPuzzleID(String puzzleID) { this.puzzleID = puzzleID; }
     public void setFloor(int floor) { this.floor = floor; }
-    public void setNorthID(int northID) { NorthID = northID; }
-    public void setSouthID(int southID) { SouthID = southID; }
-    public void setEastID(int eastID) { EastID = eastID; }
-    public void setWestID(int westID) { WestID = westID; }
-
-
-
-
-
-
-
+    public void setNorthID(String northID) { NorthID = northID; }
+    public void setSouthID(String southID) { SouthID = southID; }
+    public void setEastID(String eastID) { EastID = eastID; }
+    public void setWestID(String westID) { WestID = westID; }
+    
+    
+    public static void main(String[] args) {
+    ArrayList<String> rlist = new ArrayList<String>();
+	
+	String url = "jdbc:ucanaccess://Resource/SoftDevPro.accdb";
+	
+	try {
+		Connection con = DriverManager.getConnection(url);
+		Statement s = con.createStatement();
+		ResultSet rs = s.executeQuery("SELECT room_id, room, room_desc, monster_id, item_id, item_id2, item_id3, puzzle_id, floor, north_id, south_id, east_id, west_id FROM rooms");
+		while (rs.next()) {
+			rlist.add(rs.getString(1));
+			rlist.add(rs.getString(2));
+			rlist.add(rs.getString(3));
+			rlist.add(rs.getString(4));
+			rlist.add(rs.getString(5));
+			rlist.add(rs.getString(6));
+			rlist.add(rs.getString(7));
+			rlist.add(rs.getString(8));
+			rlist.add(rs.getString(9));
+			rlist.add(rs.getString(10));
+			rlist.add(rs.getString(11));
+			System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2) + "\t\t\t" + rs.getString(3) + "\t\t\t" + rs.getString(4)+ "\t\t\t" + rs.getString(5)
+								+ "\t\t\t" + rs.getString(6) + "\t\t\t" + rs.getString(6) + "\t\t\t" + rs.getString(7) + "\t\t\t" + rs.getString(8)
+								+ "\t\t\t" + rs.getString(9) + "\t\t\t" + rs.getString(10) + "\t\t\t" + rs.getString(11));
+		}
+	} catch (SQLException e) {
+		e.printStackTrace();
+		
+		}
+    }
 }
