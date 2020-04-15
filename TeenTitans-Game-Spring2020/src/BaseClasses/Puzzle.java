@@ -76,7 +76,7 @@ public class Puzzle {
     public void setRoomLocation2(String roomLocation2) { this.roomLocation2 = roomLocation2; }
     
     public static void main(String[] args) {
-        ArrayList<String> plist = new ArrayList<String>();
+        ArrayList<Puzzle> plist = new ArrayList<Puzzle>();
     	
     	String url = "jdbc:ucanaccess://Resource/SoftDevPro.accdb";
     	
@@ -85,26 +85,27 @@ public class Puzzle {
     		Statement s = con.createStatement();
     		ResultSet rs = s.executeQuery("SELECT puzzle_id, puzzle_desc, puzzle_desc2, puzzle_desc3, puzzle_desc4, hint, hint2, hint3, hint4, solution, solution2, solution3, solution4, reward, penalty, room_puzzle, room_puzzle2 FROM puzzles");
     		while (rs.next()) {
-    			plist.add(rs.getString(1));
-    			plist.add(rs.getString(2));
-    			plist.add(rs.getString(3));
-    			plist.add(rs.getString(4));
-    			plist.add(rs.getString(5));
-    			plist.add(rs.getString(6));
-    			plist.add(rs.getString(7));
-    			plist.add(rs.getString(8));
-    			plist.add(rs.getString(9));
-    			plist.add(rs.getString(10));
-    			plist.add(rs.getString(11));
-    			plist.add(rs.getString(12));
-    			plist.add(rs.getString(13));
-    			plist.add(rs.getString(14));
-    			plist.add(rs.getString(15));
-    			plist.add(rs.getString(16));
-    			plist.add(rs.getString(17));
-    			System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2) + "\t\t\t" + rs.getString(3) + "\t\t\t" + rs.getString(4)+ "\t\t\t" + rs.getString(5)
-    								+ "\t\t\t" + rs.getString(6) + "\t\t\t" + rs.getString(6) + "\t\t\t" + rs.getString(7) + "\t\t\t" + rs.getString(8)
-    								+ "\t\t\t" + rs.getString(9) + "\t\t\t" + rs.getString(10) + "\t\t\t" + rs.getString(11));
+    			String puzzle_id = rs.getString(1);
+    			String puzzle_desc = rs.getString(2);
+    			String monster_id = rs.getString(3);
+    			String puzzle_desc2 = rs.getString(4);
+    			String puzzle_desc3 = rs.getString(5);
+    			String puzzle_desc4 = rs.getString(6);
+    			String hint = rs.getString(7);
+    			String hint2 = rs.getString(8);
+    			String hint3 = rs.getString(9);
+    			String hint4 = rs.getString(10);
+    			String solution = rs.getString(11);
+    			String solution2 = rs.getString(12);
+    			String solution3 = rs.getString(13);
+    			String solution4 = rs.getString(14);
+    			String reward = rs.getString(15);
+    			String penalty = rs.getString(16);
+    			String room_puzzle = rs.getString(17);
+    			String room_puzzle2 = rs.getString(18);
+    			
+    			plist.add(new Puzzle(puzzle_id, puzzle_desc, puzzle_desc2, puzzle_desc3, puzzle_desc4, hint, hint2, hint3, hint4, solution, solution2, solution3, solution4, reward, penalty, room_puzzle, room_puzzle2));
+    			
     		}
     	} catch (SQLException e) {
     		e.printStackTrace();

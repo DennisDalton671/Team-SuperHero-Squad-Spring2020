@@ -14,7 +14,7 @@ public class Item {
     private String description;
     private String roomLocation;
 
-    public Item(String id, String itemName, String description, String roomLocation) {
+    public Item(String id, String itemName, String description, String roomLocation, String attack_point, String room_id, String item_benefit, String item_use, String craft) {
         this.id = id;
         this.itemName = itemName;
         this.description = description;
@@ -34,22 +34,27 @@ public class Item {
     public void setRoomLocation(String roomLocation) { this.roomLocation = roomLocation; }
     public static void main(String[] args) {
         
-    	ArrayList<String> ilist = new ArrayList<String>();
+    	ArrayList<Item> ilist = new ArrayList<Item>();
     	
     	String url = "jdbc:ucanaccess://Resource/SoftDevPro.accdb";
     	
     	try {
     		Connection con = DriverManager.getConnection(url);
     		Statement s = con.createStatement();
-    		ResultSet rs = s.executeQuery("SELECT monster_id, monster, monster_desc, health_point, attack_point, room_id FROM monsters");
+    		ResultSet rs = s.executeQuery("SELECT item_id, item, item_desc, acquired, acquired_additional, item_boost, item_benefit, item_use, craft FROM monsters");
     		while (rs.next()) {
-    			ilist.add(rs.getString(1));
-    			ilist.add(rs.getString(2));
-    			ilist.add(rs.getString(3));
-    			ilist.add(rs.getString(4));
-    			ilist.add(rs.getString(5));
-    			ilist.add(rs.getString(6));
-    			System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2) + "\t\t\t" + rs.getString(3) + "\t\t\t" + rs.getString(4));
+    			String item_id = rs.getString(1);
+    			String item = rs.getString(2);
+    			String item_desc = rs.getString(3);
+    			String acquired = rs.getString(4);
+    			String acquired_additional = rs.getString(5);
+    			String item_boost = rs.getString(6);
+    			String item_benefit = rs.getString(7);
+    			String item_use = rs.getString(8);
+    			String craft = rs.getString(9);
+    			
+    			ilist.add(new Item(item_id, item, item_desc, acquired, acquired_additional, item_boost, item_benefit, item_use, craft));
+    			
     		}
     	} catch (SQLException e) {
     		e.printStackTrace();
