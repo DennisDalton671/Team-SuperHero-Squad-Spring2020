@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+import org.hsqldb.lib.HsqlByteArrayOutputStream;
+import org.w3c.dom.ls.LSOutput;
+
+>>>>>>> origin/Omar
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -7,6 +13,7 @@ public class Trial {
 		
 		ArrayList<String> list = new ArrayList<String>();
 		
+<<<<<<< HEAD
 		String url = "jdbc:ucanaccess://Resource/SoftDevPro.accdb";
 		
 		try {
@@ -23,4 +30,15 @@ public class Trial {
 		}
 	}
 
+=======
+
+		
+
+
+		System.out.println(list);
+	}
+
+
+
+>>>>>>> origin/Omar
 }
