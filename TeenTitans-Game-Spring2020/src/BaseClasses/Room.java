@@ -4,6 +4,7 @@ public class Room {
 
     private String id;
     private String name;
+    private String floor;
     private String description;
     private String monsterID;
     private String itemID;
@@ -16,9 +17,10 @@ public class Room {
     private String itemID3;
 
     //BaseClasses.Room with everything
-    public Room (String id, String name, String description, String monsterID, String itemID, String puzzleID, String NorthID, String SouthID, String WestID, String EastID, String itemID2, String itemID3 ) {
+    public Room (String id, String name, String floor, String description, String monsterID, String itemID, String puzzleID, String NorthID, String SouthID, String WestID, String EastID, String itemID2, String itemID3 ) {
         this.id = id;
         this.name = name;
+        this.floor = floor;
         this.description = description;
         this.monsterID = monsterID;
         this.itemID = itemID;
@@ -40,6 +42,7 @@ public class Room {
     // Getters
     public String getId() { return id; }
     public String getName() { return name; }
+    public String getFloor() { return floor; }
     public String getDescription() { return description; }
     public String getMonsterID() { return monsterID; }
     public String getItemID() { return itemID; }
@@ -54,6 +57,7 @@ public class Room {
     // Setters
     public void setId(String id) { this.id = id; }
     public void setName(String name) { this.name = name; }
+    public void setFloor(String floor) { this.floor = floor; }
     public void setDescription(String description) { this.description = description; }
     public void setMonsterID(String monsterID) { this.monsterID = monsterID; }
     public void setItemID(String itemID) { this.itemID = itemID; }

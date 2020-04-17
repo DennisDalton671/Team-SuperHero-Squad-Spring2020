@@ -20,22 +20,23 @@ public class Model2 {
         try {
             Connection con = DriverManager.getConnection(url);
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT room_id, room, room_desc, monster_id, item_id, puzzle_id, north_id, south_id, west_id, east_id, item_id2, item_id3  FROM rooms");
+            ResultSet rs = s.executeQuery("SELECT room_id, room, floor, room_desc, monster_id, item_id, puzzle_id, north_id, south_id, west_id, east_id, item_id2, item_id3  FROM rooms");
             int count = 0;
             while (rs.next()) {
                 String room_id = rs.getString(1);
                 String room = rs.getString(2);
-                String room_desc = rs.getString(3);
-                String monster_id = rs.getString(4);
-                String item_id = rs.getString(5);
-                String puzzle_id = rs.getString(6);
-                String north_id = rs.getString(7);
-                String south_id = rs.getString(8);
-                String west_id = rs.getString(9);
-                String east_id = rs.getString(10);
-                String item_id2 = rs.getString(11);
-                String item_id3 = rs.getString(12);
-                list.add(new Room(room_id, room, room_desc, monster_id, item_id, puzzle_id, north_id, south_id, west_id, east_id, item_id2, item_id3));
+                String floor = rs.getNString(3);
+                String room_desc = rs.getString(4);
+                String monster_id = rs.getString(5);
+                String item_id = rs.getString(6);
+                String puzzle_id = rs.getString(7);
+                String north_id = rs.getString(8);
+                String south_id = rs.getString(9);
+                String west_id = rs.getString(10);
+                String east_id = rs.getString(11);
+                String item_id2 = rs.getString(12);
+                String item_id3 = rs.getString(13);
+                list.add(new Room(room_id, room, floor, room_desc, monster_id, item_id, puzzle_id, north_id, south_id, west_id, east_id, item_id2, item_id3));
                 System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
             }
         } catch (
@@ -55,7 +56,6 @@ public class Model2 {
             while (rs.next()) {
                 String puzzle_id = rs.getString(1);
                 String puzzle_desc = rs.getString(2);
-                String monster_id = rs.getString(3);
                 String puzzle_desc2 = rs.getString(4);
                 String puzzle_desc3 = rs.getString(5);
                 String puzzle_desc4 = rs.getString(6);
@@ -116,7 +116,7 @@ public class Model2 {
         try {
             Connection con = DriverManager.getConnection(url);
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT item_id, item, item_desc, acquired, acquired_additional, item_boost, item_benefit, item_use, craft FROM monsters");
+            ResultSet rs = s.executeQuery("SELECT item_id, item, item_desc, acquired, acquired_additional, item_boost, item_benefit, item_use, craft FROM items");
             while (rs.next()) {
                 String item_id = rs.getString(1);
                 String item = rs.getString(2);
