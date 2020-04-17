@@ -14,7 +14,6 @@ public class Puzzle {
     private String hint3;
     private String hint4;
     private String solution;
-<<<<<<< HEAD
     private String solution2;
     private String solution3;
     private String solution4;
@@ -24,13 +23,6 @@ public class Puzzle {
     private String room_puzzle2;
 
     public Puzzle(String id, String description, String description2, String description3, String description4, String hint1, String hint2, String hint3, String hint4, String solution, String solution2, String solution3, String solution4, String reward, String penalty, String room_puzzle, String room_puzzle2) {
-=======
-    private ArrayList<String> rewards;
-    private boolean punishment;
-    private int roomLocation;
-
-    public Puzzle(int id, String description, String solution, ArrayList<String> rewards, boolean punishment) {
->>>>>>> 75b78cee3bfcd52575aff75e23e09f2f6c26aa6e
         this.id = id;
         this.description = description;
         this.description2 = description2;
@@ -61,7 +53,6 @@ public class Puzzle {
     public String getHint3() { return hint3; }
     public String getHint4() { return hint4; }
     public String getSolution() { return solution; }
-<<<<<<< HEAD
     public String getSolution2() { return solution2; }
     public String getSolution3() { return solution3; }
     public String getSolution4() { return solution4; }
@@ -69,12 +60,6 @@ public class Puzzle {
     public String getPenalty() { return penalty; }
     public String getRoom_puzzle() { return room_puzzle; }
     public String getRoom_puzzle2() { return room_puzzle2; }
-
-=======
-    public ArrayList<String> getRewards() { return rewards; }
-    public boolean isPunishment() { return punishment; }
-    public int getRoomLocation() { return roomLocation; }
->>>>>>> 75b78cee3bfcd52575aff75e23e09f2f6c26aa6e
 
     // Setters
     public void setId(String id) { this.id = id; }
@@ -101,7 +86,6 @@ public class Puzzle {
     }
     public void setHint4(String hint4) { this.hint4 = hint4; }
     public void setSolution(String solution) { this.solution = solution; }
-<<<<<<< HEAD
     public void setSolution2(String solution2) {
         this.solution2 = solution2;
     }
@@ -123,9 +107,4 @@ public class Puzzle {
     public void setRoom_puzzle2(String room_puzzle2) {
         this.room_puzzle2 = room_puzzle2;
     }
-=======
-    public void setRewards(ArrayList<String> rewards) { this.rewards = rewards; }
-    public void setPunishment(boolean punishment) { this.punishment = punishment; }
-    public void setRoomLocation(int roomLocation) { this.roomLocation = roomLocation; }
->>>>>>> 75b78cee3bfcd52575aff75e23e09f2f6c26aa6e
 }
