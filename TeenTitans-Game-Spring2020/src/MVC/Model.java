@@ -1,9 +1,9 @@
 package MVC;
 
-import BaseClasses.Item;
-import BaseClasses.Monster;
-import BaseClasses.Puzzle;
-import BaseClasses.Room;
+import Model.Item;
+import Model.Monster;
+import Model.Room;
+import Model.Puzzle;
 
 import java.sql.*;
 import java.util.ArrayList;
