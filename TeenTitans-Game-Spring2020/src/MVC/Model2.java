@@ -8,7 +8,7 @@ import BaseClasses.Room;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class Model {
+public class Model2 {
 
     public static void main(String args[]) {
 
@@ -133,6 +133,14 @@ public class Model {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+
+
+        boolean gameLoop = true;
+        while (gameLoop){
+
+            System.out.println(list.get(1));
+
         }
 
 

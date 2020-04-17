@@ -31,6 +31,12 @@ public class Room {
         this.itemID3 = itemID3;
     }
 
+    @Override
+    public String toString() {
+        return name + "\n" +
+               description;
+    }
+
     // Getters
     public String getId() { return id; }
     public String getName() { return name; }
