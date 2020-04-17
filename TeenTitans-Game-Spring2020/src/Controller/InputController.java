@@ -1,31 +1,29 @@
 package Controller;
 import Model.Model;
+import Model.InputC;
 import View.View;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
 public class InputController implements EventHandler {
 
-	private Model model;
+	private InputC model;
 	private View view;
 	
-	public InputController(Model model, View view) {
+	public InputController(InputC model, View view) {
 		this.model = model;
 		this.view = view;
 		
 	}
+
 	
-	public void initModel(int x){
-		this.model.setValue(x);
-	} 
-	
-	public void addModel(Model m){
+	public void addModel(InputC m){
 		this.model = m;
 	}
 	
 	public void handle(Event arg0) {
 		// TODO Auto-generated method stub
-		model.addString(view.getInput());
+		model.checkUserInput(view.getInput());
 	}
 	
 }

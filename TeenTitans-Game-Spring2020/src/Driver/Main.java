@@ -2,6 +2,7 @@ package Driver;
 import Controller.ChangeViewController;
 import Controller.InputController;
 import Model.Model;
+import Model.InputC;
 import View.View;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -23,13 +24,16 @@ public class Main extends Application{
 		View view = new View();
 		Scene scene = new Scene(view);
 		Model model = new Model();
+		InputC c = new InputC();
 		
 		model.addObserver(view);
+		c.addObserver(view);
 		
-		control = new InputController(model,view);
+		//control = new InputController(model,view);
 		control2 = new ChangeViewController(model,view);
-		control.addModel(model);
+		//control.addModel(model);
 		control2.addModel(model);
+		control = new InputController(c,view);
 		//control.initModel(10);
 		
 		view.addInputController(control);
