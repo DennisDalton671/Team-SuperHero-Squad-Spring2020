@@ -99,7 +99,7 @@ public class Model {
                 String defeat_message = rs.getString(7);
                 String item_reward = rs.getString(8);
                 String item_reward2 = rs.getString(9);
-                System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2) + "\t\t\t" + rs.getString(3) + "\t\t\t" + rs.getString(4) + "\t\t\t" + rs.getString(5) + "\t\t\t" + rs.getString(6) + "\t\t\t" + rs.getString(7) + "\t\t\t" + rs.getString(8) + "\t\t\t" + rs.getString(9));
+                System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
                 mlist.add(new Monster(monster_id, monster, monster_desc, health_point, attack_point, room_id, defeat_message, item_reward, item_reward2));
 
             }
@@ -126,7 +126,7 @@ public class Model {
                 String item_benefit = rs.getString(7);
                 String item_use = rs.getString(8);
                 String craft = rs.getString(9);
-                System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2) + "\t\t\t" + rs.getString(3) + "\t\t\t" + rs.getString(4) + "\t\t\t" + rs.getString(5) + "\t\t\t" + rs.getString(6) + "\t\t\t" + rs.getString(7) + "\t\t\t" + rs.getString(8) + "\t\t\t" + rs.getString(9));
+                System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
                 ilist.add(new Item(item_id, item, item_desc, acquired, acquired_additional, item_boost, item_benefit, item_use, craft));
 
             }
