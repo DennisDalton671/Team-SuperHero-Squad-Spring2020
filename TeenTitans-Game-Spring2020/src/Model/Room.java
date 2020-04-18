@@ -1,11 +1,10 @@
-package BaseClasses;
-
-import java.util.ArrayList;
+package Model;
 
 public class Room {
 
     private String id;
     private String name;
+    private String floor;
     private String description;
     private String monsterID;
     private String itemID;
@@ -17,12 +16,11 @@ public class Room {
     private String itemID2;
     private String itemID3;
 
-    ArrayList<String> inventory = new ArrayList<String>();
-    
     //BaseClasses.Room with everything
-    public Room (String id, String name, String description, String monsterID, String itemID, String puzzleID, String NorthID, String SouthID, String WestID, String EastID, String itemID2, String itemID3 ) {
+    public Room (String id, String name, String floor, String description, String monsterID, String itemID, String puzzleID, String NorthID, String SouthID, String WestID, String EastID, String itemID2, String itemID3 ) {
         this.id = id;
         this.name = name;
+        this.floor = floor;
         this.description = description;
         this.monsterID = monsterID;
         this.itemID = itemID;
@@ -35,31 +33,17 @@ public class Room {
         this.itemID3 = itemID3;
     }
 
+    @Override
+    public String toString() {
+        return name + "\n" +
+               description;
+    }
+
     // Getters
     public String getId() { return id; }
     public String getName() { return name; }
-    public String getDescription() { 
-    	/*If there are more then 50 character in a line, 
-		it'll make a new line*/
-		if(description.length() > 50) {
-			int totalCharacterLength = 0;
-			int descriptionLength = description.length();
-			String outputString ="";
-
-			for (String word : description.split(" ")) {
-				totalCharacterLength += word.length();
-				descriptionLength -= word.length()+1;
-				outputString += word + " ";
-
-				if(totalCharacterLength > 40 && descriptionLength > 0) {
-					totalCharacterLength = 0;
-					outputString += "\n";
-				}
-			}
-			description = outputString;
-		}
-		return description; 
-		}
+    public String getFloor() { return floor; }
+    public String getDescription() { return description; }
     public String getMonsterID() { return monsterID; }
     public String getItemID() { return itemID; }
     public String getPuzzleID() { return puzzleID; }
@@ -73,7 +57,8 @@ public class Room {
     // Setters
     public void setId(String id) { this.id = id; }
     public void setName(String name) { this.name = name; }
-    public void setDescription(String description) {this.description = description;} 
+    public void setFloor(String floor) { this.floor = floor; }
+    public void setDescription(String description) { this.description = description; }
     public void setMonsterID(String monsterID) { this.monsterID = monsterID; }
     public void setItemID(String itemID) { this.itemID = itemID; }
     public void setPuzzleID(String puzzleID) { this.puzzleID = puzzleID; }
@@ -83,37 +68,11 @@ public class Room {
     public void setWestID(String westID) { WestID = westID; }
     public void setItemID2(String itemID2) { this.itemID2 = itemID2; }
     public void setItemID3(String itemID3) { this.itemID3 = itemID3; }
-	
-    public void Scan() {
-		for (int i = 0; i < inventory.size(); i++) {
-			System.out.println(inventory.get(i));
-		}
-	}
-	
-	public void PickUp(Player p) {
-		for (int i = 0; i < inventory.size(); i++) {
-			p.addInventory(inventory.get(i));
-		}
-		inventory.clear();
-		return p;
-	}
-	
-	public void Drop(Player p) {
-		for (int i = 0; i < p.getSize(); i++) {
-			inventory.add(p.getIndex(i));
-		}
-		p.clear();
-		return p;
-	}
-	
-	public void Inspect(String puzzleID) {
-		this.puzzleID = puzzleID;
-	}
-	public void puzzleClear() {
-		this.puzzleID = "0";
-		}
-	}
 
 
 
 
+
+
+
+}
