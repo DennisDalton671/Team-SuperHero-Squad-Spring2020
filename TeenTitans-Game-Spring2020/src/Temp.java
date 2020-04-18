@@ -1,10 +1,16 @@
+import BaseClasses.AttackState;
+import BaseClasses.Monster;
+
 import java.sql.*;
 
 public class Temp {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Hello Team");
+	public static void main(String[] args) throws InterruptedException {
+
+		Monster Test = new Monster("1", "TestMonster", "desc","50", "5", "1","oof","e","");
+		AttackState.attackState(Test);
+
+		/*System.out.println("Hello Team");
 		System.out.println("Sebastien Says hey");
 		System.out.println("Taylor's commit");
 		System.out.println("Omar was here");
@@ -22,6 +28,7 @@ public class Temp {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		*/
 
 	}
 
