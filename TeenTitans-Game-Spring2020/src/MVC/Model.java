@@ -12,37 +12,7 @@ public class Model {
 
     public static void main(String args[]) {
 
-        String url = "jdbc:ucanaccess://Resource/SoftDevPro_1.accdb";
-
-        // Rooms ################
-        ArrayList<Room> list = new ArrayList<Room>();
-
-        try {
-            Connection con = DriverManager.getConnection(url);
-            Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT room_id, room, floor, room_desc, monster_id, item_id, puzzle_id, north_id, south_id, west_id, east_id, item_id2, item_id3  FROM rooms");
-            int count = 0;
-            while (rs.next()) {
-                String room_id = rs.getString(1);
-                String room = rs.getString(2);
-                String floor = rs.getNString(3);
-                String room_desc = rs.getString(4);
-                String monster_id = rs.getString(5);
-                String item_id = rs.getString(6);
-                String puzzle_id = rs.getString(7);
-                String north_id = rs.getString(8);
-                String south_id = rs.getString(9);
-                String west_id = rs.getString(10);
-                String east_id = rs.getString(11);
-                String item_id2 = rs.getString(12);
-                String item_id3 = rs.getString(13);
-                list.add(new Room(room_id, room, floor, room_desc, monster_id, item_id, puzzle_id, north_id, south_id, west_id, east_id, item_id2, item_id3));
-                System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
-            }
-        } catch (
-                SQLException e) {
-            e.printStackTrace();
-        }
+        String url = "jdbc:ucanaccess://Resource/SoftDevPro_2.accdb";
 
 
 

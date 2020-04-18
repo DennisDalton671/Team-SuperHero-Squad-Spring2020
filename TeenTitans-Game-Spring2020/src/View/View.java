@@ -1,6 +1,7 @@
 package View;
 import java.util.Observable;
 
+import Model.Connector;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -77,7 +78,7 @@ public class View extends BorderPane implements java.util.Observer {
 
 	public void update(Observable o, Object obj) {
 		// TODO Auto-generated method stub
-		this.display.appendText(((String)obj) + "\n");
+		this.display.appendText(((Connector)obj).getOutput() + "\n");
 	}
 	
 	public void defaultSetup() {
