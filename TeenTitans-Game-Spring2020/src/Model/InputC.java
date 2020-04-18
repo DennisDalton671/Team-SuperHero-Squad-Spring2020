@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class InputC extends java.util.Observable {
 
@@ -24,6 +23,7 @@ public class InputC extends java.util.Observable {
 		player = new Player("P1", "100", "5", "RM_1", "None");
 		
 		player.addInventory("AR_KEY5");
+
 		
 		try {
 			Connection con = DriverManager.getConnection(url);
