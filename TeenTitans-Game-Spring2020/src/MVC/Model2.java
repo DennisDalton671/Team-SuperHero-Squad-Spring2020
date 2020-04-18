@@ -43,8 +43,8 @@ public class Model2 {
             e.printStackTrace();
         }
 
-
-
+        
+        
         ArrayList<Puzzle> plist = new ArrayList<Puzzle>();
 
         try {
@@ -98,7 +98,7 @@ public class Model2 {
                 String item_reward2 = rs.getString(9);
 
                 mlist.add(new Monster(monster_id, monster, monster_desc, health_point, attack_point, room_id, defeat_message, item_reward, item_reward2));
-
+            
             }
         } catch (SQLException e) {
             e.printStackTrace();
