@@ -13,7 +13,7 @@ public class Item {
         this.description = description;
         this.roomLocation = roomLocation;
     }
-
+    
     // Getters
     public int getId() { return id; }
     public String getItemName() { return itemName; }

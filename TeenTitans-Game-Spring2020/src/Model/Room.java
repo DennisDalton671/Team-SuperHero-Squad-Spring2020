@@ -41,7 +41,25 @@ public class Room {
         return name + "\n" +
                description;
     }
+    
+    public boolean checkInventory(String id) {
+    	if (roomItemInventory.size() == 0 || roomItemInventory.get(0).equalsIgnoreCase("0")) return false;
+    	for (int x = 0; x < roomItemInventory.size(); x++) {
+    		if (roomItemInventory.get(x).equalsIgnoreCase(id)) return true;
+    	}
+    	return false;
+    }
 
+    public boolean pickupItem(String name) {
+    	for (int x = 0; x < roomItemInventory.size(); x++) {
+    		if (roomItemInventory.get(x).equalsIgnoreCase(name)) {
+    			roomItemInventory.remove(x);
+    			return true;
+    		}
+    	}
+    	return false;
+    }
+    
     // Getters
     public String getId() { return id; }
     public String getName() { return name; }
