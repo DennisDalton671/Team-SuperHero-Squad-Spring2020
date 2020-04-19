@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.ArrayList;
+
 public class Player extends Entity{
 
 	private String equipped;
@@ -20,11 +22,11 @@ public class Player extends Entity{
 		super.addInventory(id);
 	}
 	
-	public String showInventory() {
-		String temp = "";
-		if (super.getInventory().size() == 0) return "Empty";
+	public ArrayList<String> showInventory() {
+		ArrayList<String> temp = new ArrayList<String>();
+		if (super.getInventory().size() == 0) temp.add("Empty");
 		for (int x = 0; x < super.getInventory().size(); x++) {
-			temp += "[" + super.getInventory().get(x) + "] ";
+			temp.add(super.getInventory().get(x));
 		}
 		return temp;
 	}

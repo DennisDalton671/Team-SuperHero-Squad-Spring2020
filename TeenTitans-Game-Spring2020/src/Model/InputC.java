@@ -198,7 +198,7 @@ public class InputC extends java.util.Observable {
 				output = "Item added to inventory";
 			} else output = "Item not in room";
 		} else if (s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")) {
-			output = "Inventory: " + ((Player) player).showInventory();
+			output = "Inventory: " + showInventory();
 		}
 		return output;
 	}
@@ -265,4 +265,15 @@ public class InputC extends java.util.Observable {
 		return "False";
 	}
 	
+	public String showInventory() {
+		ArrayList<String> temp = ((Player) player).showInventory();
+		String output = "";
+		for (int x = 0; x < iList.size(); x++) {
+			for (int y = 0; y < temp.size(); y++) {
+				if (iList.get(x).getId().equalsIgnoreCase(temp.get(y)))
+					output +=  "[" + iList.get(x).getItemName() + "]";
+			}
+    	}
+		return output;
+	}
 }
