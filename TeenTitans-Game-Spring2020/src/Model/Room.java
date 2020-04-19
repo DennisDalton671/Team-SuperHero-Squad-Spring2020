@@ -23,6 +23,7 @@ public class Room {
     public Room (String id, String name, String floor, String description, String monsterID, String itemID, String puzzleID, String NorthID, String SouthID, String WestID, String EastID, String key) {
     	this.roomItemInventory = new ArrayList<String>();
     	this.id = id;
+        this.id = id;
         this.name = name;
         this.floor = floor;
         this.description = description;
@@ -43,21 +44,19 @@ public class Room {
     }
     
     public boolean checkInventory(String id) {
-    	if (roomItemInventory.size() == 0 || roomItemInventory.get(0).equalsIgnoreCase("0")) return false;
-    	for (int x = 0; x < roomItemInventory.size(); x++) {
-    		if (roomItemInventory.get(x).equalsIgnoreCase(id)) return true;
-    	}
-    	return false;
+    	return roomItemInventory.contains(id);
     }
 
-    public boolean pickupItem(String name) {
-    	for (int x = 0; x < roomItemInventory.size(); x++) {
-    		if (roomItemInventory.get(x).equalsIgnoreCase(name)) {
-    			roomItemInventory.remove(x);
-    			return true;
-    		}
-    	}
-    	return false;
+	public boolean pickupItem(String name) {
+		if (roomItemInventory.contains(name)) {
+			roomItemInventory.remove(name);
+			return true;
+		}
+		return false;
+	}
+
+    public void addInventory(String id) {
+    	roomItemInventory.add(id);
     }
     
     // Getters
@@ -88,7 +87,7 @@ public class Room {
     public void setWestID(String westID) { this.WestID = westID; }
     public void setkey(String key) { this.key = key; }
 
-
+    
 
 
 

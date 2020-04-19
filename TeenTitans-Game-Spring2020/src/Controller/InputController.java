@@ -2,10 +2,11 @@ package Controller;
 import Model.Model;
 import Model.InputC;
 import View.View;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
-public class InputController implements EventHandler {
+public class InputController implements EventHandler<ActionEvent> {
 
 	private InputC model;
 	private View view;
@@ -21,7 +22,7 @@ public class InputController implements EventHandler {
 		this.model = m;
 	}
 	
-	public void handle(Event arg0) {
+	public void handle(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		model.checkUserInput(view.getInput());
 	}

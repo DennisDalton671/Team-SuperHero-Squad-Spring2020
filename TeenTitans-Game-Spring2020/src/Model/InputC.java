@@ -28,6 +28,10 @@ public class InputC extends java.util.Observable {
 		
 		player.addInventory("AR_KEY5");
 
+	// Rooms ################
+	ArrayList<Room> list;
+	String room;
+	
 		
 		try {
 			Connection con = DriverManager.getConnection(url);
@@ -36,7 +40,7 @@ public class InputC extends java.util.Observable {
 					"SELECT room_id, room, floor, room_desc, monster_id, item_id, puzzle_id, north_id, south_id, west_id, east_id, key  FROM rooms");
 			while (rs.next()) {
 				String room_id = rs.getString(1);
-				String room = rs.getString(2);
+				String room_name = rs.getString(2);
 				String floor = rs.getString(3);
 				String room_desc = rs.getString(4);
 				String monster_id = rs.getString(5);
@@ -47,7 +51,7 @@ public class InputC extends java.util.Observable {
 				String west_id = rs.getString(10);
 				String east_id = rs.getString(11);
 				String key = rs.getString(12);
-				rList.add(new Room(room_id, room, floor, room_desc, monster_id, item_id, puzzle_id, north_id, south_id,
+				rList.add(new Room(room_id, room_name, floor, room_desc, monster_id, item_id, puzzle_id, north_id, south_id,
 						west_id, east_id, key));
 				System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
 			}
@@ -85,7 +89,7 @@ public class InputC extends java.util.Observable {
 		}
 		if (s.equalsIgnoreCase("North") || s.equalsIgnoreCase("East") ||s.equalsIgnoreCase("South") || s.equalsIgnoreCase("West")) 
 			connector.setOutput(checkDirection(s));
-		else if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L") || temp.substring(0,temp.indexOf(" ")).equalsIgnoreCase("Pickup") || s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I"))
+		else if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L") || temp.substring(0,temp.indexOf(" ")).equalsIgnoreCase("Pickup") || s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I") || temp.substring(0,temp.indexOf(" ")).equalsIgnoreCase("Drop"))
 			connector.setOutput(roomCommands(s));
 		else connector.setOutput("Invalid Input");
 		
@@ -179,7 +183,6 @@ public class InputC extends java.util.Observable {
         }
 		return output;
 	}
-	
 	public String roomCommands(String s) {
 		String temp = " ";
 		if (s.contains(" ")) {
@@ -188,7 +191,7 @@ public class InputC extends java.util.Observable {
 		String output = "";
 		
 		if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L")) {
-			output = rList.get(checkCurrentRoom()).getDescription() + "\nItem List: " + itemList();
+			output = "Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: " + rList.get(checkCurrentRoom()).getDescription() + "\nItem List: " + itemList();
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Pickup"))) {
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
@@ -197,8 +200,18 @@ public class InputC extends java.util.Observable {
 				player.addInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)));
 				output = "Item added to inventory";
 			} else output = "Item not in room";
+		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Drop"))) {
+			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
+				output = "Item does not exist";
+			}
+			if (player.inventoryCheck(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
+				player.dropInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)));
+				rList.get(checkCurrentRoom()).addInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)));
+				output = "Item dropped into room";
+			} else output = "Item not in inventory";
+			
 		} else if (s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")) {
-			output = "Inventory: " + ((Player) player).showInventory();
+			output = "Inventory: " + showInventory();
 		}
 		return output;
 	}
@@ -265,4 +278,15 @@ public class InputC extends java.util.Observable {
 		return "False";
 	}
 	
+	public String showInventory() {
+		ArrayList<String> temp = ((Player) player).showInventory();
+		String output = "";
+		for (int x = 0; x < iList.size(); x++) {
+			for (int y = 0; y < temp.size(); y++) {
+				if (iList.get(x).getId().equalsIgnoreCase(temp.get(y)))
+					output +=  "[" + iList.get(x).getItemName() + "]";
+			}
+    	}
+		return output;
+	}
 }

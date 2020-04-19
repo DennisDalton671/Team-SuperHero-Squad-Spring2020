@@ -1,4 +1,5 @@
 package View;
+import java.util.ArrayList;
 import java.util.Observable;
 
 import Model.Connector;
@@ -15,6 +16,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
@@ -22,6 +24,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.WindowEvent;
 
 public class View extends BorderPane implements java.util.Observer {
 
@@ -32,6 +35,7 @@ public class View extends BorderPane implements java.util.Observer {
 	
 	private GridPane grid1;
 	private Button newGame;
+	private Button loadSaves;
 	private TableView table;
 	private ScrollPane sp1;
 	private Button continueGame;
@@ -70,6 +74,14 @@ public class View extends BorderPane implements java.util.Observer {
 		continueGame.setOnAction(controller);
 	}
 	
+	public void addKeyInput(EventHandler<KeyEvent> controller) {
+		this.setOnKeyPressed(controller);
+	}
+	
+	public void startUpEvent(EventHandler<ActionEvent> controller) {
+		loadSaves.setOnAction(controller);
+	}
+	
 	public String getInput() {
 		String temp = text.getText();
 		text.clear();
@@ -78,7 +90,16 @@ public class View extends BorderPane implements java.util.Observer {
 
 	public void update(Observable o, Object obj) {
 		// TODO Auto-generated method stub
-		this.display.appendText(((Connector)obj).getOutput() + "\n");
+		if (obj instanceof Connector) {
+			String updated = fixString(((Connector)obj).getOutput());
+			this.display.appendText(updated + "\n");
+		}
+		if (obj instanceof ArrayList) {
+			for (int x = 0; x < ((ArrayList) obj).size(); x++) {
+				table.getItems().add(((ArrayList) obj).get(x));
+			}
+		}
+		//this.display.appendText(((Connector)obj).getOutput() + "\n");
 	}
 	
 	public void defaultSetup() {
@@ -86,7 +107,7 @@ public class View extends BorderPane implements java.util.Observer {
 
 		this.setPadding(new Insets(20, 20, 20, 20));
 
-		this.setStyle(("-fx-background-color: darkred;"));
+		this.setStyle(("-fx-background-color: indigo;"));
 
 		Font font = Font.font("Verdana", FontWeight.EXTRA_BOLD, 50);
 		title.setFont(font);
@@ -101,6 +122,7 @@ public class View extends BorderPane implements java.util.Observer {
 		
 		grid1 = new GridPane();
 		newGame = new Button("Start New Game");
+		loadSaves = new Button("Load Saves");
 		table = new TableView();
 		sp1 = new ScrollPane();
 		continueGame = new Button("Continue Game");
@@ -108,30 +130,21 @@ public class View extends BorderPane implements java.util.Observer {
 		table.setMinWidth(400);
 		
 		setButton(newGame);
+		setButton(loadSaves);
 		setButton(continueGame);
+		
+		loadSaves.setAlignment(Pos.CENTER);
 		
 		grid1.setHgap(50);
 		grid1.setVgap(25);
 		
-		sp1.setContent(table);
-		
-		TableColumn saveCol = new TableColumn<Object, Object>("Game Save");
-        saveCol.setCellValueFactory(new PropertyValueFactory("Game Save"));
-        TableColumn roomCol = new TableColumn("Current Room");
-        roomCol.setCellValueFactory(new PropertyValueFactory("Current Room"));
-        
-        table.getColumns().setAll(saveCol,roomCol);
 		
 		grid1.add(newGame, 0, 0);
-		grid1.add(sp1, 0, 1);
-		grid1.add(continueGame, 0, 2);
+		grid1.add(loadSaves, 0, 1);
 		
 		grid1.setAlignment(Pos.CENTER);
 		GridPane.setHalignment(newGame, HPos.CENTER);
-		GridPane.setHalignment(sp1, HPos.CENTER);
-		GridPane.setHalignment(continueGame, HPos.CENTER);
-		
-		
+		GridPane.setHalignment(loadSaves, HPos.CENTER);
 		
 		setAlignment(grid1, Pos.CENTER);
 		this.setCenter(grid1);
@@ -244,4 +257,41 @@ public class View extends BorderPane implements java.util.Observer {
 		return l;
 	}
 	
+	public String fixString(String s) {
+		int wrapLength = 175;
+	    String wrapString = new String();
+
+	    while(s.length()>wrapLength){
+	        int lastIndex = s.lastIndexOf(" ", wrapLength);
+	        wrapString = wrapString.concat(s.substring(0, lastIndex));
+	        wrapString = wrapString.concat("\n");
+
+	        s = s.substring(lastIndex+1, s.length());
+	    }
+	    return wrapString + s + "\n";
+		
+	}
+	
+	public void setSTabel() {
+		table = new TableView();
+		sp1 = new ScrollPane();
+		
+		table.setMinWidth(400);
+		
+		sp1.setContent(table);
+		
+		TableColumn saveCol = new TableColumn("Save");
+        saveCol.setCellValueFactory(new PropertyValueFactory("id"));
+        TableColumn roomCol = new TableColumn("Current Room");
+        roomCol.setCellValueFactory(new PropertyValueFactory("room"));
+        
+        table.getColumns().setAll(saveCol, roomCol);
+        
+        grid1.getChildren().remove(loadSaves);
+        grid1.add(sp1, 0, 1);
+        grid1.add(continueGame, 0, 2);
+        
+        GridPane.setHalignment(sp1, HPos.CENTER);
+        GridPane.setHalignment(continueGame, HPos.CENTER);
+	}
 }
