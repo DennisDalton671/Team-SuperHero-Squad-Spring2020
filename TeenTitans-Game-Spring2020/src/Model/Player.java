@@ -16,4 +16,17 @@ public class Player extends Entity{
 		return false;
 	}
 	
+	public void addItem(String id) {
+		super.addInventory(id);
+	}
+	
+	public String showInventory() {
+		String temp = "";
+		if (super.getInventory().size() == 0) return "Empty";
+		for (int x = 0; x < super.getInventory().size(); x++) {
+			temp += "[" + super.getInventory().get(x) + "] ";
+		}
+		return temp;
+	}
+	
 }
