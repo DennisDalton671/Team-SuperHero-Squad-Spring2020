@@ -1,5 +1,8 @@
 import BaseClasses.AttackState;
 import BaseClasses.Monster;
+import BaseClasses.Puzzle;
+import BaseClasses.PuzzleState;
+import MVC.Model2;
 
 import java.sql.*;
 
@@ -7,8 +10,11 @@ public class Temp {
 
 	public static void main(String[] args) throws InterruptedException {
 
+
 		Monster Test = new Monster("1", "TestMonster", "desc","50", "5", "1","oof","e","");
-		AttackState.attackState(Test);
+		Puzzle Test2 = new Puzzle("1","Puzzledesc1","Puzzledesc2","puzzledesc3","puzzledesc4", "hint1", "hint2", "hint3", "hint4", "solution", "solution2", "solution3", "solution4", "reward", "penalty", "Room1", "Room2");
+		PuzzleState.puzzleState(Test2);
+		//AttackState.attackState(Test);
 
 		/*System.out.println("Hello Team");
 		System.out.println("Sebastien Says hey");
