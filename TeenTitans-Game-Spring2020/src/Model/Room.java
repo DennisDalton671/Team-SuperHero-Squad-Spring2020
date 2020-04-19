@@ -23,6 +23,7 @@ public class Room {
     public Room (String id, String name, String floor, String description, String monsterID, String itemID, String puzzleID, String NorthID, String SouthID, String WestID, String EastID, String key) {
     	this.roomItemInventory = new ArrayList<String>();
     	this.id = id;
+        this.id = id;
         this.name = name;
         this.floor = floor;
         this.description = description;

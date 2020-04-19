@@ -1,4 +1,5 @@
 package Controller;
+import Model.Model;
 import Model.InputC;
 import View.View;
 import javafx.event.ActionEvent;

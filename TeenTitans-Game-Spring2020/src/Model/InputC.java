@@ -28,6 +28,10 @@ public class InputC extends java.util.Observable {
 		
 		player.addInventory("AR_KEY5");
 
+	// Rooms ################
+	ArrayList<Room> list;
+	String room;
+	
 		
 		try {
 			Connection con = DriverManager.getConnection(url);
@@ -36,7 +40,7 @@ public class InputC extends java.util.Observable {
 					"SELECT room_id, room, floor, room_desc, monster_id, item_id, puzzle_id, north_id, south_id, west_id, east_id, key  FROM rooms");
 			while (rs.next()) {
 				String room_id = rs.getString(1);
-				String room = rs.getString(2);
+				String room_name = rs.getString(2);
 				String floor = rs.getString(3);
 				String room_desc = rs.getString(4);
 				String monster_id = rs.getString(5);
@@ -47,7 +51,7 @@ public class InputC extends java.util.Observable {
 				String west_id = rs.getString(10);
 				String east_id = rs.getString(11);
 				String key = rs.getString(12);
-				rList.add(new Room(room_id, room, floor, room_desc, monster_id, item_id, puzzle_id, north_id, south_id,
+				rList.add(new Room(room_id, room_name, floor, room_desc, monster_id, item_id, puzzle_id, north_id, south_id,
 						west_id, east_id, key));
 				System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
 			}
@@ -179,7 +183,6 @@ public class InputC extends java.util.Observable {
         }
 		return output;
 	}
-	
 	public String roomCommands(String s) {
 		String temp = " ";
 		if (s.contains(" ")) {

@@ -41,6 +41,16 @@ public class Main extends Application{
 		control3 = new KeyInput(c,view);
 		control4 = new StartUpController(s,view);
 		
+		model.addObserver(view);
+		c.addObserver(view);
+		
+		//control = new InputController(model,view);
+		control2 = new ChangeViewController(model,view);
+		//control.addModel(model);
+		control2.addModel(model);
+		control = new InputController(c,view);
+		//control.initModel(10);
+		
 		view.addInputController(control);
 		view.changeViewController(control2);
 		view.addKeyInput(control3);
