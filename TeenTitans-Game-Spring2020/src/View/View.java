@@ -107,7 +107,7 @@ public class View extends BorderPane implements java.util.Observer {
 
 		this.setPadding(new Insets(20, 20, 20, 20));
 
-		this.setStyle(("-fx-background-color: darkred;"));
+		this.setStyle(("-fx-background-color: indigo;"));
 
 		Font font = Font.font("Verdana", FontWeight.EXTRA_BOLD, 50);
 		title.setFont(font);

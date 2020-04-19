@@ -85,7 +85,7 @@ public class InputC extends java.util.Observable {
 		}
 		if (s.equalsIgnoreCase("North") || s.equalsIgnoreCase("East") ||s.equalsIgnoreCase("South") || s.equalsIgnoreCase("West")) 
 			connector.setOutput(checkDirection(s));
-		else if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L") || temp.substring(0,temp.indexOf(" ")).equalsIgnoreCase("Pickup") || s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I"))
+		else if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L") || temp.substring(0,temp.indexOf(" ")).equalsIgnoreCase("Pickup") || s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I") || temp.substring(0,temp.indexOf(" ")).equalsIgnoreCase("Drop"))
 			connector.setOutput(roomCommands(s));
 		else connector.setOutput("Invalid Input");
 		
@@ -188,7 +188,7 @@ public class InputC extends java.util.Observable {
 		String output = "";
 		
 		if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L")) {
-			output = rList.get(checkCurrentRoom()).getDescription() + "\nItem List: " + itemList();
+			output = "Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: " + rList.get(checkCurrentRoom()).getDescription() + "\nItem List: " + itemList();
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Pickup"))) {
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
@@ -197,6 +197,16 @@ public class InputC extends java.util.Observable {
 				player.addInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)));
 				output = "Item added to inventory";
 			} else output = "Item not in room";
+		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Drop"))) {
+			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
+				output = "Item does not exist";
+			}
+			if (player.inventoryCheck(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
+				player.dropInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)));
+				rList.get(checkCurrentRoom()).addInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)));
+				output = "Item dropped into room";
+			} else output = "Item not in inventory";
+			
 		} else if (s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")) {
 			output = "Inventory: " + showInventory();
 		}

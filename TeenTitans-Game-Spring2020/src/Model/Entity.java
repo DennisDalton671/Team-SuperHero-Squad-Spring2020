@@ -54,6 +54,14 @@ public class Entity {
 		inventory.add(ID);
 	}
 	
+	public void dropInventory(String ID) {
+		inventory.remove(ID);
+	}
+	
+	public boolean inventoryCheck(String ID) {
+		return inventory.contains(ID);
+	}
+	
 	public ArrayList<String> getInventory() {
 		return inventory;
 	}
