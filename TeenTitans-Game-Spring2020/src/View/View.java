@@ -43,6 +43,7 @@ public class View extends BorderPane implements java.util.Observer {
 	private GridPane grid2;
 	private GridPane grid3;
 	private GridPane grid4;
+	private GridPane grid5;
 	private TableView inventory;
 	private Label health;
 	private Label attack;
@@ -236,9 +237,21 @@ public class View extends BorderPane implements java.util.Observer {
 		
 		grid2.setPadding(new Insets(20,20,20,20));
 		
+		grid5 = new GridPane();
+		
+		Button b = new Button("Test");
+		
+		b.setMinHeight(400);
+		b.setMinWidth(450);
+		
+		grid4.setPadding(new Insets(20,20,20,20));
+		
+		grid5.add(b, 0, 0);
+		grid5.add(grid4, 0,1);
+		
 		this.setLeft(grid3);
 		this.setCenter(grid2);
-		this.setRight(grid4);
+		this.setRight(grid5);
 	}
 	
 	
