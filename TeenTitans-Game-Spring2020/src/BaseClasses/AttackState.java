@@ -13,11 +13,11 @@ public class AttackState {
                                                                                    ------------------
                                                                                    -= Description =-
                                                                                    ------------------
-   => "Assuming the player is in the same room as a monster, and the monster hasn’t been defeated yet, the player must be able to type “Attack” or “Hit” followed by monster name.
-   =>  After each attack command, the monster’s HP will be subtracted by the player’s AP and the monster will counter-attack.
-   =>  If the monster can counter-attack, the player’s HP will be subtracted from the monster’s AP.
-   =>  When the monster’s HP reaches 0, the monster will be defeated and will not spawn in that room anymore.
-   =>  After the monster is defeated, the player will be told that the monster is defeated and the items that the monster had will be removed from their inventory and added to the player’s inventory."
+   => "Assuming the player is in the same room as a monster, and the monster hasnâ€™t been defeated yet, the player must be able to type â€œAttackâ€� or â€œHitâ€� followed by monster name.
+   =>  After each attack command, the monsterâ€™s HP will be subtracted by the playerâ€™s AP and the monster will counter-attack.
+   =>  If the monster can counter-attack, the playerâ€™s HP will be subtracted from the monsterâ€™s AP.
+   =>  When the monsterâ€™s HP reaches 0, the monster will be defeated and will not spawn in that room anymore.
+   =>  After the monster is defeated, the player will be told that the monster is defeated and the items that the monster had will be removed from their inventory and added to the playerâ€™s inventory."
 
 
     */
