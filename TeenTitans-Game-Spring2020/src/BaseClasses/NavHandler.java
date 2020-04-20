@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import Model.Room;
 public class NavHandler {
     // Handles the answer and outputs a room ID.
     public static String ResultfromNavAnswer (String answer, Room roomObj) {
