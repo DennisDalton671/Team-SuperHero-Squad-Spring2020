@@ -2,10 +2,11 @@ package Controller;
 
 import Model.Model;
 import View.View;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 
-public class ChangeViewController implements EventHandler{
+public class ChangeViewController implements EventHandler<ActionEvent>{
 
 	private Model model;
 	private View view;
@@ -24,7 +25,7 @@ public class ChangeViewController implements EventHandler{
 		this.model = m;
 	}
 	
-	public void handle(Event arg0) {
+	public void handle(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		//model.updateView();
 		view.buildGame();
