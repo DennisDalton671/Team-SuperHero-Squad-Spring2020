@@ -19,6 +19,7 @@ public class InputC extends java.util.Observable {
 	ArrayList<Room> rList;
 	ArrayList<Item> iList;
 	ArrayList<Puzzle> pList;
+	ArrayList<Monster> mList;
 	
 	public InputC() {
 		
@@ -26,6 +27,7 @@ public class InputC extends java.util.Observable {
 		rList = new ArrayList<Room>();
 		iList = new ArrayList<Item>();
 		pList = new ArrayList<Puzzle>();
+		mList = new ArrayList<Monster>();
 		connector = new Connector();
 		player = new Player("P1", "100", "5", "RM_1", "None", "1");
 		
@@ -112,6 +114,28 @@ public class InputC extends java.util.Observable {
                 String room_puzzle2 = rs.getString(17);
 
                 pList.add(new Puzzle(puzzle_id, puzzle_desc, puzzle_desc2, puzzle_desc3, puzzle_desc4, hint, hint2, hint3, hint4, solution, solution2, solution3, solution4, reward, penalty, room_puzzle, room_puzzle2));
+                System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
+            }
+        } catch (
+                SQLException e) {
+            e.printStackTrace();
+        }
+        
+        try {
+            Connection con = DriverManager.getConnection(url);
+            Statement s = con.createStatement();
+            ResultSet rs = s.executeQuery("SELECT monster_id, monster, monster_desc, health_point, attack_point, room_id, defeat_message, item_reward FROM monsters");
+            while (rs.next()) {
+            	String monster_id = rs.getString(1);
+                String monster = rs.getString(2);
+                String monster_desc = rs.getString(3);
+                String health_point = rs.getString(4);
+                String attack_point = rs.getString(5);
+                String room_id = rs.getString(6);
+                String defeat_message = rs.getString(7);
+                String item_reward = rs.getString(8);
+
+                mList.add(new Monster(monster_id, health_point, attack_point, room_id, monster, monster_desc, defeat_message, item_reward));
                 System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
             }
         } catch (
@@ -355,5 +379,26 @@ public class InputC extends java.util.Observable {
 			}
 		}
 		return "None";
-	}	
+	}
+	
+	public void monsterDrop()
+	{
+		for (int i = 0; i < mList.size(); i++)
+		{
+			if (mList.get(i).getRoom().equalsIgnoreCase(rList.get(checkCurrentRoom()).getId()))
+			{
+				for (int j = 0; j < iList.size(); j++)
+				{
+					if (mList.get(i).getItemReward().equalsIgnoreCase(iList.get(j).getId()))
+					{
+						rList.get(checkCurrentRoom()).addInventory(iList.get(j).getId());
+					}
+					if (iList.get(j).getId().equalsIgnoreCase("AR_HP"))
+					{
+						rList.get(checkCurrentRoom()).addInventory(iList.get(j).getId());
+					}
+				}
+			}
+		}
+	}
 }
