@@ -22,7 +22,7 @@ public class InputC extends java.util.Observable {
 	
 	public InputC() {
 		
-		url = "jdbc:ucanaccess://Resource/SoftDevPro_2.accdb";
+		url = "jdbc:ucanaccess://Resource/SoftDevPro_3.accdb";
 		rList = new ArrayList<Room>();
 		iList = new ArrayList<Item>();
 		pList = new ArrayList<Puzzle>();
