@@ -61,6 +61,11 @@ public class InputC extends java.util.Observable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
+		
+		
+		
 		try {
             Connection con = DriverManager.getConnection(url);
             Statement s = con.createStatement();
@@ -226,6 +231,7 @@ public class InputC extends java.util.Observable {
         }
 		return output;
 	}
+	
 	public String roomCommands(String s) {
 		String temp = " ";
 		if (s.contains(" ")) {
@@ -349,5 +355,5 @@ public class InputC extends java.util.Observable {
 			}
 		}
 		return "None";
-	}
+	}	
 }
