@@ -400,20 +400,14 @@ public class InputC extends java.util.Observable {
 		return "None";
 	}
 	
-	public void monsterDrop()
-	{
-		for (int i = 0; i < mList.size(); i++)
-		{
-			if (mList.get(i).getRoom().equalsIgnoreCase(rList.get(checkCurrentRoom()).getId()))
-			{
-				for (int j = 0; j < iList.size(); j++)
-				{
-					if (mList.get(i).getItemReward().equalsIgnoreCase(iList.get(j).getId()))
-					{
+	public void monsterDrop() {
+		for (int i = 0; i < mList.size(); i++) {
+			if (mList.get(i).getRoom().equalsIgnoreCase(rList.get(checkCurrentRoom()).getId())) {
+				for (int j = 0; j < iList.size(); j++) {
+					if (mList.get(i).getItemReward().equalsIgnoreCase(iList.get(j).getId())) {
 						rList.get(checkCurrentRoom()).addInventory(iList.get(j).getId());
 					}
-					if (iList.get(j).getId().equalsIgnoreCase("AR_HP"))
-					{
+					if (iList.get(j).getId().equalsIgnoreCase("AR_HP")) {
 						rList.get(checkCurrentRoom()).addInventory(iList.get(j).getId());
 					}
 				}
