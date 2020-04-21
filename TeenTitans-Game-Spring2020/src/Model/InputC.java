@@ -243,7 +243,7 @@ public class InputC extends java.util.Observable {
 		String output = "";
 		
 		if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L")) {
-			output = "Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: " + rList.get(checkCurrentRoom()).getDescription() + "\nItem List: " + itemList() + "Puzzle Name: " + checkRoomPuzzle();
+			output = "Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: " + rList.get(checkCurrentRoom()).getDescription() + "\nItem List: " + itemList() + "\nPuzzle Name: " + checkRoomPuzzle();
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Pickup"))) {
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
@@ -327,6 +327,7 @@ public class InputC extends java.util.Observable {
 				item += "[" + iList.get(x).getItemName() + "] ";
 			}
 		}
+		if (item.equalsIgnoreCase("")) item = "None";
 		return item;
 	}
 	
@@ -346,6 +347,7 @@ public class InputC extends java.util.Observable {
 					output +=  "[" + iList.get(x).getItemName() + "]";
 			}
     	}
+		if (output.equalsIgnoreCase("")) output = "None";
 		return output;
 	}
 	
@@ -353,7 +355,7 @@ public class InputC extends java.util.Observable {
 		if (!rList.get(checkCurrentRoom()).getPuzzleID().equalsIgnoreCase("0")) {
 			for (int x = 0; x < pList.size(); x++) {
 				if (pList.get(x).getId().equalsIgnoreCase(rList.get(checkCurrentRoom()).getPuzzleID())) {
-					return pList.get(x).getDescription();
+					return pList.get(x).getName();
 				}
 			}
 		}
