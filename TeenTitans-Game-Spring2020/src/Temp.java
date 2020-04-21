@@ -1,8 +1,8 @@
 import BaseClasses.AttackState;
 import BaseClasses.Monster;
-import BaseClasses.Puzzle;
 import BaseClasses.PuzzleState;
 import MVC.Model2;
+import Model.Puzzle;
 
 import java.sql.*;
 

@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import BaseClasses.Item;
-import BaseClasses.Puzzle;
 
 public class InputC extends java.util.Observable {
 
@@ -22,7 +21,7 @@ public class InputC extends java.util.Observable {
 	
 	public InputC() {
 		
-		url = "jdbc:ucanaccess://Resource/SoftDevPro_2.accdb";
+		url = "jdbc:ucanaccess://Resource/SoftDevPro_Final_One_For_Real_JK.accdb";
 		rList = new ArrayList<Room>();
 		iList = new ArrayList<Item>();
 		pList = new ArrayList<Puzzle>();
@@ -86,27 +85,26 @@ public class InputC extends java.util.Observable {
         try {
             Connection con = DriverManager.getConnection(url);
             Statement s = con.createStatement();
-            ResultSet rs = s.executeQuery("SELECT puzzle_id, puzzle_desc, puzzle_desc2, puzzle_desc3, puzzle_desc4, hint1, hint2, hint3, hint4, solution, solution2, solution3, solution4, reward, penalty, room_puzzle, room_puzzle2 FROM puzzles");
+            ResultSet rs = s.executeQuery("SELECT puzzle_id, puzzleName, puzzle_desc, hint1, hint2, hint3, hint4, solution, reward, penalty, room_puzzle, completion, itemRequired, itemRequired2, itemRequired3, itemRequired4 FROM puzzles");
             while (rs.next()) {
                 String puzzle_id = rs.getString(1);
-                String puzzle_desc = rs.getString(2);
-                String puzzle_desc2 = rs.getString(3);
-                String puzzle_desc3 = rs.getString(4);
-                String puzzle_desc4 = rs.getString(5);
-                String hint = rs.getString(6);
-                String hint2 = rs.getString(7);
-                String hint3 = rs.getString(8);
-                String hint4 = rs.getString(9);
-                String solution = rs.getString(10);
-                String solution2 = rs.getString(11);
-                String solution3 = rs.getString(12);
-                String solution4 = rs.getString(13);
-                String reward = rs.getString(14);
-                String penalty = rs.getString(15);
-                String room_puzzle = rs.getString(16);
-                String room_puzzle2 = rs.getString(17);
+                String puzzle_name = rs.getString(2);
+                String puzzle_desc = rs.getString(3);
+                String hint1 = rs.getString(4);
+                String hint2 = rs.getString(5);
+                String hint3 = rs.getString(6);
+                String hint4 = rs.getString(7);
+                String solution = rs.getString(8);
+                String reward = rs.getString(9);
+                String penalty = rs.getString(10);
+                String room_puzzle = rs.getString(11);
+                String completion = rs.getString(12);
+                String itemRequired_1 = rs.getString(13);
+                String itemRequired_2  = rs.getString(14);
+                String itemRequired_3 = rs.getString(15);
+                String itemRequired_4  = rs.getString(16);
 
-                pList.add(new Puzzle(puzzle_id, puzzle_desc, puzzle_desc2, puzzle_desc3, puzzle_desc4, hint, hint2, hint3, hint4, solution, solution2, solution3, solution4, reward, penalty, room_puzzle, room_puzzle2));
+                pList.add(new Puzzle(puzzle_id, puzzle_name, puzzle_desc, hint1, hint2, hint3, hint4, solution, reward, penalty, room_puzzle, completion, itemRequired_1, itemRequired_2, itemRequired_3, itemRequired_4));
                 System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
             }
         } catch (
@@ -135,7 +133,18 @@ public class InputC extends java.util.Observable {
 		} else {
 			connector.setOutput("Invalid Input");
 		}
-
+		
+		
+		//rList.get(checkCurrentRoom()).setMap("default.jpg");
+		connector.setImage(rList.get(checkCurrentRoom()).getMap());
+		
+		setChanged();
+		notifyObservers(connector);
+	}
+	
+	public void startup() {
+		connector.setOutput(rList.get(checkCurrentRoom()).getDescription());
+		connector.setImage(rList.get(checkCurrentRoom()).getMap());
 		setChanged();
 		notifyObservers(connector);
 	}

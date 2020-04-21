@@ -3,6 +3,8 @@ package BaseClasses;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Model.Puzzle;
+
 public class PuzzleState {
     /* Here's the Puzzle State method version 1.0.
 

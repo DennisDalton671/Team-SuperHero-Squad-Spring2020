@@ -16,6 +16,7 @@ public class Room {
     private String WestID;
     private String EastID;
     private String key;
+    private String map;
     private ArrayList<String> roomItemInventory;
     
 
@@ -35,6 +36,7 @@ public class Room {
         this.WestID = WestID;
         this.EastID = EastID;
         this.key = key;
+        this.map = "map_" + id + ".png";
     }
 
     @Override
@@ -72,6 +74,7 @@ public class Room {
     public String getEastID() { return EastID; }
     public String getWestID() { return WestID; }
     public String getKey() { return key; }
+    public String getMap() { return map; }
 
     // Setters
     public void setId(String id) { this.id = id; }
@@ -86,6 +89,7 @@ public class Room {
     public void setEastID(String eastID) { this.EastID = eastID; }
     public void setWestID(String westID) { this.WestID = westID; }
     public void setkey(String key) { this.key = key; }
+    public void setMap(String map) { this.map = map;}
 
     
 

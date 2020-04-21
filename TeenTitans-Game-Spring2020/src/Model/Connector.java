@@ -3,6 +3,7 @@ package Model;
 public class Connector {
 
 	private String output;
+	private String image;
 
 	public String getOutput() {
 		return output;
@@ -12,6 +13,12 @@ public class Connector {
 		this.output = output;
 	}
 	
+	public void setImage(String image) {
+		this.image = image;
+	}
 	
+	public String getImage() {
+		return image;
+	}
 	
 }
