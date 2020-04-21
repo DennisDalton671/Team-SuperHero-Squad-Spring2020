@@ -163,7 +163,18 @@ public class InputC extends java.util.Observable {
 		} else {
 			connector.setOutput("Invalid Input");
 		}
-
+		
+		
+		//rList.get(checkCurrentRoom()).setMap("default.jpg");
+		connector.setImage(rList.get(checkCurrentRoom()).getMap());
+		
+		setChanged();
+		notifyObservers(connector);
+	}
+	
+	public void startup() {
+		connector.setOutput(rList.get(checkCurrentRoom()).getDescription());
+		connector.setImage(rList.get(checkCurrentRoom()).getMap());
 		setChanged();
 		notifyObservers(connector);
 	}

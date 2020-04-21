@@ -3,7 +3,6 @@ import Controller.ChangeViewController;
 import Controller.InputController;
 import Controller.KeyInput;
 import Controller.StartUpController;
-import Model.Model;
 import Model.SaveLoader;
 import Model.InputC;
 import View.View;
@@ -28,7 +27,7 @@ public class Main extends Application{
 		
 		View view = new View();
 		Scene scene = new Scene(view);
-		Model model = new Model();
+		InputC model = new InputC();
 		InputC c = new InputC();
 		SaveLoader s = new SaveLoader();
 		
@@ -37,7 +36,7 @@ public class Main extends Application{
 		s.addObserver(view);
 		
 		control = new InputController(c,view);
-		control2 = new ChangeViewController(model,view);
+		control2 = new ChangeViewController(c,view);
 		control3 = new KeyInput(c,view);
 		control4 = new StartUpController(s,view);
 		
@@ -45,9 +44,9 @@ public class Main extends Application{
 		c.addObserver(view);
 		
 		//control = new InputController(model,view);
-		control2 = new ChangeViewController(model,view);
+		control2 = new ChangeViewController(c,view);
 		//control.addModel(model);
-		control2.addModel(model);
+		control2.addModel(c);
 		control = new InputController(c,view);
 		//control.initModel(10);
 		

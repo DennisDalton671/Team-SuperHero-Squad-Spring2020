@@ -16,6 +16,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -39,6 +41,7 @@ public class View extends BorderPane implements java.util.Observer {
 	private TableView table;
 	private ScrollPane sp1;
 	private Button continueGame;
+	private ImageView image = new ImageView();
 	
 	private GridPane grid2;
 	private GridPane grid3;
@@ -94,6 +97,7 @@ public class View extends BorderPane implements java.util.Observer {
 		if (obj instanceof Connector) {
 			String updated = fixString(((Connector)obj).getOutput());
 			this.display.appendText(updated + "\n");
+			image.setImage(new Image("file:Resource/Map Pictures/" + ((Connector) obj).getImage()));
 		}
 		if (obj instanceof ArrayList) {
 			for (int x = 0; x < ((ArrayList) obj).size(); x++) {
@@ -239,14 +243,13 @@ public class View extends BorderPane implements java.util.Observer {
 		
 		grid5 = new GridPane();
 		
-		Button b = new Button("Test");
 		
-		b.setMinHeight(400);
-		b.setMinWidth(450);
+		image.setFitHeight(400);
+		image.setFitWidth(450);
 		
 		grid4.setPadding(new Insets(20,20,20,20));
 		
-		grid5.add(b, 0, 0);
+		grid5.add(image, 0, 0);
 		grid5.add(grid4, 0,1);
 		
 		this.setLeft(grid3);
@@ -259,7 +262,7 @@ public class View extends BorderPane implements java.util.Observer {
 		b.setStyle("-fx-font-size: 40");
 		b.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
 		b.setMinHeight(100);
-		b.setMinWidth(150);
+		b.setMinWidth(125);
 		return b;
 	}
 	
