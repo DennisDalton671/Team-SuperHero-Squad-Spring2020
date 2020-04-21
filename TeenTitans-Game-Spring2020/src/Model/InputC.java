@@ -156,7 +156,8 @@ public class InputC extends java.util.Observable {
 			else if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L")
 					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Pickup")
 					|| s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")
-					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Drop") || s.equalsIgnoreCase("Solve"))
+					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Drop") || s.equalsIgnoreCase("Solve")
+					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Examine"))
 				connector.setOutput(roomCommands(s));
 			else connector.setOutput("Invalid Input");
 		} else if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
@@ -292,6 +293,15 @@ public class InputC extends java.util.Observable {
 			} else {
 				output = "No puzzle in the room";
 			}
+		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Examine"))) {
+			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
+				output = "You cannot examine that item";
+			}
+			else if (rList.get(checkCurrentRoom()).checkInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
+				output = "Description: " + itemDesc(convertIName(temp.substring(temp.indexOf(" ") + 1)));
+			} else if (player.inventoryCheck(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
+				output = "Description: " + showInventoryDesc(convertIName(temp.substring(temp.indexOf(" ") + 1)));
+			} else output = "Item not in room";
 		}
 		return output;
 	}
@@ -400,5 +410,32 @@ public class InputC extends java.util.Observable {
 				}
 			}
 		}
+	}
+	
+	public String itemDesc(String id) {
+		String item = "";
+		for (int x = 0; x < iList.size(); x++) {
+			if (rList.get(checkCurrentRoom()).checkInventory(iList.get(x).getId())) {
+				if (iList.get(x).getId().equalsIgnoreCase(id)) {
+					item += "[" + iList.get(x).getDescription() + "] ";
+				}
+			}
+		}
+		return item;
+	}
+	
+	public String showInventoryDesc(String id) {
+		ArrayList<String> temp = ((Player) player).showInventory();
+		String output = "";
+		for (int x = 0; x < iList.size(); x++) {
+			for (int y = 0; y < temp.size(); y++) {
+				if (iList.get(x).getId().equalsIgnoreCase(temp.get(y))) {
+					if (temp.get(y).equalsIgnoreCase(id)) {
+						output += iList.get(x).getDescription();
+					}
+				}
+			}
+    	}
+		return output;
 	}
 }
