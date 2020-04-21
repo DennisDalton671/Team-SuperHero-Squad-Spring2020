@@ -12,7 +12,7 @@ public class Temp {
 
 
 		Monster Test = new Monster("1", "TestMonster", "desc","50", "5", "1","oof","e","");
-		Puzzle Test2 = new Puzzle("1","Puzzledesc1","Puzzledesc2","puzzledesc3","puzzledesc4", "hint1", "hint2", "hint3", "hint4", "solution", "solution2", "solution3", "solution4", "reward", "penalty", "Room1", "Room2");
+		Puzzle Test2 = new Puzzle("1", "Puzzlename", "Puzzledesc1", "hint1", "hint2", "hint3", "hint4", "solution", "reward", "penalty", "Room1", "Completion", "itemRequired1", "itemRequired2", "itemRequired3", "itemRequired4");
 		PuzzleState.puzzleState(Test2);
 		//AttackState.attackState(Test);
 
