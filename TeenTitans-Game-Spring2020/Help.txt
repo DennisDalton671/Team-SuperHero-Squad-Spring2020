@@ -1,10 +1,10 @@
 
 
 ------Directions------
-North, n, N, NORTH, north ---- Go up
-South, s, S, SOUTH, south ---- Go Down
-East, e, E, EAST, east ------- Go Left
-West, w, W, WEST, west ------- Go Right
+North, NORTH, north ---- Go up
+South, SOUTH, south ---- Go Down
+East, EAST, east ------- Go Left
+West, WEST, west ------- Go Right
 
 
 -------Actions--------
