@@ -1,13 +1,18 @@
 package Model;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player extends Entity{
 
 	private String equipped;
+	private String playerState;
 	
-	public Player(String ID, String health, String attack, String room, String equipped) {
+	public Player(String ID, String health, String attack, String room, String equipped, String playerState) {
 		super(ID, health, attack, room);
+		this.equipped = equipped;
+		this.playerState = playerState;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -29,6 +34,22 @@ public class Player extends Entity{
 			temp.add(super.getInventory().get(x));
 		}
 		return temp;
+	}
+
+	public String getEquipped() {
+		return equipped;
+	}
+
+	public void setEquipped(String equipped) {
+		this.equipped = equipped;
+	}
+
+	public String getPlayerState() {
+		return playerState;
+	}
+
+	public void setPlayerState(String playerState) {
+		this.playerState = playerState;
 	}
 	
 }

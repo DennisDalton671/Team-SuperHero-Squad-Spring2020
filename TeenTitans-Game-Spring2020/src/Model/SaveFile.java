@@ -4,9 +4,10 @@ public class SaveFile {
 
 	private String id;
 	private String room;
+	private String saveID;
 	
-	public SaveFile(String room) {
-		this.room = room;
+	public SaveFile(String saveID, String health, String attack, String playerState, String equipped, String room_id) {
+		this.saveID = saveID;
 	}
 
 	public String getId() {

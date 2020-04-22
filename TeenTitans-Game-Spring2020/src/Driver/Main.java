@@ -1,9 +1,12 @@
 package Driver;
 import Controller.ChangeViewController;
+import Controller.EastInput;
 import Controller.InputController;
 import Controller.KeyInput;
+import Controller.NorthInput;
+import Controller.SouthInput;
 import Controller.StartUpController;
-import Model.Model;
+import Controller.WestInput;
 import Model.SaveLoader;
 import Model.InputC;
 import View.View;
@@ -17,18 +20,23 @@ public class Main extends Application{
 	ChangeViewController control2;
 	KeyInput control3;
 	StartUpController control4;
+	NorthInput control5;
+	EastInput control6;
+	SouthInput control7;
+	WestInput control8;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		
 		View view = new View();
 		Scene scene = new Scene(view);
-		Model model = new Model();
+		InputC model = new InputC();
 		InputC c = new InputC();
 		SaveLoader s = new SaveLoader();
 		
@@ -37,17 +45,21 @@ public class Main extends Application{
 		s.addObserver(view);
 		
 		control = new InputController(c,view);
-		control2 = new ChangeViewController(model,view);
+		control2 = new ChangeViewController(c,view);
 		control3 = new KeyInput(c,view);
 		control4 = new StartUpController(s,view);
+		control5 = new NorthInput(c,view);
+		control6 = new EastInput(c,view);
+		control7 = new SouthInput(c,view);
+		control8 = new WestInput(c,view);
 		
 		model.addObserver(view);
 		c.addObserver(view);
 		
 		//control = new InputController(model,view);
-		control2 = new ChangeViewController(model,view);
+		control2 = new ChangeViewController(c,view);
 		//control.addModel(model);
-		control2.addModel(model);
+		control2.addModel(c);
 		control = new InputController(c,view);
 		//control.initModel(10);
 		
@@ -55,6 +67,10 @@ public class Main extends Application{
 		view.changeViewController(control2);
 		view.addKeyInput(control3);
 		view.startUpEvent(control4);
+		view.addNorthInput(control5);
+		view.addEastInput(control6);
+		view.addSouthInput(control7);
+		view.addWestInput(control8);
 		
 		primaryStage.setTitle("Fun Testing");
 		primaryStage.setFullScreen(true);

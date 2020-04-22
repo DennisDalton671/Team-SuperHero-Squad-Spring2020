@@ -5,26 +5,23 @@ import View.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
-public class ChangeViewController implements EventHandler<ActionEvent>{
-
+public class EastInput implements EventHandler<ActionEvent>{
 	private InputC model;
 	private View view;
 	
-	public ChangeViewController(InputC model, View view) {
+	public EastInput(InputC model, View view) {
 		this.model = model;
 		this.view = view;
 		
 	}
+
 	
-	public void addModel(InputC model) {
-		this.model = model;
+	public void addModel(InputC m){
+		this.model = m;
 	}
 	
 	public void handle(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		//model.updateView();
-		view.buildGame();
-		model.startup();
+		model.checkUserInput("East");
 	}
-	
 }

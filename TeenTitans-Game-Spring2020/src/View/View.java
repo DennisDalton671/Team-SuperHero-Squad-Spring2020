@@ -16,6 +16,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -39,10 +41,12 @@ public class View extends BorderPane implements java.util.Observer {
 	private TableView table;
 	private ScrollPane sp1;
 	private Button continueGame;
+	private ImageView image = new ImageView();
 	
 	private GridPane grid2;
 	private GridPane grid3;
 	private GridPane grid4;
+	private GridPane grid5;
 	private TableView inventory;
 	private Label health;
 	private Label attack;
@@ -82,6 +86,30 @@ public class View extends BorderPane implements java.util.Observer {
 		loadSaves.setOnAction(controller);
 	}
 	
+	public void addNorthInput(EventHandler<ActionEvent> controller) {
+		northButton = new Button("North");
+		setButton(northButton);
+		northButton.setOnAction(controller);
+	}
+	
+	public void addEastInput(EventHandler<ActionEvent> controller) {
+		eastButton = new Button("East");
+		setButton(eastButton);
+		eastButton.setOnAction(controller);
+	}
+	
+	public void addSouthInput(EventHandler<ActionEvent> controller) {
+		southButton = new Button("South");
+		setButton(southButton);
+		southButton.setOnAction(controller);
+	}
+	
+	public void addWestInput(EventHandler<ActionEvent> controller) {
+		westButton = new Button("West");
+		setButton(westButton);
+		westButton.setOnAction(controller);
+	}
+	
 	public String getInput() {
 		String temp = text.getText();
 		text.clear();
@@ -89,10 +117,21 @@ public class View extends BorderPane implements java.util.Observer {
 	}
 
 	public void update(Observable o, Object obj) {
+		
 		// TODO Auto-generated method stub
 		if (obj instanceof Connector) {
+			inventory.getItems().clear();
+			String desc = fixString(((Connector)obj).getDescription());
 			String updated = fixString(((Connector)obj).getOutput());
+			if (((Connector)obj).isDesc()) { 
+				this.display.appendText(desc);
+				((Connector)obj).setDesc(false);
+			}
 			this.display.appendText(updated + "\n");
+			image.setImage(new Image("file:Resource/Map Pictures/" + ((Connector) obj).getImage()));
+			for (int x = 0; x < ((Connector) obj).getList().size(); x++) {
+				inventory.getItems().add(((Connector) obj).getList().get(x));
+			}
 		}
 		if (obj instanceof ArrayList) {
 			for (int x = 0; x < ((ArrayList) obj).size(); x++) {
@@ -111,7 +150,7 @@ public class View extends BorderPane implements java.util.Observer {
 
 		Font font = Font.font("Verdana", FontWeight.EXTRA_BOLD, 50);
 		title.setFont(font);
-		title.setTextFill(javafx.scene.paint.Color.LIGHTGRAY);
+		title.setTextFill(javafx.scene.paint.Color.DEEPSKYBLUE);
 
 		setAlignment(title, Pos.CENTER);
 		this.setTop(title);
@@ -164,16 +203,6 @@ public class View extends BorderPane implements java.util.Observer {
 		
 		inventory = new TableView();
 		
-		northButton = new Button("North");
-		eastButton = new Button("East");
-		southButton = new Button("South");
-		westButton = new Button("West");
-		
-		setButton(northButton);
-		setButton(eastButton);
-		setButton(southButton);
-		setButton(westButton);
-		
 		health = new Label("100");
 		attack = new Label("50");
 		equipped = new Label("None");
@@ -191,7 +220,7 @@ public class View extends BorderPane implements java.util.Observer {
 		setLabel(inventoryD);
 		
 		TableColumn inventoryC = new TableColumn<Object, Object>("Inventory");
-        inventoryC.setCellValueFactory(new PropertyValueFactory("Inventory"));
+        inventoryC.setCellValueFactory(new PropertyValueFactory("items"));
 		
         inventory.getColumns().setAll(inventoryC);
         
@@ -236,29 +265,40 @@ public class View extends BorderPane implements java.util.Observer {
 		
 		grid2.setPadding(new Insets(20,20,20,20));
 		
+		grid5 = new GridPane();
+		
+		
+		image.setFitHeight(400);
+		image.setFitWidth(450);
+		
+		grid4.setPadding(new Insets(20,20,20,20));
+		
+		grid5.add(image, 0, 0);
+		grid5.add(grid4, 0,1);
+		
 		this.setLeft(grid3);
 		this.setCenter(grid2);
-		this.setRight(grid4);
+		this.setRight(grid5);
 	}
 	
 	
 	public Button setButton(Button b) {
 		b.setStyle("-fx-font-size: 40");
-		b.setBackground(new Background(new BackgroundFill(Color.GRAY, null, null)));
+		b.setBackground(new Background(new BackgroundFill(Color.DEEPSKYBLUE, null, null)));
 		b.setMinHeight(100);
-		b.setMinWidth(150);
+		b.setMinWidth(125);
 		return b;
 	}
 	
 	public Label setLabel(Label l) {
 		Font font = Font.font("Verdana", FontWeight.EXTRA_BOLD, 25);
 		l.setFont(font);
-		l.setTextFill(Color.WHITE);
+		l.setTextFill(Color.DEEPSKYBLUE);
 		return l;
 	}
 	
 	public String fixString(String s) {
-		int wrapLength = 175;
+		int wrapLength = 200;
 	    String wrapString = new String();
 
 	    while(s.length()>wrapLength){

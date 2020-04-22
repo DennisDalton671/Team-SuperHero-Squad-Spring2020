@@ -1,0 +1,17 @@
+
+
+------Directions------
+North, n, N, NORTH, north ---- Go up
+South, s, S, SOUTH, south ---- Go Down
+East, e, E, EAST, east ------- Go Left
+West, w, W, WEST, west ------- Go Right
+
+
+-------Actions--------
+Inventory or I --------------- Displays picked up items
+Help ------------------------- Displays list of commands
+Look or L -------------------- Looks for monsters in room
+Examine ---------------------- Displays monster stats
+Drop + item ------------------ Drop item
+Solve ------------------------ Enter Puzzle State
+Examine ---------------------- Display more item details
