@@ -19,6 +19,7 @@ public class InputC extends java.util.Observable {
 
 	Entity player;
 	Entity monster;
+	Room room;
 	ArrayList<Room> rList;
 	ArrayList<Item> iList;
 	ArrayList<Puzzle> pList;
@@ -370,6 +371,7 @@ public class InputC extends java.util.Observable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+			
 			output = "Game successfully Saved";
 	}
 
