@@ -3,6 +3,8 @@ package BaseClasses;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import Model.Puzzle;
+
 public class PuzzleState {
     /* Here's the Puzzle State method version 1.0.
 
@@ -39,16 +41,22 @@ public class PuzzleState {
         if (!puzzle.getDescription().equals("0")) {
             System.out.println( puzzle.getDescription()  );
         }
-        if (!puzzle.getDescription2().equals("0")) {
-            System.out.println(puzzle.getDescription2());
-        }
-        if (!puzzle.getDescription3().equals("0")) {
-            System.out.println(puzzle.getDescription3());
-        }
-        if (!puzzle.getDescription4().equals("0")) {
-            System.out.println(puzzle.getDescription4());
-        }
+
         System.out.println("Figure out the solution for the Puzzle.");
+//        // Displays descriptions if there are any
+//        if (!puzzle.getDescription().equals("0")) {
+//            System.out.println( puzzle.getDescription()  );
+//        }
+//        if (!puzzle.getDescription2().equals("0")) {
+//            System.out.println(puzzle.getDescription2());
+//        }
+//        if (!puzzle.getDescription3().equals("0")) {
+//            System.out.println(puzzle.getDescription3());
+//        }
+//        if (!puzzle.getDescription4().equals("0")) {
+//            System.out.println(puzzle.getDescription4());
+//        }
+//        System.out.println("Figure out the solution for the Puzzle.");
         System.out.println("Type and enter Hint for a hint.");
         System.out.println("Type Quit if you don't want to solve the puzzle.");
         
