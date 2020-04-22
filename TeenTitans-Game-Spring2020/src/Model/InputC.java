@@ -185,52 +185,6 @@ public class InputC extends java.util.Observable {
 			}
 		}
 
-		if (s.equalsIgnoreCase("save")) {
-
-			try {
-				int save = 0;
-				save++;
-
-				String playerSave = "INSERT INTO Player (saveID, health, attack, playerState, equipped, room_id) VALUES (?,?,?,?,?,?)";
-				Connection con = DriverManager.getConnection(url);
-				PreparedStatement PreparedStatement = con.prepareStatement(playerSave);
-
-				PreparedStatement.setString(1, Integer.toString(save));
-				PreparedStatement.setString(2, getHealth());
-				PreparedStatement.setString(3, getAttack());
-				PreparedStatement.setString(4, getPlayerState());
-				PreparedStatement.setString(5, ((Player) player).getEquipped());
-				PreparedStatement.setString(6, getRoomID());
-				// PreparedStatement.setString(7, ((Player) player).getInventory());
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-				// s.setString();
-
-				int row = PreparedStatement.executeUpdate();
-				if (row > 0) {
-					System.out.println("A row has been inserted successfully.");
-				}
-
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
 		// rList.get(checkCurrentRoom()).setMap("default.jpg");
 		connector.setImage(rList.get(checkCurrentRoom()).getMap());
 		connector.setList(showInventoryD());
@@ -392,7 +346,32 @@ public class InputC extends java.util.Observable {
 				output = "" + ((Player) player).getHealth();
 			}
 
+		} else if (s.equalsIgnoreCase("save")) {
+			String item = player.getInventory().toString();
+			try {
+
+				String playerSave = "INSERT INTO Player (saveID, health, attack, playerState, equipped, room_id, items) VALUES (?,?,?,?,?,?,?)";
+				Connection con = DriverManager.getConnection(url);
+				PreparedStatement PreparedStatement = con.prepareStatement(playerSave);
+
+				PreparedStatement.setInt(1, 1);
+				PreparedStatement.setString(2, getHealth());
+				PreparedStatement.setString(3, getAttack());
+				PreparedStatement.setString(4, getPlayerState());
+				PreparedStatement.setString(5, ((Player) player).getEquipped());
+				PreparedStatement.setString(6, getRoomID());
+				PreparedStatement.setString(7, item);
+				
+			int row = PreparedStatement.executeUpdate();
+			if (row > 0) {
+				System.out.println("A row has been inserted successfully.");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+			output = "Game successfully Saved";
+	}
 
 		return output;
 	}

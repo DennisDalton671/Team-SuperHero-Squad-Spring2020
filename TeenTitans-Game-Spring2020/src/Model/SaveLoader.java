@@ -20,7 +20,7 @@ public class SaveLoader extends java.util.Observable{
 			Connection con = DriverManager.getConnection(url);
 			Statement s = con.createStatement();
 			ResultSet rs = s.executeQuery(
-					"SELECT saveID, health, attack, playerState, equipped, room_id from player");
+					"SELECT saveID, health, attack, playerState, equipped, room_id, items from player");
 			while (rs.next()) {
 				String saveID = rs.getString(1);
 				String health = rs.getString(2);
@@ -28,8 +28,10 @@ public class SaveLoader extends java.util.Observable{
 				String playerState = rs.getString(4);
 				String equipped = rs.getString(5);
 				String room_id = rs.getString(6);
+				String items = rs.getString(7);
 
-				saves.add(new SaveFile(saveID, health, attack, playerState, equipped, room_id));
+				saves.add(new SaveFile(saveID, health, attack, playerState, equipped, room_id, items));
+				player.addInventory(items);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

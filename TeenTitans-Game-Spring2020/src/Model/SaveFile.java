@@ -6,7 +6,7 @@ public class SaveFile {
 	private String room;
 	private String saveID;
 	
-	public SaveFile(String saveID, String health, String attack, String playerState, String equipped, String room_id) {
+	public SaveFile(String saveID, String health, String attack, String playerState, String equipped, String room_id, String items) {
 		this.saveID = saveID;
 	}
 
