@@ -163,13 +163,14 @@ public class InputC extends java.util.Observable {
 					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Examine") || s.equalsIgnoreCase("help")
 					|| s.equalsIgnoreCase("save"))
 				connector.setOutput(roomCommands(s));
-			else connector.setOutput("Invalid Input");
+			else
+				connector.setOutput("Invalid Input");
 		} else if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
 			connector.setOutput("No none puzzling inputs while puzzling");
 		} else {
 			connector.setOutput("Invalid Input");
 		}
-		if(s.equalsIgnoreCase("help")) {
+		if (s.equalsIgnoreCase("help")) {
 			try {
 				@SuppressWarnings("resource")
 				FileReader fr = new FileReader("Help.txt");
@@ -183,58 +184,57 @@ public class InputC extends java.util.Observable {
 				e.printStackTrace();
 			}
 		}
-		
+
 		if (s.equalsIgnoreCase("save")) {
-			int save = 0;
-			save++;
-			
-		try {
-			String playerSave = "INSERT INTO Player (saveID, health, attack, playerState, equipped, room_id) VALUES (?,?,?,?,?,?)";
-            Connection con = DriverManager.getConnection(url);
-            PreparedStatement PreparedStatement = con.prepareStatement(playerSave);
-            
-            PreparedStatement.setString(1, Integer.toString(save));
-            PreparedStatement.setString(2, getHealth());
-            PreparedStatement.setString(3, getAttack());
-            PreparedStatement.setString(4, getPlayerState());
-            PreparedStatement.setString(5, ((Player) player).getEquipped());
-            PreparedStatement.setString(6, getRoomID());
-            //PreparedStatement.setString(7, ((Player) player).getInventory());
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            //s.setString();
-            
-            int row = PreparedStatement.executeUpdate();
-            if (row > 0) {
-                System.out.println("A row has been inserted successfully.");
-            }
-            	
-            } catch (SQLException e) {
-        e.printStackTrace();
+
+			try {
+				int save = 0;
+				save++;
+
+				String playerSave = "INSERT INTO Player (saveID, health, attack, playerState, equipped, room_id) VALUES (?,?,?,?,?,?)";
+				Connection con = DriverManager.getConnection(url);
+				PreparedStatement PreparedStatement = con.prepareStatement(playerSave);
+
+				PreparedStatement.setString(1, Integer.toString(save));
+				PreparedStatement.setString(2, getHealth());
+				PreparedStatement.setString(3, getAttack());
+				PreparedStatement.setString(4, getPlayerState());
+				PreparedStatement.setString(5, ((Player) player).getEquipped());
+				PreparedStatement.setString(6, getRoomID());
+				// PreparedStatement.setString(7, ((Player) player).getInventory());
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+				// s.setString();
+
+				int row = PreparedStatement.executeUpdate();
+				if (row > 0) {
+					System.out.println("A row has been inserted successfully.");
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
-	}
-		
-		
-		
-		//rList.get(checkCurrentRoom()).setMap("default.jpg");
+
+		// rList.get(checkCurrentRoom()).setMap("default.jpg");
 		connector.setImage(rList.get(checkCurrentRoom()).getMap());
 		connector.setList(showInventoryD());
-		
+
 		setChanged();
 		notifyObservers(connector);
 		connector.clearList();
@@ -525,31 +525,38 @@ public class InputC extends java.util.Observable {
 		}
 		return item;
 	}
+
 	public String getHealth() {
 		return ((Player) player).getHealth();
 	}
-	
+
 	public String getAttack() {
 		return ((Player) player).getAttack();
 	}
-	
+
 	public String getPlayerState() {
 		return ((Player) player).getPlayerState();
 	}
-	
+
 	public String getRoomID() {
 		return ((Player) player).getRoom();
 	}
-	
+
 	public String getEquipped() {
 		return ((Player) player).getEquipped();
 	}
-	
+
 	public ArrayList<String> getInventory() {
 		return ((Player) player).getInventory();
 	}
 	
-	
+	int counter = 0;
+    public String AutoNumber() {
+        int tmp = counter;
+        counter++;
+        return Integer.toString(tmp);
+    }
+
 	public String showInventoryDesc(String id) {
 		ArrayList<String> temp = ((Player) player).showInventory();
 		String output = "";
