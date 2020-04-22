@@ -30,7 +30,7 @@ public class InputC extends java.util.Observable {
 		connector = new Connector();
 		player = new Player("P1", "100", "5", "RM_1", "None", "1");
 		
-		player.addInventory("AR_KEY5");
+		//player.addInventory("AR_KEY5");
 
 	// Rooms ################
 	ArrayList<Room> list;
@@ -167,13 +167,17 @@ public class InputC extends java.util.Observable {
 		
 		//rList.get(checkCurrentRoom()).setMap("default.jpg");
 		connector.setImage(rList.get(checkCurrentRoom()).getMap());
+		connector.setList(showInventoryD());
 		
 		setChanged();
 		notifyObservers(connector);
+		connector.clearList();
 	}
 	
 	public void startup() {
-		connector.setOutput(rList.get(checkCurrentRoom()).getDescription());
+		connector.setDescription("Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: " + rList.get(checkCurrentRoom()).getDescription());
+		connector.setOutput("");
+		connector.setList(showInventoryD());
 		connector.setImage(rList.get(checkCurrentRoom()).getMap());
 		setChanged();
 		notifyObservers(connector);
@@ -192,14 +196,14 @@ public class InputC extends java.util.Observable {
             		if (((Player) player).checkKey(rList.get(checkNorthRoom()).getKey())) {
             			player.setRoom(rList.get(temp).getNorthID());
             			temp = checkCurrentRoom();
-            			output = "Room Unlocked\n"  + rList.get(temp).getDescription();
+            			output = "Room Unlocked\n"  + rList.get(temp).getName();
             		} else {
             			output = "Key Required";
             		}
             	} else {
             		player.setRoom(rList.get(temp).getNorthID());
         			temp = checkCurrentRoom();
-        			output = rList.get(temp).getDescription();
+        			output = rList.get(temp).getName();
             	}
             }
         }
@@ -212,14 +216,14 @@ public class InputC extends java.util.Observable {
             		if (((Player) player).checkKey(rList.get(checkEastRoom()).getKey())) {
             			player.setRoom(rList.get(temp).getEastID());
             			temp = checkCurrentRoom();
-            			output = "Room Unlocked\n"  + rList.get(temp).getDescription();
+            			output = "Room Unlocked\n"  + rList.get(temp).getName();
             		} else {
             			output = "Key Required";
             		}
             	} else {
             		player.setRoom(rList.get(temp).getEastID());
         			temp = checkCurrentRoom();
-        			output = rList.get(temp).getDescription();
+        			output = rList.get(temp).getName();
             	}
             }
         }
@@ -232,14 +236,14 @@ public class InputC extends java.util.Observable {
             		if (((Player) player).checkKey(rList.get(checkSouthRoom()).getKey())) {
             			player.setRoom(rList.get(temp).getSouthID());
             			temp = checkCurrentRoom();
-            			output = "Room Unlocked\n"  + rList.get(temp).getDescription();
+            			output = "Room Unlocked\n"  + rList.get(temp).getName();
             		} else {
             			output = "Key Required";
             		}
             	} else {
             		player.setRoom(rList.get(temp).getSouthID());
         			temp = checkCurrentRoom();
-        			output = rList.get(temp).getDescription();
+        			output = rList.get(temp).getName();
             	}
             }
         }
@@ -252,14 +256,14 @@ public class InputC extends java.util.Observable {
             		if (((Player) player).checkKey(rList.get(checkWestRoom()).getKey())) {
             			player.setRoom(rList.get(temp).getWestID());
             			temp = checkCurrentRoom();
-            			output = "Room Unlocked\n"  + rList.get(temp).getDescription();
+            			output = "Room Unlocked\n"  + rList.get(temp).getName();
             		} else {
             			output = "Key Required";
             		}
             	} else {
             		player.setRoom(rList.get(temp).getWestID());
         			temp = checkCurrentRoom();
-        			output = rList.get(temp).getDescription();
+        			output = rList.get(temp).getName();
             	}
             }
         }
@@ -274,7 +278,8 @@ public class InputC extends java.util.Observable {
 		String output = "";
 		
 		if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L")) {
-			output = "Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: " + rList.get(checkCurrentRoom()).getDescription() + "\nItem List: " + itemList() + "\nPuzzle Name: " + checkRoomPuzzle();
+			connector.setDescription("Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: " + rList.get(checkCurrentRoom()).getDescription());
+			output = "\nItem List: " + itemList() + "\nPuzzle Name: " + checkRoomPuzzle();
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Pickup"))) {
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
@@ -367,6 +372,7 @@ public class InputC extends java.util.Observable {
 				item += "[" + iList.get(x).getItemName() + "] ";
 			}
 		}
+		if (item.equalsIgnoreCase("")) item = "None";
 		return item;
 	}
 	
@@ -386,7 +392,20 @@ public class InputC extends java.util.Observable {
 					output +=  "[" + iList.get(x).getItemName() + "]";
 			}
     	}
+		if (output.equalsIgnoreCase("")) output = "None";
 		return output;
+	}
+	
+	public ArrayList<String> showInventoryD() {
+		ArrayList<String> temp = ((Player) player).showInventory();
+		ArrayList<String> temp2 = new ArrayList<String>();
+		for (int x = 0; x < iList.size(); x++) {
+			for (int y = 0; y < temp.size(); y++) {
+				if (iList.get(x).getId().equalsIgnoreCase(temp.get(y)))
+					temp2.add(iList.get(x).getItemName());
+			}
+    	}
+		return temp2;
 	}
 	
 	public String checkRoomPuzzle() {
