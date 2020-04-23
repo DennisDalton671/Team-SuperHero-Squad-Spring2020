@@ -37,6 +37,12 @@ public class PuzzleState {
         String answer = "";
         int hintCount = 1;
 
+        // Displays descriptions if there are any
+        if (!puzzle.getDescription().equals("0")) {
+            System.out.println( puzzle.getDescription()  );
+        }
+
+        System.out.println("Figure out the solution for the Puzzle.");
 //        // Displays descriptions if there are any
 //        if (!puzzle.getDescription().equals("0")) {
 //            System.out.println( puzzle.getDescription()  );

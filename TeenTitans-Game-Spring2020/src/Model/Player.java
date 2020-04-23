@@ -1,5 +1,7 @@
 package Model;
 
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Player extends Entity{
@@ -25,6 +27,10 @@ public class Player extends Entity{
 		super.addInventory(id);
 	}
 	
+	public void removeItem(String id) {
+		super.dropInventory(id);
+	}
+		
 	public ArrayList<String> showInventory() {
 		ArrayList<String> temp = new ArrayList<String>();
 		if (super.getInventory().size() == 0) temp.add("Empty");
@@ -49,7 +55,5 @@ public class Player extends Entity{
 	public void setPlayerState(String playerState) {
 		this.playerState = playerState;
 	}
-	
-	
 	
 }
