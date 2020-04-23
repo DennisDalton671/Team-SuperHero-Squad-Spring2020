@@ -27,6 +27,10 @@ public class Player extends Entity{
 		super.addInventory(id);
 	}
 	
+	public void removeItem(String id) {
+		super.dropInventory(id);
+	}
+		
 	public ArrayList<String> showInventory() {
 		ArrayList<String> temp = new ArrayList<String>();
 		if (super.getInventory().size() == 0) temp.add("Empty");

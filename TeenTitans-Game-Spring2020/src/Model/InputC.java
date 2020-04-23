@@ -173,12 +173,9 @@ public class InputC extends java.util.Observable {
 		}
 		if (s.equalsIgnoreCase("help")) {
 			try {
-				@SuppressWarnings("resource")
-				FileReader fr = new FileReader("Help.txt");
-
-				int i;
-				while ((i = fr.read()) != -1)
-					System.out.print((char) i);
+				
+				ProcessBuilder help = new ProcessBuilder("Notepad.exe", "Help.txt");
+				help.start();
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
