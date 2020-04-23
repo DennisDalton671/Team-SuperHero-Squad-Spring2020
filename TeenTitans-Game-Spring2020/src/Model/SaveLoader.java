@@ -31,7 +31,6 @@ public class SaveLoader extends java.util.Observable{
 				String items = rs.getString(7);
 
 				saves.add(new SaveFile(saveID, health, attack, playerState, equipped, room_id, items));
-				player.addInventory(items);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
