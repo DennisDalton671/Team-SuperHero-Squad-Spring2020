@@ -145,9 +145,19 @@ public class View extends BorderPane implements java.util.Observer {
 		title = new Label("Mansion Escape");
 
 		this.setPadding(new Insets(20, 20, 20, 20));
-
-		this.setStyle(("-fx-background-color: indigo;"));
-
+		
+		//Background Choice1
+		this.setStyle(("-fx-background-image: url('https://i.pinimg.com/originals/75/32/13/7532136df91ebb39339eace3ea489b23.gif'); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
+		
+		//Background Choice2
+		//this.setStyle(("-fx-background-image: url('https://i.pinimg.com/originals/22/74/ac/2274ac8a7de1d349d7752ae0b56dde5b.jpg'); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
+		
+		//Background Choice3
+		//this.setStyle(("-fx-background-image: url('https://i.pinimg.com/originals/d2/50/78/d25078bf9629888db914bb95e485dd23.jpg'); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
+				
+		//Background Choice4
+		//this.setStyle(("-fx-background-image: url('https://66.media.tumblr.com/020d26355d2eb6396b947b2abd2e6b9b/6bed6aa0631b07a3-a5/s640x960/d464ffa169dc96220e8247ab29b40ca34aeae865.jpg'); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
+		
 		Font font = Font.font("Verdana", FontWeight.EXTRA_BOLD, 50);
 		title.setFont(font);
 		title.setTextFill(javafx.scene.paint.Color.DEEPSKYBLUE);

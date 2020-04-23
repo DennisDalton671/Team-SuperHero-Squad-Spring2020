@@ -147,12 +147,14 @@ public class InputC extends java.util.Observable {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void checkUserInput(String s) {
+		
 		String temp = " ";
 		if (s.contains(" ")) {
 			temp = s;
 		}
+		
 		if (((Player) player).getPlayerState().equalsIgnoreCase("1")) {
 			if (s.equalsIgnoreCase("North") || s.equalsIgnoreCase("East") || s.equalsIgnoreCase("South")
 					|| s.equalsIgnoreCase("West"))
@@ -162,7 +164,7 @@ public class InputC extends java.util.Observable {
 					|| s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")
 					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Drop") || s.equalsIgnoreCase("Solve")
 					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Examine") || s.equalsIgnoreCase("help")
-					|| s.equalsIgnoreCase("save"))
+					|| s.equalsIgnoreCase("save") || s.equalsIgnoreCase("Fight"))
 				connector.setOutput(roomCommands(s));
 			else
 				connector.setOutput("Invalid Input");
@@ -173,8 +175,8 @@ public class InputC extends java.util.Observable {
 		}
 		if (s.equalsIgnoreCase("help")) {
 			try {
-				
-				ProcessBuilder help = new ProcessBuilder("Notepad.exe", "Help.txt");
+
+				ProcessBuilder help = new ProcessBuilder("Notepad.exe", "Resource/Help.txt");
 				help.start();
 
 			} catch (IOException e) {
@@ -182,7 +184,12 @@ public class InputC extends java.util.Observable {
 				e.printStackTrace();
 			}
 		}
-
+		if (s.equalsIgnoreCase("look") || s.equalsIgnoreCase("l")) {
+			if(((Player) player).getRoom().equalsIgnoreCase("RM_16")){
+				player.setRoom("RM_3");
+			}
+		}
+		
 		// rList.get(checkCurrentRoom()).setMap("default.jpg");
 		connector.setImage(rList.get(checkCurrentRoom()).getMap());
 		connector.setList(showInventoryD());
@@ -329,6 +336,15 @@ public class InputC extends java.util.Observable {
 			} else {
 				output = "No puzzle in the room";
 			}
+		} else if (s.equalsIgnoreCase("Fight")) {
+			if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
+				((Player) player).setPlayerState("3");
+				output = "You are now in battle";
+				// r.list.get(checkCurrentRoom()).getMonsterID())
+			} else {
+				output = "There is no monster in this room";
+			}
+
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Examine"))) {
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "You cannot examine that item";
@@ -339,11 +355,6 @@ public class InputC extends java.util.Observable {
 				output = "Description: " + showInventoryDesc(convertIName(temp.substring(temp.indexOf(" ") + 1)));
 			} else
 				output = "Item not in room";
-		} else if (s.equalsIgnoreCase("attack")) {
-			if (rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
-				output = "" + ((Player) player).getHealth();
-			}
-
 		} else if (s.equalsIgnoreCase("save")) {
 			String item = player.getInventory().toString();
 			try {
@@ -359,18 +370,18 @@ public class InputC extends java.util.Observable {
 				PreparedStatement.setString(5, ((Player) player).getEquipped());
 				PreparedStatement.setString(6, getRoomID());
 				PreparedStatement.setString(7, item);
-				
-			int row = PreparedStatement.executeUpdate();
-			if (row > 0) {
-				System.out.println("A row has been inserted successfully.");
+
+				int row = PreparedStatement.executeUpdate();
+				if (row > 0) {
+					System.out.println("A row has been inserted successfully.");
+				}
+
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
 
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-			
 			output = "Game successfully Saved";
-	}
+		}
 
 		return output;
 	}
@@ -438,6 +449,15 @@ public class InputC extends java.util.Observable {
 				return iList.get(x).getId();
 		}
 		return "False";
+	}
+
+	public String convertMName(String name) {
+		for (int x = 0; x < mList.size(); x++) {
+			if (mList.get(x).getName().equalsIgnoreCase(rList.get(checkCurrentRoom()).getMonsterID())) {
+				return mList.get(x).getName();
+			}
+		}
+		return "None";
 	}
 
 	public String showInventory() {
@@ -527,13 +547,14 @@ public class InputC extends java.util.Observable {
 	public ArrayList<String> getInventory() {
 		return ((Player) player).getInventory();
 	}
-	
+
 	int counter = 0;
-    public String AutoNumber() {
-        int tmp = counter;
-        counter++;
-        return Integer.toString(tmp);
-    }
+
+	public String AutoNumber() {
+		int tmp = counter;
+		counter++;
+		return Integer.toString(tmp);
+	}
 
 	public String showInventoryDesc(String id) {
 		ArrayList<String> temp = ((Player) player).showInventory();
