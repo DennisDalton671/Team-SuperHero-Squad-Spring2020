@@ -332,8 +332,9 @@ public class InputC extends java.util.Observable {
 				if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
 					((Player) player).setPlayerState("3");
 					output = "You are now in battle";
+					//r.list.get(checkCurrentRoom()).getMonsterID())
 				} else {
-					output = "There is no monster here";
+					output = "There is no monster in this room";
 				}
 			
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Examine"))) {
@@ -442,6 +443,12 @@ public class InputC extends java.util.Observable {
 		return "False";
 	}
 
+	//public String convertMName(String name) {
+		//for (int x = 0; x < mList.size(); x++) {
+			//if (mList.get(x).getName().
+		//}
+	//}
+	
 	public String showInventory() {
 		ArrayList<String> temp = ((Player) player).showInventory();
 		String output = "";
