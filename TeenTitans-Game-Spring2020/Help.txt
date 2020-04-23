@@ -21,4 +21,5 @@ Look or L -------------------- Looks for monsters in room
 Examine ---------------------- Displays monster stats
 Drop + item ------------------ Drop item
 Solve ------------------------ Enter Puzzle State
+Hint ------------------------- Get puzzle hint
 Examine ---------------------- Display more item details

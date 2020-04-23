@@ -162,7 +162,7 @@ public class InputC extends java.util.Observable {
 					|| s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")
 					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Drop") || s.equalsIgnoreCase("Solve")
 					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Examine") || s.equalsIgnoreCase("help")
-					|| s.equalsIgnoreCase("save"))
+					|| s.equalsIgnoreCase("save") || s.equalsIgnoreCase("Fight"))
 				connector.setOutput(roomCommands(s));
 			else
 				connector.setOutput("Invalid Input");
@@ -328,7 +328,14 @@ public class InputC extends java.util.Observable {
 				output = "You are now puzzling";
 			} else {
 				output = "No puzzle in the room";
-			}
+			}} else if (s.equalsIgnoreCase("Fight")) {
+				if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
+					((Player) player).setPlayerState("3");
+					output = "You are now in battle";
+				} else {
+					output = "There is no monster here";
+				}
+			
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Examine"))) {
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "You cannot examine that item";
