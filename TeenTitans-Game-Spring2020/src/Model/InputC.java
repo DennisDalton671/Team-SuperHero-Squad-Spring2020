@@ -339,11 +339,6 @@ public class InputC extends java.util.Observable {
 				output = "Description: " + showInventoryDesc(convertIName(temp.substring(temp.indexOf(" ") + 1)));
 			} else
 				output = "Item not in room";
-		} else if (s.equalsIgnoreCase("attack")) {
-			if (rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
-				output = "" + ((Player) player).getHealth();
-			}
-
 		} else if (s.equalsIgnoreCase("save")) {
 			String item = player.getInventory().toString();
 			try {
