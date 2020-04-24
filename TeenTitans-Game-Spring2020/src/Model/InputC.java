@@ -353,7 +353,7 @@ public class InputC extends java.util.Observable {
 		if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L")) {
 			connector.setDescription("Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: "
 					+ rList.get(checkCurrentRoom()).getDescription());
-			output = "\nItem List: " + itemList() + "\nPuzzle Name: " + checkRoomPuzzle();
+			output = "\nItem List: " + itemList() + "\nPuzzle Name: " + checkRoomPuzzle() +  "\nMonster Name: " + checkRoomMonster();
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Pickup"))) {
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
