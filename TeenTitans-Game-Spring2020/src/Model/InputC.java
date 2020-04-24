@@ -147,15 +147,61 @@ public class InputC extends java.util.Observable {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public void loadPlayer(Object save) {
+
+		try {
+			Connection con = DriverManager.getConnection(url);
+			Statement s = con.createStatement();
+			ResultSet rs = s.executeQuery(
+					"SELECT monster_id, monster, monster_desc, health_point, attack_point, room_id, defeat_message, item_reward FROM monsters");
+			while (rs.next()) {
+				String monster_id = rs.getString(1);
+				String monster = rs.getString(2);
+				String monster_desc = rs.getString(3);
+				String health_point = rs.getString(4);
+				String attack_point = rs.getString(5);
+				String room_id = rs.getString(6);
+				String defeat_message = rs.getString(7);
+				String item_reward = rs.getString(8);
+
+				mList.add(new Monster(monster_id, health_point, attack_point, room_id, monster, monster_desc,
+						defeat_message, item_reward));
+				System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public void checkUserInput(String s) {
-		
+
 		String temp = " ";
 		if (s.contains(" ")) {
 			temp = s;
 		}
-		
-		if (((Player) player).getPlayerState().equalsIgnoreCase("1")) {
+
+		if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
+
+			if (s.equalsIgnoreCase("Give up") || s.equalsIgnoreCase("leave")
+					|| s.equalsIgnoreCase(getCurrentPuzzle().getSolution()) || s.equalsIgnoreCase("observe")
+					|| s.equalsIgnoreCase("hint")) {
+				connector.setOutput(puzzleCommands(s));
+			} else {
+				connector.setOutput("No none puzzling inputs while puzzling");
+			}
+
+		}
+		if (((Player) player).getPlayerState().equalsIgnoreCase("3")) {
+
+			if (s.equalsIgnoreCase("cease") || s.equalsIgnoreCase("retreat") || s.equalsIgnoreCase("check")
+					|| s.equalsIgnoreCase("attack")) {
+				connector.setOutput(monsterCommands(s));
+			} else {
+				connector.setOutput("No none battling inputs while battling");
+			}
+		} else if (((Player) player).getPlayerState().equalsIgnoreCase("1")) {
 			if (s.equalsIgnoreCase("North") || s.equalsIgnoreCase("East") || s.equalsIgnoreCase("South")
 					|| s.equalsIgnoreCase("West"))
 				connector.setOutput(checkDirection(s));
@@ -164,15 +210,16 @@ public class InputC extends java.util.Observable {
 					|| s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")
 					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Drop") || s.equalsIgnoreCase("Solve")
 					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Examine") || s.equalsIgnoreCase("help")
-					|| s.equalsIgnoreCase("save") || s.equalsIgnoreCase("Fight"))
+					|| s.equalsIgnoreCase("save") || s.equalsIgnoreCase("Fight") || s.equalsIgnoreCase("Leave")
+					|| s.equalsIgnoreCase("give up") || s.equalsIgnoreCase("cease") || s.equalsIgnoreCase("retreat")
+					|| s.equalsIgnoreCase("check") || s.equalsIgnoreCase("attack"))
 				connector.setOutput(roomCommands(s));
 			else
 				connector.setOutput("Invalid Input");
-		} else if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
-			connector.setOutput("No none puzzling inputs while puzzling");
 		} else {
 			connector.setOutput("Invalid Input");
 		}
+
 		if (s.equalsIgnoreCase("help")) {
 			try {
 
@@ -185,11 +232,11 @@ public class InputC extends java.util.Observable {
 			}
 		}
 		if (s.equalsIgnoreCase("look") || s.equalsIgnoreCase("l")) {
-			if(((Player) player).getRoom().equalsIgnoreCase("RM_16")){
+			if (((Player) player).getRoom().equalsIgnoreCase("RM_16")) {
 				player.setRoom("RM_3");
 			}
 		}
-		
+
 		// rList.get(checkCurrentRoom()).setMap("default.jpg");
 		connector.setImage(rList.get(checkCurrentRoom()).getMap());
 		connector.setList(showInventoryD());
@@ -340,7 +387,6 @@ public class InputC extends java.util.Observable {
 			if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
 				((Player) player).setPlayerState("3");
 				output = "You are now in battle";
-				// r.list.get(checkCurrentRoom()).getMonsterID())
 			} else {
 				output = "There is no monster in this room";
 			}
@@ -383,6 +429,83 @@ public class InputC extends java.util.Observable {
 			output = "Game successfully Saved";
 		}
 
+		return output;
+	}
+
+	// Hello World
+
+	public String puzzleCommands(String s) {
+		String output = "";
+		Puzzle p = getCurrentPuzzle();
+		if (s.equalsIgnoreCase("give up")) {
+			((Player) player).setPlayerState("1");
+			((Player) player).addInventory(p.getReward());
+			rList.get(checkCurrentRoom()).setPuzzleID("0");
+			output = "Puzzle Skipped";
+		} else if (s.equalsIgnoreCase("leave")) {
+			((Player) player).setPlayerState("1");
+			output = "Left Puzzle";
+		} else if (s.equalsIgnoreCase(p.getSolution())) {
+			if ((((Player) player).getInventory().contains(p.getItemRequired_1()) || (p.getItemRequired_1()
+					.equalsIgnoreCase("0"))
+					&& (((Player) player).getInventory().contains(p.getItemRequired_2())
+							|| (p.getItemRequired_2().equalsIgnoreCase("0"))
+									&& (((Player) player).getInventory().contains(p.getItemRequired_3())
+											|| (p.getItemRequired_3().equalsIgnoreCase("0"))
+													&& (((Player) player).getInventory().contains(p.getItemRequired_4())
+															|| (p.getItemRequired_4().equalsIgnoreCase("0"))))))) {
+				((Player) player).setPlayerState("1");
+				((Player) player).addInventory(p.getReward());
+				rList.get(checkCurrentRoom()).setPuzzleID("0");
+				output = p.getCompletion();
+			} else {
+				output = "Missing required item";
+			}
+		} else if (s.equalsIgnoreCase("observe")) {
+			output = p.getDescription();
+		} else if (s.equalsIgnoreCase("hint")) {
+			if (p.getHint1().equalsIgnoreCase("0")) {
+				output = "No Hints GL ;-)";
+			} else {
+				output = "\nHint 1: " + p.getHint1();
+			}
+			if (!p.getHint2().equalsIgnoreCase("0")) {
+				output += "\nHint 2: " + p.getHint2();
+			}
+			if (!p.getHint3().equalsIgnoreCase("0")) {
+				output += "\nHint 3: " + p.getHint3();
+			}
+			if (!p.getHint4().equalsIgnoreCase("0")) {
+				output += "\nHint 4: " + p.getHint4();
+			}
+		}
+
+		return output;
+	}
+
+	public String monsterCommands(String s) {
+		String output = "";
+		Monster m = getCurrentMonster();
+		if (s.equalsIgnoreCase("cease")) {
+			((Player) player).setPlayerState("1");
+			((Player) player).addInventory(m.getItemReward());
+			rList.get(checkCurrentRoom()).setMonsterID("0");
+			;
+			output = "Battle Skipped";
+		} else if (s.equalsIgnoreCase("retreat")) {
+			((Player) player).setPlayerState("1");
+			output = "Left Battle";
+		} else if (s.equalsIgnoreCase("check")) {
+			if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
+				output = "Monster Name: "+ m.getName() + "\nMonster Description: " +m.getDescription() + "\nMonster Health: " + m.getHealth() + "\nAttack Power: " + m.getAttack();
+			}
+		} else if (s.equalsIgnoreCase("attack")) {
+			m.getMonsterAttacklife(((Player) player).getMonsAttack());
+			//((Player) player);
+			//((Player) player).getAttack(getAttack());
+			//output = "Monster Health: " + m.getHealth();
+			//output = "Monster Health: " + ((Player) player).getHealth();
+		}
 		return output;
 	}
 
@@ -497,6 +620,17 @@ public class InputC extends java.util.Observable {
 		return "None";
 	}
 
+	public String checkRoomMonster() {
+		if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
+			for (int x = 0; x < mList.size(); x++) {
+				if (mList.get(x).getID().equalsIgnoreCase(rList.get(checkCurrentRoom()).getMonsterID())) {
+					return mList.get(x).getName();
+				}
+			}
+		}
+		return "None";
+	}
+
 	public void monsterDrop() {
 		for (int i = 0; i < mList.size(); i++) {
 			if (mList.get(i).getRoom().equalsIgnoreCase(rList.get(checkCurrentRoom()).getId())) {
@@ -569,5 +703,23 @@ public class InputC extends java.util.Observable {
 			}
 		}
 		return output;
+	}
+
+	public Puzzle getCurrentPuzzle() {
+		for (int x = 0; x < pList.size(); x++) {
+			if (pList.get(x).getName().equalsIgnoreCase(checkRoomPuzzle())) {
+				return pList.get(x);
+			}
+		}
+		return null;
+	}
+
+	public Monster getCurrentMonster() {
+		for (int x = 0; x < mList.size(); x++) {
+			if (mList.get(x).getName().equalsIgnoreCase(checkRoomMonster())) {
+				return mList.get(x);
+			}
+		}
+		return null;
 	}
 }

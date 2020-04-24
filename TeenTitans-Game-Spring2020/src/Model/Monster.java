@@ -6,10 +6,16 @@ public class Monster extends Entity {
     private String description;
     private String monsterDefeatedMessage;
     private String itemReward;
+	private String id;
+	private String healthPoint;
+	private String attackPoint;
 
     public Monster(String ID, String health, String attack, String room, String name, String description, String monsterDefeatedMessage, String itemReward) {
     	super(ID, health, attack, room);
-        this.name = name;
+        this.id=ID;
+    	this.name = name;
+    	this.healthPoint = health;
+    	this.attackPoint = attack;
         this.description = description;
         this.monsterDefeatedMessage = monsterDefeatedMessage;
         this.itemReward = itemReward;
@@ -26,4 +32,12 @@ public class Monster extends Entity {
     public void setDescription(String description) { this.description = description; }
     public void setMonsterDefeatedMessage(String monsterDefeatedMessage) { this.itemReward = monsterDefeatedMessage;}
     public void setItemReward(String itemReward) { this.itemReward = itemReward;}
+    
+    public void getMonsterAttacklife(String i) {
+		healthPoint = Integer.toString(Integer.parseInt(healthPoint) - Integer.parseInt(i));
+	}
+    
+    public String getMAttack() {
+		return attackPoint;
+	}
 }

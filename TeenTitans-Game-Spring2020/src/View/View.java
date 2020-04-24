@@ -75,6 +75,9 @@ public class View extends BorderPane implements java.util.Observer {
 	
 	public void changeViewController(EventHandler<ActionEvent> controller){
 		newGame.setOnAction(controller);
+	}
+	
+	public void loadGameController(EventHandler<ActionEvent> controller) {
 		continueGame.setOnAction(controller);
 	}
 	
@@ -308,7 +311,7 @@ public class View extends BorderPane implements java.util.Observer {
 	}
 	
 	public String fixString(String s) {
-		int wrapLength = 200;
+		int wrapLength = 175;
 	    String wrapString = new String();
 
 	    while(s.length()>wrapLength){
@@ -343,5 +346,9 @@ public class View extends BorderPane implements java.util.Observer {
         
         GridPane.setHalignment(sp1, HPos.CENTER);
         GridPane.setHalignment(continueGame, HPos.CENTER);
+	}
+	
+	public Object getTable() {
+		return table.getSelectionModel().getSelectedItem();
 	}
 }

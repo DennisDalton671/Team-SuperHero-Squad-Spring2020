@@ -8,9 +8,14 @@ public class Player extends Entity{
 
 	private String equipped;
 	private String playerState;
+	private String healthPoint;
+	private String attackPoint;
+	
 	
 	public Player(String ID, String health, String attack, String room, String equipped, String playerState) {
 		super(ID, health, attack, room);
+		this.attackPoint = attack;
+		this.healthPoint = health;
 		this.equipped = equipped;
 		this.playerState = playerState;
 		// TODO Auto-generated constructor stub
@@ -54,6 +59,14 @@ public class Player extends Entity{
 
 	public void setPlayerState(String playerState) {
 		this.playerState = playerState;
+	}
+	
+	public void getAttack(String i) {
+		healthPoint = Integer.toString(Integer.parseInt(healthPoint) - Integer.parseInt(i));
+	}
+	
+	public String getMonsAttack() {
+		return attackPoint;
 	}
 	
 }
