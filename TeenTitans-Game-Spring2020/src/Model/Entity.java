@@ -65,4 +65,8 @@ public class Entity {
 	public ArrayList<String> getInventory() {
 		return inventory;
 	}
+	
+	public void setInventory(ArrayList<String> s) {
+		inventory = s;
+	}
 }

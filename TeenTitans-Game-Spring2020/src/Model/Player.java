@@ -44,10 +44,22 @@ public class Player extends Entity{
 		return equipped;
 	}
 
-	public void setEquipped(String equipped) {
-		this.equipped = equipped;
+	public void setEquipped(String equipped, String attack, String name) {
+		String temp2 = name.substring(0, 1).toUpperCase() + name.substring(1);
+		this.equipped = temp2;
+		int temp = Integer.parseInt(super.getAttack());
+		temp += Integer.parseInt(attack);
+		super.setAttack(Integer.toString(temp));
+		super.getInventory().remove(equipped);
 	}
 
+	public void setUnequip(String attack) {
+		equipped = "None";
+		int temp = Integer.parseInt(super.getAttack());
+		temp -= Integer.parseInt(attack);
+		super.setAttack(Integer.toString(temp));
+	}
+	
 	public String getPlayerState() {
 		return playerState;
 	}
