@@ -183,7 +183,14 @@ public class InputC extends java.util.Observable {
 			temp = s;
 		}
 
-		if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
+		if (((Player) player).getPlayerState().equalsIgnoreCase("3")) {
+
+			if (s.equalsIgnoreCase("attack") || s.equalsIgnoreCase("hit")) {
+				connector.setOutput(monsterCommands(s));
+			} else {
+				connector.setOutput("No non-fighting inputs while fighting");
+			}
+		} else if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
 
 			if (s.equalsIgnoreCase("Give up") || s.equalsIgnoreCase("leave") || s.equalsIgnoreCase(getCurrentPuzzle().getSolution()) || s.equalsIgnoreCase("observe") || s.equalsIgnoreCase("hint")) {
 				connector.setOutput(puzzleCommands(s));
@@ -342,7 +349,7 @@ public class InputC extends java.util.Observable {
 		if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L")) {
 			connector.setDescription("Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: "
 					+ rList.get(checkCurrentRoom()).getDescription());
-			output = "\nItem List: " + itemList() + "\nPuzzle Name: " + checkRoomPuzzle();
+			output = "\nItem List: " + itemList() + "\nPuzzle Name: " + checkRoomPuzzle() + "\nMonster Name: " + checkRoomMonster();
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Pickup"))) {
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
@@ -368,7 +375,8 @@ public class InputC extends java.util.Observable {
 		} else if (s.equalsIgnoreCase("Solve")) {
 			if (!rList.get(checkCurrentRoom()).getPuzzleID().equalsIgnoreCase("0")) {
 				((Player) player).setPlayerState("2");
-				output = "You are now puzzling";
+				output = "You are now puzzling \nPuzzle Description: \n"
+						+ getCurrentPuzzle().getDescription();
 			} else {
 				output = "No puzzle in the room";
 			}
@@ -383,14 +391,15 @@ public class InputC extends java.util.Observable {
 
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Examine"))) {
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
-				output = "You cannot examine that item";
-			} else if (rList.get(checkCurrentRoom())
+				output = "You cannot examine that object";
+			} if (rList.get(checkCurrentRoom())
 					.checkInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
 				output = "Description: " + itemDesc(convertIName(temp.substring(temp.indexOf(" ") + 1)));
-			} else if (player.inventoryCheck(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
+			} if (player.inventoryCheck(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
 				output = "Description: " + showInventoryDesc(convertIName(temp.substring(temp.indexOf(" ") + 1)));
-			} else
-				output = "Item not in room";
+			} if (rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase(convertMName(temp.substring(temp.indexOf(" ") + 1)))) {
+				output = "Stats: \nHP: " + getCurrentMonster().getHealth() + "\nAP: " + getCurrentMonster().getAttack();
+			}
 		} else if (s.equalsIgnoreCase("save")) {
 			String item = player.getInventory().toString();
 			try {
@@ -473,6 +482,33 @@ public class InputC extends java.util.Observable {
 		return output;
 	}
 
+	public String monsterCommands(String s) {
+		String output = "";
+		Monster m = getCurrentMonster();
+		int monsterHP = Integer.parseInt(getCurrentMonster().getHealth());
+		int monsterAP = Integer.parseInt(getCurrentMonster().getAttack());
+		int playerHP = Integer.parseInt(((Player) player).getHealth());
+		int playerAP = Integer.parseInt(((Player) player).getAttack());
+		output = "The monster attacked you!";
+		playerHP -= monsterAP;
+		String playerHealth = Integer.toString(playerHP);
+		((Player) player).setHealth(playerHealth);
+		if (s.equalsIgnoreCase("attack") || s.equalsIgnoreCase("hit")) {
+			monsterHP -= playerAP;
+			String monsterHealth = Integer.toString(monsterHP);
+			m.setHealth(monsterHealth);
+			output += "\nYou attacked the monster!";
+		}
+		if (monsterHP <= 0) {
+			m.setHealth("0");
+			output += "\n" + m.getMonsterDefeatedMessage();
+			((Player) player).setPlayerState("1");
+			monsterDrop();
+			rList.get(checkCurrentRoom()).setMonsterID("0");
+		}
+		return output;
+	}
+	
 	public int checkCurrentRoom() {
 		for (int x = 0; x < rList.size(); x++) {
 			if (rList.get(x).getId().equals(player.getRoom())) {
@@ -540,11 +576,11 @@ public class InputC extends java.util.Observable {
 
 	public String convertMName(String name) {
 		for (int x = 0; x < mList.size(); x++) {
-			if (mList.get(x).getName().equalsIgnoreCase(rList.get(checkCurrentRoom()).getMonsterID())) {
-				return mList.get(x).getName();
+			if (mList.get(x).getName().equalsIgnoreCase(name)) {
+				return mList.get(x).getID();
 			}
 		}
-		return "None";
+		return "False";
 	}
 
 	public String showInventory() {
@@ -583,16 +619,27 @@ public class InputC extends java.util.Observable {
 		}
 		return "None";
 	}
+	
+	public String checkRoomMonster() {
+		if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
+			for (int x = 0; x < mList.size(); x++) {
+				if (mList.get(x).getID().equalsIgnoreCase(rList.get(checkCurrentRoom()).getMonsterID())) {
+					return mList.get(x).getName();
+				}
+			}
+		}
+		return "None";
+	}
 
 	public void monsterDrop() {
 		for (int i = 0; i < mList.size(); i++) {
 			if (mList.get(i).getRoom().equalsIgnoreCase(rList.get(checkCurrentRoom()).getId())) {
 				for (int j = 0; j < iList.size(); j++) {
 					if (mList.get(i).getItemReward().equalsIgnoreCase(iList.get(j).getId())) {
-						rList.get(checkCurrentRoom()).addInventory(iList.get(j).getId());
+						player.addInventory(iList.get(j).getId());
 					}
 					if (iList.get(j).getId().equalsIgnoreCase("AR_HP")) {
-						rList.get(checkCurrentRoom()).addInventory(iList.get(j).getId());
+						player.addInventory(iList.get(j).getId());
 					}
 				}
 			}
@@ -662,6 +709,15 @@ public class InputC extends java.util.Observable {
 		for (int x = 0; x < pList.size(); x++) {
 			if (pList.get(x).getName().equalsIgnoreCase(checkRoomPuzzle())) {
 				return pList.get(x);
+			}
+		}
+		return null;
+	}
+	
+	public Monster getCurrentMonster() {
+		for (int x = 0; x < mList.size(); x++) {
+			if (mList.get(x).getName().equalsIgnoreCase(checkRoomMonster())) {
+				return mList.get(x);
 			}
 		}
 		return null;
