@@ -1,6 +1,6 @@
-import BaseClasses.AttackState;
 import BaseClasses.Monster;
 import BaseClasses.PuzzleState;
+import Model.AttackState;
 import Model.Puzzle;
 
 import java.sql.*;

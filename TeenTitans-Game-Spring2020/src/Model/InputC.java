@@ -353,7 +353,8 @@ public class InputC extends java.util.Observable {
 		if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L")) {
 			connector.setDescription("Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: "
 					+ rList.get(checkCurrentRoom()).getDescription());
-			output = "\nItem List: " + itemList() + "\nPuzzle Name: " + checkRoomPuzzle() +  "\nMonster Name: " + checkRoomMonster();
+			output = "\nItem List: " + itemList() + "\nPuzzle Name: " + checkRoomPuzzle() + "\nMonster Name: "
+					+ checkRoomMonster();
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Pickup"))) {
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
@@ -496,28 +497,30 @@ public class InputC extends java.util.Observable {
 			output = "Left Battle";
 		} else if (s.equalsIgnoreCase("inspect")) {
 			if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
-				output = "Monster Name: "+ m.getName() + "\nMonster Description: " +m.getDescription() + "\nMonster Health: " + m.getHealth() + "\nAttack Power: " + m.getAttack();
+				output = "Monster Name: " + m.getName() + "\nMonster Description: " + m.getDescription()
+						+ "\nMonster Health: " + m.getHealth() + "\nAttack Power: " + m.getAttack();
 			}
 		} else if (s.equalsIgnoreCase("attack")) {
 			if (Integer.parseInt(m.getHealth()) > 0) {
 				if (Integer.parseInt(((Player) player).getHealthPoint()) > 0) {
-				m.MonsterGestsAttacked(((Player) player).HitsMonster());
-				((Player) player).PlayerGetsAttacked(m.HitsPlayer());
-				output = "Monster health: " + m.getHealthPoint() + "\nPlayer Health: " + ((Player)player).getHealthPoint();
-				
-			} else{ output = "The battle prove too hard and you have died"; }
-			} 
-			else {
+					m.MonsterGestsAttacked(((Player) player).HitsMonster());
+					((Player) player).PlayerGetsAttacked(m.HitsPlayer());
+					output = "Monster health: " + m.getHealthPoint() + "\nPlayer Health: "
+							+ ((Player) player).getHealthPoint();
+
+				} else {
+					output = "The battle prove too hard and you have died";
+				}
+			} else {
 				m.setId("0");
 				output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + m.getItemReward();
 				((Player) player).addInventory(m.getItemReward());
 				((Player) player).setPlayerState("1");
 			}
-		
-	}
+
+		}
 		return output;
 	}
-		
 
 	public int checkCurrentRoom() {
 		for (int x = 0; x < rList.size(); x++) {
