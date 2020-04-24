@@ -33,11 +33,53 @@ public class Monster extends Entity {
     public void setMonsterDefeatedMessage(String monsterDefeatedMessage) { this.itemReward = monsterDefeatedMessage;}
     public void setItemReward(String itemReward) { this.itemReward = itemReward;}
     
-    public void getMonsterAttacklife(String i) {
+    /**
+	 * @return the healthPoint
+	 */
+	public String getHealthPoint() {
+		return healthPoint;
+	}
+
+	/**
+	 * @param healthPoint the healthPoint to set
+	 */
+	public void setHealthPoint(String healthPoint) {
+		this.healthPoint = healthPoint;
+	}
+    
+    /**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the attackPoint
+	 */
+	public String getAttackPoint() {
+		return attackPoint;
+	}
+
+	/**
+	 * @param attackPoint the attackPoint to set
+	 */
+	public void setAttackPoint(String attackPoint) {
+		this.attackPoint = attackPoint;
+	}
+
+	public void MonsterGestsAttacked(String i) {
 		healthPoint = Integer.toString(Integer.parseInt(healthPoint) - Integer.parseInt(i));
 	}
     
-    public String getMAttack() {
+    public String HitsPlayer() {
 		return attackPoint;
 	}
 }

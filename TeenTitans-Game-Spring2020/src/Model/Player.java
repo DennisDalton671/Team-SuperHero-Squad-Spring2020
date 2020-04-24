@@ -10,6 +10,8 @@ public class Player extends Entity{
 	private String playerState;
 	private String healthPoint;
 	private String attackPoint;
+	private Item item;
+	private String equip;
 	
 	
 	public Player(String ID, String health, String attack, String room, String equipped, String playerState) {
@@ -61,11 +63,39 @@ public class Player extends Entity{
 		this.playerState = playerState;
 	}
 	
-	public void getAttack(String i) {
+	/**
+	 * @return the healthPoint
+	 */
+	public String getHealthPoint() {
+		return healthPoint;
+	}
+
+	/**
+	 * @param healthPoint the healthPoint to set
+	 */
+	public void setHealthPoint(String healthPoint) {
+		this.healthPoint = healthPoint;
+	}
+
+	/**
+	 * @return the attackPoint
+	 */
+	public String getAttackPoint() {
+		return attackPoint;
+	}
+
+	/**
+	 * @param attackPoint the attackPoint to set
+	 */
+	public void setAttackPoint(String attackPoint) {
+		this.attackPoint = attackPoint;
+	}
+
+	public void PlayerGetsAttacked(String i) {
 		healthPoint = Integer.toString(Integer.parseInt(healthPoint) - Integer.parseInt(i));
 	}
 	
-	public String getMonsAttack() {
+	public String HitsMonster() {
 		return attackPoint;
 	}
 	

@@ -438,13 +438,13 @@ public class InputC extends java.util.Observable {
 		String output = "";
 		Puzzle p = getCurrentPuzzle();
 		if (s.equalsIgnoreCase("give up")) {
+			output = "Puzzle Skipped";
 			((Player) player).setPlayerState("1");
 			((Player) player).addInventory(p.getReward());
 			rList.get(checkCurrentRoom()).setPuzzleID("0");
-			output = "Puzzle Skipped";
 		} else if (s.equalsIgnoreCase("leave")) {
-			((Player) player).setPlayerState("1");
 			output = "Left Puzzle";
+			((Player) player).setPlayerState("1");
 		} else if (s.equalsIgnoreCase(p.getSolution())) {
 			if ((((Player) player).getInventory().contains(p.getItemRequired_1()) || (p.getItemRequired_1()
 					.equalsIgnoreCase("0"))
@@ -494,20 +494,32 @@ public class InputC extends java.util.Observable {
 			output = "Battle Skipped";
 		} else if (s.equalsIgnoreCase("retreat")) {
 			((Player) player).setPlayerState("1");
+			;
 			output = "Left Battle";
 		} else if (s.equalsIgnoreCase("check")) {
 			if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
 				output = "Monster Name: "+ m.getName() + "\nMonster Description: " +m.getDescription() + "\nMonster Health: " + m.getHealth() + "\nAttack Power: " + m.getAttack();
 			}
 		} else if (s.equalsIgnoreCase("attack")) {
-			m.getMonsterAttacklife(((Player) player).getMonsAttack());
-			//((Player) player);
-			//((Player) player).getAttack(getAttack());
-			//output = "Monster Health: " + m.getHealth();
-			//output = "Monster Health: " + ((Player) player).getHealth();
-		}
+			if (Integer.parseInt(m.getHealth()) > 0) {
+				if (Integer.parseInt(((Player) player).getHealthPoint()) > 0) {
+				m.MonsterGestsAttacked(((Player) player).HitsMonster());
+				((Player) player).PlayerGetsAttacked(m.HitsPlayer());
+				output = "Monster health: " + m.getHealthPoint() + "\nPlayer Health: " + ((Player)player).getHealthPoint();
+				
+			} else{ output = "The battle prove too hard and you have died"; }
+			} 
+			else {
+				m.setId("0");
+				output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + m.getItemReward();
+				((Player) player).addInventory(m.getItemReward());
+				((Player) player).setPlayerState("1");
+			}
+		
+	}
 		return output;
 	}
+		
 
 	public int checkCurrentRoom() {
 		for (int x = 0; x < rList.size(); x++) {

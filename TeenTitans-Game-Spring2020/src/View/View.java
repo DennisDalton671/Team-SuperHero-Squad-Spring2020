@@ -28,6 +28,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.WindowEvent;
 
+@SuppressWarnings("deprecation")
 public class View extends BorderPane implements java.util.Observer {
 
 	public static final int width = 1920;
