@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+s
 
 			|￣￣￣￣￣￣|
 			|   Help    |
@@ -32,31 +32,3 @@ Check ------------------------ Displays Monster Bio & Stats
 Retreat ---------------------- Leave Battle State
 Examine ---------------------- Displays monster stats
 Save ------------------------- Save Game
-=======
-
-			|￣￣￣￣￣￣|
-			|   Help    |
-			|  Commands | 
-			|           |
-			| ＿＿＿＿＿_| 
-			(\__/) || 
-			(•ㅅ•) || 
-			/ 　 づ
-------Directions------
-North, NORTH, north ---- Go up
-South, SOUTH, south ---- Go Down
-East, EAST, east ------- Go Left
-West, WEST, west ------- Go Right
-
-
--------Actions--------
-Inventory or I --------------- Displays picked up items
-Help ------------------------- Displays list of commands
-Look or L -------------------- Looks for monsters in room
-Examine ---------------------- Displays monster stats
-Drop + item ------------------ Drop item
-Solve ------------------------ Enter Puzzle State
-Hint ------------------------- Get puzzle hint
-fight ------------------------ Enter Battle State
-Examine ---------------------- Display more item details
->>>>>>> branch 'splouis' of https://github.com/DennisDalton671/Team-SuperHero-Squad-Spring2020.git
