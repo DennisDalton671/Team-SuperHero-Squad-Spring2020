@@ -195,7 +195,7 @@ public class InputC extends java.util.Observable {
 		}
 		if (((Player) player).getPlayerState().equalsIgnoreCase("3")) {
 
-			if (s.equalsIgnoreCase("cease") || s.equalsIgnoreCase("retreat") || s.equalsIgnoreCase("check")
+			if (s.equalsIgnoreCase("pull out") || s.equalsIgnoreCase("retreat") || s.equalsIgnoreCase("inspect")
 					|| s.equalsIgnoreCase("attack")) {
 				connector.setOutput(monsterCommands(s));
 			} else {
@@ -486,17 +486,15 @@ public class InputC extends java.util.Observable {
 	public String monsterCommands(String s) {
 		String output = "";
 		Monster m = getCurrentMonster();
-		if (s.equalsIgnoreCase("cease")) {
+		if (s.equalsIgnoreCase("pull out")) {
 			((Player) player).setPlayerState("1");
 			((Player) player).addInventory(m.getItemReward());
 			rList.get(checkCurrentRoom()).setMonsterID("0");
-			;
 			output = "Battle Skipped";
 		} else if (s.equalsIgnoreCase("retreat")) {
 			((Player) player).setPlayerState("1");
-			;
 			output = "Left Battle";
-		} else if (s.equalsIgnoreCase("check")) {
+		} else if (s.equalsIgnoreCase("inspect")) {
 			if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
 				output = "Monster Name: "+ m.getName() + "\nMonster Description: " +m.getDescription() + "\nMonster Health: " + m.getHealth() + "\nAttack Power: " + m.getAttack();
 			}
