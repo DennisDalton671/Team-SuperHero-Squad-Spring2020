@@ -188,7 +188,7 @@ public class InputC extends java.util.Observable {
 			if (s.equalsIgnoreCase("Give up") || s.equalsIgnoreCase("leave") || s.equalsIgnoreCase(getCurrentPuzzle().getSolution()) || s.equalsIgnoreCase("observe") || s.equalsIgnoreCase("hint")) {
 				connector.setOutput(puzzleCommands(s));
 			} else {
-				connector.setOutput("No none puzzling inputs while puzzling");
+				connector.setOutput("No non-puzzling inputs while puzzling");
 			}
 
 		} else if (((Player) player).getPlayerState().equalsIgnoreCase("1")) {
@@ -252,7 +252,7 @@ public class InputC extends java.util.Observable {
 		// if the Answer is NORTH
 		if (s.equalsIgnoreCase("NORTH")) {
 			if (rList.get(temp).getNorthID() == null) {
-				output = "You can not go that way";
+				output = "You cannot go that way";
 			} else if (rList.get(temp).getNorthID() != null) {
 				if (!rList.get(checkNorthRoom()).getKey().equalsIgnoreCase("0")) {
 					if (((Player) player).checkKey(rList.get(checkNorthRoom()).getKey())) {
@@ -272,7 +272,7 @@ public class InputC extends java.util.Observable {
 		// if the Answer is EAST
 		else if (s.equalsIgnoreCase("EAST")) {
 			if (rList.get(temp).getEastID() == null) {
-				output = "You can not go that way";
+				output = "You cannot go that way";
 			} else if (rList.get(temp).getEastID() != null) {
 				if (!rList.get(checkEastRoom()).getKey().equalsIgnoreCase("0")) {
 					if (((Player) player).checkKey(rList.get(checkEastRoom()).getKey())) {
@@ -292,7 +292,7 @@ public class InputC extends java.util.Observable {
 		// if the Answer is SOUTH
 		else if (s.equalsIgnoreCase("SOUTH")) {
 			if (rList.get(temp).getSouthID() == null) {
-				output = "You can not go that way";
+				output = "You cannot go that way";
 			} else if (rList.get(temp).getSouthID() != null) {
 				if (!rList.get(checkSouthRoom()).getKey().equalsIgnoreCase("0")) {
 					if (((Player) player).checkKey(rList.get(checkSouthRoom()).getKey())) {
@@ -312,7 +312,7 @@ public class InputC extends java.util.Observable {
 		// if the Answer is WEST
 		else if (s.equalsIgnoreCase("WEST")) {
 			if (rList.get(temp).getWestID() == null) {
-				output = "You can not go that way";
+				output = "You cannot go that way";
 			} else if (rList.get(temp).getWestID() != null) {
 				if (!rList.get(checkWestRoom()).getKey().equalsIgnoreCase("0")) {
 					if (((Player) player).checkKey(rList.get(checkWestRoom()).getKey())) {

@@ -22,5 +22,5 @@ Examine ---------------------- Displays monster stats
 Drop + item ------------------ Drop item
 Solve ------------------------ Enter Puzzle State
 Hint ------------------------- Get puzzle hint
-fight ------------------------ Enter Battle State
-Examine ---------------------- Display more item details
+Fight ------------------------ Enter Battle State
+Examine + item ---------------------- Display more item details
