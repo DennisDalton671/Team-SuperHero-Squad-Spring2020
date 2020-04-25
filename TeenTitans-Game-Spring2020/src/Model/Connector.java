@@ -2,16 +2,27 @@ package Model;
 
 import java.util.ArrayList;
 
+/* An object to be passed to the view so it can get all the necessary variables it needs in order to display and update*/
+
 public class Connector {
 
 	private String output;
 	private String description;
 	private String image;
+	private String health;
+	private String attack;
+	private String equipped;
 	private boolean isDesc;
 	private ArrayList<Inventory> list;
+	private boolean lose;
+	private boolean win;
+	private static boolean restart;
 
 	public Connector() {
 		list = new ArrayList<Inventory>();
+		lose = false;
+		win = false;
+		restart = false;
 	}
 	
 	public String getOutput() {
@@ -60,7 +71,54 @@ public class Connector {
 	public void setDesc(boolean isDesc) {
 		this.isDesc = isDesc;
 	}
+
+	public void setHealth(String health) {
+		this.health = health;
+	}
+
+	public String getAttack() {
+		return attack;
+	}
+
+	public void setAttack(String attack) {
+		this.attack = attack;
+	}
+
+	public String getEquipped() {
+		return equipped;
+	}
+
+	public void setEquipped(String equipped) {
+		if (equipped.equalsIgnoreCase("0") || equipped.equalsIgnoreCase("")) this.equipped = "None";
+		else this.equipped = equipped;
+	}
+
+	public String getHealth() {
+		return health;
+	}
+
+	public boolean isLose() {
+		return lose;
+	}
+
+	public void setLose(boolean lose) {
+		this.lose = lose;
+	}
+
+	public boolean isWin() {
+		return win;
+	}
+
+	public void setWin(boolean win) {
+		this.win = win;
+	}
 	
-	
+	public boolean isRestart() {
+		return restart;
+	}
+
+	public void setRestart(boolean restart) {
+		Connector.restart = restart;
+	}
 	
 }

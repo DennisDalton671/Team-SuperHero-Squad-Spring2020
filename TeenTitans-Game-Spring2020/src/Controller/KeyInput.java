@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/* Takes input from the user and is activated with the enter button press */
+
 public class KeyInput implements EventHandler<KeyEvent> {
 
 	private InputC model;

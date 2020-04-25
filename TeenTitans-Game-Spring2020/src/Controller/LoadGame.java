@@ -15,9 +15,15 @@ public class LoadGame implements EventHandler<ActionEvent> {
 		this.view = view;
 	}
 
+	public void addModel(InputC m){
+		this.model = m;
+	}
+	
 	public void handle(ActionEvent event) {
 		// TODO Auto-generated method stub
-		
+		model.loadPlayer(view.getSave());
+		view.buildGame();
+		model.startup();
 	}
 	
 }

@@ -1,8 +1,8 @@
 package Model;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
+
+/* Stores all of the information about the player */
 
 public class Player extends Entity{
 
@@ -44,16 +44,37 @@ public class Player extends Entity{
 		return equipped;
 	}
 
-	public void setEquipped(String equipped) {
-		this.equipped = equipped;
+	public void setEquipped(String equipped, String attack, String name) {
+		String temp2 = name.substring(0, 1).toUpperCase() + name.substring(1);
+		this.equipped = temp2;
+		int temp = Integer.parseInt(super.getAttack());
+		temp += Integer.parseInt(attack);
+		super.setAttack(Integer.toString(temp));
+		super.getInventory().remove(equipped);
 	}
 
+	public void setEquipped1(String equipped) {
+		this.equipped = equipped;
+	}
+	
+	public void setUnequip(String attack, String id) {
+		super.addInventory(id);
+		equipped = "None";
+		int temp = Integer.parseInt(super.getAttack());
+		temp -= Integer.parseInt(attack);
+		super.setAttack(Integer.toString(temp));
+	}
+	
 	public String getPlayerState() {
 		return playerState;
 	}
 
 	public void setPlayerState(String playerState) {
 		this.playerState = playerState;
+	}
+
+	public void PlayerGetsAttacked(String i) {
+		super.setHealth(Integer.toString(Integer.parseInt(super.getHealth()) - Integer.parseInt(i)));
 	}
 	
 }

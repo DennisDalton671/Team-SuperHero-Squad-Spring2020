@@ -1,21 +1,18 @@
 package Controller;
 
 import Model.InputC;
-import View.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/* This controller initializes the west button to work in the game */
+
 public class WestInput implements EventHandler<ActionEvent>{
 	private InputC model;
-	private View view;
 	
-	public WestInput(InputC model, View view) {
+	public WestInput(InputC model) {
 		this.model = model;
-		this.view = view;
-		
 	}
 
-	
 	public void addModel(InputC m){
 		this.model = m;
 	}

@@ -4,23 +4,58 @@
 			|  Commands | 
 			|           |
 			| ＿＿＿＿＿_| 
-			(\__/) || 
+			(\__/  || 
 			(•ㅅ•) || 
 			/ 　 づ
-------Directions------
+
+             ===============================
+             ===== Navigation Commands =====
+             ===============================
+
+======================
+>>>>> Directions <<<<<
+======================
 North, NORTH, north ---- Go up
 South, SOUTH, south ---- Go Down
 East, EAST, east ------- Go Left
 West, WEST, west ------- Go Right
 
-
--------Actions--------
-Inventory or I --------------- Displays picked up items
-Help ------------------------- Displays list of commands
-Look or L -------------------- Looks for monsters in room
-Examine ---------------------- Displays monster stats
+=======================
+>>>>>>> Actions <<<<<<<
+=======================
 Drop + item ------------------ Drop item
-Solve ------------------------ Enter Puzzle State
-Hint ------------------------- Get puzzle hint
+Equip + item ----------------- Equips item
+Examine + item --------------- Display more item details
 Fight ------------------------ Enter Battle State
-Examine + item ---------------------- Display more item details
+Heal ------------------------- Heals the player using an item
+Help ------------------------- Displays list of commands
+Inventory or I --------------- Displays picked up items
+Look or L -------------------- Looks for monsters, puzzles, and items
+Pickup + item ---------------- Picks up item in current room
+reset ------------------------ Resets the game
+Save ------------------------- Save Game
+Solve ------------------------ Enter Puzzle State
+Unequip + item --------------- Un-equips item
+
+
+             ===========================
+             ===== Puzzle Commands =====
+             ===========================
+Give Up ---------------------- Ignore Puzzle/ Auto Clear
+Hint ------------------------- Displays Puzzle Hint
+Leave ------------------------ Exit Puzzle State
+Observe ---------------------- Displays Puzzle Description
+
+
+             ===========================
+             ===== Battle Commands =====
+             ===========================
+Attack ----------------------- attacks the monster
+Inspect ---------------------- Displays monster stats
+Pull out --------------------- Ignore Fight/ Auto Win
+Retreat ---------------------- Leave Battle State
+Use -------------------------- use an item on the monster
+
+
+
+
