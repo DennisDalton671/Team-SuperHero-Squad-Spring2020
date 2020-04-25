@@ -3,6 +3,7 @@ import Controller.ChangeViewController;
 import Controller.EastInput;
 import Controller.InputController;
 import Controller.KeyInput;
+import Controller.LoadGame;
 import Controller.NorthInput;
 import Controller.SouthInput;
 import Controller.StartUpController;
@@ -24,12 +25,14 @@ public class Main extends Application{
 	EastInput control6;
 	SouthInput control7;
 	WestInput control8;
+	LoadGame control9;
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		launch(args);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -51,6 +54,7 @@ public class Main extends Application{
 		control6 = new EastInput(c,view);
 		control7 = new SouthInput(c,view);
 		control8 = new WestInput(c,view);
+		control9 = new LoadGame(c,view);
 		
 		model.addObserver(view);
 		c.addObserver(view);
