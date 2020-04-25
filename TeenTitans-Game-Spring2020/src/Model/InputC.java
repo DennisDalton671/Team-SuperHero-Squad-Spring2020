@@ -296,6 +296,7 @@ public class InputC extends java.util.Observable {
 		if (s.equalsIgnoreCase("up up down down left right left right b a")) {
 			player.setHealth("666");
 			player.setAttack("999");
+			connector.setOutput("Konami Code Accepted");
 		}
 		
 		// rList.get(checkCurrentRoom()).setMap("default.jpg");
@@ -573,6 +574,7 @@ public class InputC extends java.util.Observable {
 			if (player.getInventory().contains(iList.get(0).getId())) {
 				player.dropInventory(iList.get(0).getId());
 				player.addHealth(iList.get(0).getItemBenefit());
+				output = "You have been healed";
 			}
 		}
 
@@ -672,7 +674,7 @@ public class InputC extends java.util.Observable {
 				}
 			} else {
 				m.setID("0");
-				output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + m.getItemReward();
+				output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + getItemName(m.getItemReward());
 				// monsterDrop();
 				((Player) player).addInventory(m.getItemReward());
 				((Player) player).addInventory("AR_HP");
@@ -686,7 +688,7 @@ public class InputC extends java.util.Observable {
 								|| temp.substring(temp.indexOf(" ") + 1).equalsIgnoreCase("stake"))) {
 					((Player) player).getInventory().remove(getItemID(temp.substring(temp.indexOf(" ") + 1)));
 					m.setID("0");
-					output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + m.getItemReward();
+					output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + getItemName(m.getItemReward());
 					// monsterDrop();
 					((Player) player).addInventory(m.getItemReward());
 					((Player) player).addInventory("AR_HP");
@@ -763,6 +765,15 @@ public class InputC extends java.util.Observable {
 		return "false";
 	}
 
+	public String getItemName(String id) {
+		for (int x = 0; x < iList.size(); x++) {
+			if (iList.get(x).getId().equalsIgnoreCase(id)) {
+				return iList.get(x).getItemName();
+			}
+		}
+		return "false";
+	}
+	
 	public int getItem(String name) {
 		for (int x = 0; x < iList.size(); x++) {
 			if (iList.get(x).getItemName().equalsIgnoreCase(name)) {
