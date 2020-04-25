@@ -7,6 +7,9 @@ public class Connector {
 	private String output;
 	private String description;
 	private String image;
+	private String health;
+	private String attack;
+	private String equipped;
 	private boolean isDesc;
 	private ArrayList<Inventory> list;
 
@@ -59,6 +62,31 @@ public class Connector {
 
 	public void setDesc(boolean isDesc) {
 		this.isDesc = isDesc;
+	}
+
+	public void setHealth(String health) {
+		this.health = health;
+	}
+
+	public String getAttack() {
+		return attack;
+	}
+
+	public void setAttack(String attack) {
+		this.attack = attack;
+	}
+
+	public String getEquipped() {
+		return equipped;
+	}
+
+	public void setEquipped(String equipped) {
+		if (equipped.equalsIgnoreCase("0") || equipped.equalsIgnoreCase("")) this.equipped = "None";
+		else this.equipped = equipped;
+	}
+
+	public String getHealth() {
+		return health;
 	}
 	
 	

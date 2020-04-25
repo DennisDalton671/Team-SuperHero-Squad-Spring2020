@@ -28,6 +28,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.WindowEvent;
 
+@SuppressWarnings("deprecation")
 public class View extends BorderPane implements java.util.Observer {
 
 	public static final int width = 1920;
@@ -123,6 +124,9 @@ public class View extends BorderPane implements java.util.Observer {
 		
 		// TODO Auto-generated method stub
 		if (obj instanceof Connector) {
+			health.setText(((Connector) obj).getHealth());
+			attack.setText(((Connector) obj).getAttack());
+			equipped.setText(((Connector) obj).getEquipped());
 			inventory.getItems().clear();
 			String desc = fixString(((Connector)obj).getDescription());
 			String updated = fixString(((Connector)obj).getOutput());

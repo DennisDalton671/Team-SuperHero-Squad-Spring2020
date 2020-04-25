@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry excluding="src/|Resource/" kind="src" path=""/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="Resource/commons-lang-2.6.jar"/>
-	<classpathentry kind="lib" path="Resource/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="Resource/hsqldb.jar"/>
-	<classpathentry kind="lib" path="Resource/jackcess-2.1.6.jar"/>
-	<classpathentry kind="lib" path="Resource/ucanaccess-4.0.1.jar"/>
-	<classpathentry kind="lib" path="Resource/ucanload.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="Resource/Jar Files/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="Resource/Jar Files/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="Resource/Jar Files/hsqldb.jar"/>
+	<classpathentry kind="lib" path="Resource/Jar Files/jackcess-2.1.6.jar"/>
+	<classpathentry kind="lib" path="Resource/Jar Files/ucanaccess-4.0.1.jar"/>
+	<classpathentry kind="lib" path="Resource/Jar Files/ucanload.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
