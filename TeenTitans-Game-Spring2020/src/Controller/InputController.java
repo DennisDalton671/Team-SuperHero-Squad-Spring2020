@@ -1,13 +1,14 @@
 package Controller;
-import Model.Model;
 import Model.InputC;
 import View.View;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 
-public class InputController implements EventHandler<ActionEvent> {
+/* This controller is the main controller of the game and takes the user input and places it into the model
+ * to do the heavy lifting for the program*/
 
+public class InputController implements EventHandler<ActionEvent> {
+	
 	private InputC model;
 	private View view;
 	

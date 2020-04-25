@@ -1,5 +1,7 @@
 package Model;
 
+/* Stores the save date to be displayed by the table view */
+
 public class SaveFile {
 
 	private String id;

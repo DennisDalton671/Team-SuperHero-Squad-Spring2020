@@ -2,6 +2,8 @@ package Model;
 
 import java.util.ArrayList;
 
+/* An object to be passed to the view so it can get all the necessary variables it needs in order to display and update*/
+
 public class Connector {
 
 	private String output;
@@ -12,9 +14,13 @@ public class Connector {
 	private String equipped;
 	private boolean isDesc;
 	private ArrayList<Inventory> list;
+	private boolean lose;
+	private boolean win;
 
 	public Connector() {
 		list = new ArrayList<Inventory>();
+		lose = false;
+		win = false;
 	}
 	
 	public String getOutput() {
@@ -88,6 +94,23 @@ public class Connector {
 	public String getHealth() {
 		return health;
 	}
+
+	public boolean isLose() {
+		return lose;
+	}
+
+	public void setLose(boolean lose) {
+		this.lose = lose;
+	}
+
+	public boolean isWin() {
+		return win;
+	}
+
+	public void setWin(boolean win) {
+		this.win = win;
+	}
+	
 	
 	
 	

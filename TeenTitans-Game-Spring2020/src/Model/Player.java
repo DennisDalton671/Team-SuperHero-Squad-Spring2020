@@ -1,8 +1,8 @@
 package Model;
 
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
+
+/* Stores all of the information about the player */
 
 public class Player extends Entity{
 
@@ -53,6 +53,10 @@ public class Player extends Entity{
 		super.getInventory().remove(equipped);
 	}
 
+	public void setEquipped1(String equipped) {
+		this.equipped = equipped;
+	}
+	
 	public void setUnequip(String attack, String id) {
 		super.addInventory(id);
 		equipped = "None";

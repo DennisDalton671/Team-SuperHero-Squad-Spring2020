@@ -1,21 +1,18 @@
 package Controller;
 
 import Model.InputC;
-import View.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/* This controller initializes the north button to work in the game */
+
 public class NorthInput implements EventHandler<ActionEvent>{
 	private InputC model;
-	private View view;
 	
-	public NorthInput(InputC model, View view) {
-		this.model = model;
-		this.view = view;
-		
+	public NorthInput(InputC model) {
+		this.model = model;	
 	}
 
-	
 	public void addModel(InputC m){
 		this.model = m;
 	}

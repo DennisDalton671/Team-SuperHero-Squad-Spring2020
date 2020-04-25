@@ -1,7 +1,7 @@
 package View;
+
 import java.util.ArrayList;
 import java.util.Observable;
-
 import Model.Connector;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,9 +26,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.WindowEvent;
 
-@SuppressWarnings("deprecation")
+/* The display for the entire game. Includes all of the buttons and panes that are in the game and made for a typical
+ * 1920x1080 HD display
+ */
+
 public class View extends BorderPane implements java.util.Observer {
 
 	public static final int width = 1920;
@@ -43,6 +45,7 @@ public class View extends BorderPane implements java.util.Observer {
 	private ScrollPane sp1;
 	private Button continueGame;
 	private ImageView image = new ImageView();
+	private ImageView image2 = new ImageView();
 	
 	private GridPane grid2;
 	private GridPane grid3;
@@ -124,6 +127,19 @@ public class View extends BorderPane implements java.util.Observer {
 		
 		// TODO Auto-generated method stub
 		if (obj instanceof Connector) {
+			
+			if (((Connector) obj).isLose()) {
+				this.getChildren().clear();
+				this.setStyle(("-fx-background-image: url(file:Resource/Terror.gif); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
+				
+			}
+			
+			if (((Connector) obj).isWin()) {
+				this.getChildren().clear();
+				this.setStyle(("-fx-background-image: url(file:Resource/Freedom.gif); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
+				
+			}
+			
 			health.setText(((Connector) obj).getHealth());
 			attack.setText(((Connector) obj).getAttack());
 			equipped.setText(((Connector) obj).getEquipped());
@@ -153,17 +169,9 @@ public class View extends BorderPane implements java.util.Observer {
 
 		this.setPadding(new Insets(20, 20, 20, 20));
 		
-		//Background Choice1
-		this.setStyle(("-fx-background-image: url('https://i.pinimg.com/originals/75/32/13/7532136df91ebb39339eace3ea489b23.gif'); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
+		image2.setImage(new Image("file:Resource/CreepyHome.gif"));
 		
-		//Background Choice2
-		//this.setStyle(("-fx-background-image: url('https://i.pinimg.com/originals/22/74/ac/2274ac8a7de1d349d7752ae0b56dde5b.jpg'); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
-		
-		//Background Choice3
-		//this.setStyle(("-fx-background-image: url('https://i.pinimg.com/originals/d2/50/78/d25078bf9629888db914bb95e485dd23.jpg'); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
-				
-		//Background Choice4
-		//this.setStyle(("-fx-background-image: url('https://66.media.tumblr.com/020d26355d2eb6396b947b2abd2e6b9b/6bed6aa0631b07a3-a5/s640x960/d464ffa169dc96220e8247ab29b40ca34aeae865.jpg'); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
+		this.setStyle(("-fx-background-image: url(file:Resource/CreepyHome.gif); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
 		
 		Font font = Font.font("Verdana", FontWeight.EXTRA_BOLD, 50);
 		title.setFont(font);
@@ -353,6 +361,10 @@ public class View extends BorderPane implements java.util.Observer {
 	}
 	
 	public Object getTable() {
+		return table.getSelectionModel().getSelectedItem();
+	}
+	
+	public Object getSave() {
 		return table.getSelectionModel().getSelectedItem();
 	}
 }

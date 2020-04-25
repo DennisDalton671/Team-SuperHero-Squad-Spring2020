@@ -1,7 +1,6 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=origin/splouis
 eclipse.preferences.version=1
 encoding//Resource/Help.txt=UTF-8
-<<<<<<< HEAD
-encoding//src/BaseClasses/AttackState.java=UTF-8
-=======
 encoding//src/Model/AttackState.java=UTF-8
->>>>>>> origin/splouis

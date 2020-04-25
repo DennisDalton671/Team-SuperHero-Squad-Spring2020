@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+/* Loads the save file in the database */
+
 public class SaveLoader extends java.util.Observable{
 
 	String url ="jdbc:ucanaccess://Resource/SoftDevPro_Final_One_For_Real_JK.accdb";

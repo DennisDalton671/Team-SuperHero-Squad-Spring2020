@@ -1,6 +1,10 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/* Base class for the monster and player to share */
 
 public class Entity {
 
@@ -75,4 +79,9 @@ public class Entity {
 		temp = Integer.parseInt(health) + Integer.parseInt(s);
 		health = Integer.toString(temp);
 	}
+	
+	public void setInventory(String s) {
+    	List<String> inventoryL = Arrays.asList(s.substring(1, s.length() - 1).split(", "));
+        this.inventory = new ArrayList<String>(inventoryL);
+    }
 }

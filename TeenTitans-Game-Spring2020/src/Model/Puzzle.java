@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.ArrayList;
+/* Stores all of the infromation about a puzzle */
 
 public class Puzzle {
 

@@ -1,5 +1,7 @@
 package Model;
 
+/* Stores all the information of a monster */
+
 public class Monster extends Entity {
 
     private String name;
