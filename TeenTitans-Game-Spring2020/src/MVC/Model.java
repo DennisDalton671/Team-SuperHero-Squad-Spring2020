@@ -1,7 +1,7 @@
 package MVC;
 
-import BaseClasses.Item;
 import BaseClasses.Monster;
+import Model.Item;
 import Model.Puzzle;
 import Model.Room;
 

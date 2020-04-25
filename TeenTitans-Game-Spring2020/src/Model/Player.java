@@ -8,16 +8,9 @@ public class Player extends Entity{
 
 	private String equipped;
 	private String playerState;
-	private String healthPoint;
-	private String attackPoint;
-	private Item item;
-	private String equip;
-	
 	
 	public Player(String ID, String health, String attack, String room, String equipped, String playerState) {
 		super(ID, health, attack, room);
-		this.attackPoint = attack;
-		this.healthPoint = health;
 		this.equipped = equipped;
 		this.playerState = playerState;
 		// TODO Auto-generated constructor stub
@@ -51,10 +44,23 @@ public class Player extends Entity{
 		return equipped;
 	}
 
-	public void setEquipped(String equipped) {
-		this.equipped = equipped;
+	public void setEquipped(String equipped, String attack, String name) {
+		String temp2 = name.substring(0, 1).toUpperCase() + name.substring(1);
+		this.equipped = temp2;
+		int temp = Integer.parseInt(super.getAttack());
+		temp += Integer.parseInt(attack);
+		super.setAttack(Integer.toString(temp));
+		super.getInventory().remove(equipped);
 	}
 
+	public void setUnequip(String attack, String id) {
+		super.addInventory(id);
+		equipped = "None";
+		int temp = Integer.parseInt(super.getAttack());
+		temp -= Integer.parseInt(attack);
+		super.setAttack(Integer.toString(temp));
+	}
+	
 	public String getPlayerState() {
 		return playerState;
 	}
@@ -62,41 +68,9 @@ public class Player extends Entity{
 	public void setPlayerState(String playerState) {
 		this.playerState = playerState;
 	}
-	
-	/**
-	 * @return the healthPoint
-	 */
-	public String getHealthPoint() {
-		return healthPoint;
-	}
-
-	/**
-	 * @param healthPoint the healthPoint to set
-	 */
-	public void setHealthPoint(String healthPoint) {
-		this.healthPoint = healthPoint;
-	}
-
-	/**
-	 * @return the attackPoint
-	 */
-	public String getAttackPoint() {
-		return attackPoint;
-	}
-
-	/**
-	 * @param attackPoint the attackPoint to set
-	 */
-	public void setAttackPoint(String attackPoint) {
-		this.attackPoint = attackPoint;
-	}
 
 	public void PlayerGetsAttacked(String i) {
-		healthPoint = Integer.toString(Integer.parseInt(healthPoint) - Integer.parseInt(i));
-	}
-	
-	public String HitsMonster() {
-		return attackPoint;
+		super.setHealth(Integer.toString(Integer.parseInt(super.getHealth()) - Integer.parseInt(i)));
 	}
 	
 }
