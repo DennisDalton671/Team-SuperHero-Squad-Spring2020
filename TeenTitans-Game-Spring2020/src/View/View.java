@@ -113,12 +113,14 @@ public class View extends BorderPane implements java.util.Observer {
 		setButton(westButton);
 		westButton.setOnAction(controller);
 	}
-	
+
 	public String getInput() {
 		String temp = text.getText();
 		text.clear();
 		return temp;
 	}
+
+
 
 	public void update(Observable o, Object obj) {
 		

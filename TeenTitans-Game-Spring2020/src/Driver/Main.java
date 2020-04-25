@@ -55,6 +55,7 @@ public class Main extends Application{
 		control7 = new SouthInput(c,view);
 		control8 = new WestInput(c,view);
 		control9 = new LoadGame(c,view);
+
 		
 		model.addObserver(view);
 		c.addObserver(view);
