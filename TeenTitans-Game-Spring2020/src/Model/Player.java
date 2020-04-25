@@ -53,7 +53,8 @@ public class Player extends Entity{
 		super.getInventory().remove(equipped);
 	}
 
-	public void setUnequip(String attack) {
+	public void setUnequip(String attack, String id) {
+		super.addInventory(id);
 		equipped = "None";
 		int temp = Integer.parseInt(super.getAttack());
 		temp -= Integer.parseInt(attack);
@@ -66,6 +67,10 @@ public class Player extends Entity{
 
 	public void setPlayerState(String playerState) {
 		this.playerState = playerState;
+	}
+
+	public void PlayerGetsAttacked(String i) {
+		super.setHealth(Integer.toString(Integer.parseInt(super.getHealth()) - Integer.parseInt(i)));
 	}
 	
 }

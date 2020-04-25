@@ -69,4 +69,10 @@ public class Entity {
 	public void setInventory(ArrayList<String> s) {
 		inventory = s;
 	}
+	
+	public void addHealth(String s) {
+		int temp = Integer.parseInt(health);
+		temp = Integer.parseInt(health) + Integer.parseInt(s);
+		health = Integer.toString(temp);
+	}
 }

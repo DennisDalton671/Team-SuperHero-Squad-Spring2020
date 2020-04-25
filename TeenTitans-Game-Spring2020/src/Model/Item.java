@@ -96,4 +96,5 @@ public class Item {
     public void setCraft(String craft) {
         Craft = craft;
     }
+
 }

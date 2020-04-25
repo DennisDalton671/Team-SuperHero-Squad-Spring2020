@@ -9,7 +9,7 @@ public class Monster extends Entity {
 
     public Monster(String ID, String health, String attack, String room, String name, String description, String monsterDefeatedMessage, String itemReward) {
     	super(ID, health, attack, room);
-        this.name = name;
+    	this.name = name;
         this.description = description;
         this.monsterDefeatedMessage = monsterDefeatedMessage;
         this.itemReward = itemReward;
@@ -24,6 +24,11 @@ public class Monster extends Entity {
     // Setters
     public void setName(String name) { this.name = name; }
     public void setDescription(String description) { this.description = description; }
-    public void setMonsterDefeatedMessage(String monsterDefeatedMessage) { this.itemReward = monsterDefeatedMessage;}
+    public void setMonsterDefeatedMessage(String monsterDefeatedMessage) { this.monsterDefeatedMessage = monsterDefeatedMessage;}
     public void setItemReward(String itemReward) { this.itemReward = itemReward;}
+
+	public void MonsterGetsAttacked(String i) {
+		super.setHealth(Integer.toString(Integer.parseInt(super.getHealth()) - Integer.parseInt(i)));
+	}
+    
 }
