@@ -67,6 +67,9 @@ public class View extends BorderPane implements java.util.Observer {
 	private Button eastButton;
 	private Button southButton;
 	private Button westButton;
+	private Button attackButton;
+	private Button lookButton;
+	private Button restartButton;
 	
 	public View(Stage stage) {
 		
@@ -121,6 +124,22 @@ public class View extends BorderPane implements java.util.Observer {
 		westButton = new Button("West");
 		setButton(westButton);
 		westButton.setOnAction(controller);
+	}
+	
+	public void addAttackInput(EventHandler<ActionEvent> controller) {
+		attackButton = new Button("Attck");
+		setButton(attackButton);
+		attackButton.setOnAction(controller);
+	}
+	public void addLookInput(EventHandler<ActionEvent> controller) {
+		lookButton = new Button("Look");
+		setButton(lookButton);
+		lookButton.setOnAction(controller);
+	}
+	public void addRestartInput(EventHandler<ActionEvent> controller) {
+		restartButton = new Button("Reset");
+		setButton(restartButton);
+		restartButton.setOnAction(controller);
 	}
 	
 	public String getInput() {
@@ -298,6 +317,12 @@ public class View extends BorderPane implements java.util.Observer {
 		grid4.add(new Label(), 0, 2);
 		grid4.add(southButton, 1, 2);
 		grid4.add(new Label(), 2, 2);
+		grid4.add(attackButton, 0, 3);
+		grid4.add(new Label(), 1, 3);
+		grid4.add(lookButton, 2, 3);
+		grid4.add(new Label(), 0, 4);
+		grid4.add(restartButton, 1, 4);
+		grid4.add(new Label(), 2, 4);
 		
 		grid2.setAlignment(Pos.CENTER);
 		grid3.setAlignment(Pos.CENTER);

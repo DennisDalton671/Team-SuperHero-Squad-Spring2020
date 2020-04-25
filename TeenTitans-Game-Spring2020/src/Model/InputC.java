@@ -285,7 +285,7 @@ public class InputC extends java.util.Observable {
 				player.setRoom("RM_3");
 			}
 		}
-		if (s.equalsIgnoreCase("restart")) {
+		if (s.equalsIgnoreCase("reset")) {
 			connector.setRestart(true);
 		}
 
