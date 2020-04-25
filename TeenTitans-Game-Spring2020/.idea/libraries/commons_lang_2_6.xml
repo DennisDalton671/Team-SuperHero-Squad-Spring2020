@@ -7,6 +7,12 @@
       <root url="jar://$PROJECT_DIR$/Resource/jackcess-2.1.6.jar!/" />
       <root url="jar://$PROJECT_DIR$/Resource/ucanaccess-4.0.1.jar!/" />
       <root url="jar://$PROJECT_DIR$/Resource/ucanload.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Resource/Jar Files/commons-lang-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Resource/Jar Files/commons-logging-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Resource/Jar Files/hsqldb.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Resource/Jar Files/jackcess-2.1.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Resource/Jar Files/ucanaccess-4.0.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/Resource/Jar Files/ucanload.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

@@ -41,6 +41,8 @@ public class InputC extends java.util.Observable {
 		ArrayList<Room> list;
 		String room;
 
+		// ###################################################### Data Loading #################################################################################
+		// Loads Room data from database
 		try {
 			Connection con = DriverManager.getConnection(url);
 			Statement s = con.createStatement();
@@ -67,6 +69,7 @@ public class InputC extends java.util.Observable {
 			e.printStackTrace();
 		}
 
+		// Loads Item data from database
 		try {
 			Connection con = DriverManager.getConnection(url);
 			Statement s = con.createStatement();
@@ -91,6 +94,7 @@ public class InputC extends java.util.Observable {
 			e.printStackTrace();
 		}
 
+		// Loads Puzzle data from database
 		try {
 			Connection con = DriverManager.getConnection(url);
 			Statement s = con.createStatement();
@@ -123,6 +127,7 @@ public class InputC extends java.util.Observable {
 			e.printStackTrace();
 		}
 
+		// Loads Monster data from database
 		try {
 			Connection con = DriverManager.getConnection(url);
 			Statement s = con.createStatement();
@@ -146,6 +151,7 @@ public class InputC extends java.util.Observable {
 			e.printStackTrace();
 		}
 
+		// Loads Monster data from database
 		try {
 			Connection con = DriverManager.getConnection(url);
 			Statement s = con.createStatement();
@@ -169,6 +175,7 @@ public class InputC extends java.util.Observable {
 			e.printStackTrace();
 		}
 
+		// imports save data from database
 		try {
 			Connection con = DriverManager.getConnection(url);
 			Statement s = con.createStatement();
@@ -194,6 +201,7 @@ public class InputC extends java.util.Observable {
 		}
 	}
 
+	// imports load data from database
 	public void loadPlayer(Object save) {
 
 		try {
@@ -220,77 +228,126 @@ public class InputC extends java.util.Observable {
 		}
 
 	}
+	// ###################################################### Data Loading #################################################################################
 
+
+	// Checks the user's input
 	public void checkUserInput(String s) {
 		String temp = " ";
 		if (s.contains(" ")) {
 			temp = s;
 		}
 
-		System.out.println(((Player) player).getPlayerState());
+		// Prints the Player state in the console.
+		/*
+		1 = Navigation State
+		2 = Puzzle     State
+		3 = Battle     State
+		 */
+		System.out.println(( (Player) player).getPlayerState());
 
+
+		// Commands that are active during player state 2 (Puzzle State)
 		if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
 
-			if (s.equalsIgnoreCase("Give up") || s.equalsIgnoreCase("leave")
-					|| s.equalsIgnoreCase(getCurrentPuzzle().getSolution()) || s.equalsIgnoreCase("observe")
-					|| s.equalsIgnoreCase("hint")) {
+					// List Of all Commands the user can input
+			if (       s.equalsIgnoreCase("Give up")
+					|| s.equalsIgnoreCase("leave")
+					|| s.equalsIgnoreCase(getCurrentPuzzle().getSolution())
+					|| s.equalsIgnoreCase("observe")
+					|| s.equalsIgnoreCase("hint") )
+			{
 				connector.setOutput(puzzleCommands(s));
-			} else {
+			}
+
+			else {
 				connector.setOutput("No none puzzling inputs while puzzling");
 			}
 
 		}
+
+		// Commands that are active during player state 3 (Battle State)
 		if (((Player) player).getPlayerState().equalsIgnoreCase("3")) {
 
-			if (s.equalsIgnoreCase("pull out") || s.equalsIgnoreCase("retreat") || s.equalsIgnoreCase("inspect")
-					|| s.equalsIgnoreCase("attack") || temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("use")) {
+			if (       s.equalsIgnoreCase("pull out")
+					|| s.equalsIgnoreCase("retreat")
+					|| s.equalsIgnoreCase("inspect")
+					|| s.equalsIgnoreCase("attack")
+					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("use"))
+			{
 				connector.setOutput(monsterCommands(s));
-			} else {
+			}
+
+			else {
 				connector.setOutput("No none battling inputs while battling");
 			}
-		} else if (((Player) player).getPlayerState().equalsIgnoreCase("1")) {
-			if (s.equalsIgnoreCase("North") || s.equalsIgnoreCase("East") || s.equalsIgnoreCase("South")
+		}
+
+		// Commands that are active during player state 1 (Navigation State)
+		else if (((Player) player).getPlayerState().equalsIgnoreCase("1")) {
+
+			if (       s.equalsIgnoreCase("North")
+					|| s.equalsIgnoreCase("East")
+					|| s.equalsIgnoreCase("South")
 					|| s.equalsIgnoreCase("West"))
+			{
 				connector.setOutput(checkDirection(s));
-			else if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L")
+			}
+
+			else if (  s.equalsIgnoreCase("Look")
+					|| s.equalsIgnoreCase("L")
 					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Pickup")
-					|| s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")
-					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Drop") || s.equalsIgnoreCase("Solve")
-					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Examine") || s.equalsIgnoreCase("help")
-					|| s.equalsIgnoreCase("save") || s.equalsIgnoreCase("Fight")
-					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Equip")) || s.equalsIgnoreCase("unequip")
+					|| s.equalsIgnoreCase("Inventory")
+					|| s.equalsIgnoreCase("I")
+					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Drop")
+					|| s.equalsIgnoreCase("Solve")
+					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("Examine")
+					|| s.equalsIgnoreCase("help")
+					|| s.equalsIgnoreCase("save")
+					|| s.equalsIgnoreCase("Fight")
+					|| temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Equip"))
+					|| s.equalsIgnoreCase("unequip")
 					|| s.equalsIgnoreCase("heal"))
 				connector.setOutput(roomCommands(s));
 		}
 
+		// Opens the Help.txt after the player types help. This will allow the player to see understand the game and its commands
 		if (s.equalsIgnoreCase("help")) {
 			try {
 
 				ProcessBuilder help = new ProcessBuilder("Notepad.exe", "Resource/Help.txt");
 				help.start();
 
-			} catch (IOException e) {
+			}
+
+			catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
+
+		// Will drop the player into the Torture Chamber (RM_3) if they "look" inside of Sitting Room (RM_16)
 		if (s.equalsIgnoreCase("look") || s.equalsIgnoreCase("l")) {
-			if (((Player) player).getRoom().equalsIgnoreCase("RM_16")) {
+
+			if ( ((Player) player).getRoom().equalsIgnoreCase("RM_16")) {
 				player.setRoom("RM_3");
 			}
+
 		}
 
-		// rList.get(checkCurrentRoom()).setMap("default.jpg");
-		connector.setImage(rList.get(checkCurrentRoom()).getMap());
-		connector.setList(showInventoryD());
-		connector.setHealth(player.getHealth());
-		connector.setAttack(player.getAttack());
-		connector.setEquipped(((Player) player).getEquipped());
+		// rList.get(checkCurrentRoom()).setMap("default.jpg"); ======> Unused Code
+		connector.setImage(rList.get(checkCurrentRoom()).getMap());			// Updates Map according to Current Room Player is in
+		connector.setList(showInventoryD());								// Updates Inventory (Visual)
+		connector.setHealth(player.getHealth());							// Updates Player Health (Visual)
+		connector.setAttack(player.getAttack());							// Updates Player Attack (Visual)
+		connector.setEquipped(((Player) player).getEquipped());				// Updates Player Equipped Item (Visual)
 
+		// If Player health is 0, the game is over and it closes
 		if (Integer.parseInt(((Player) player).getHealth()) <= 0) {
 			System.exit(0);
 		}
 
+		// If Player gets to Room 7 (Outside), the game is over and it closes
 		if (((Player) player).getRoom().equalsIgnoreCase("RM_7")) {
 			System.exit(0);
 		}
@@ -300,6 +357,7 @@ public class InputC extends java.util.Observable {
 		connector.clearList();
 	}
 
+	//Sets stuff
 	public void startup() {
 		connector.setDescription("Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: "
 				+ rList.get(checkCurrentRoom()).getDescription());
@@ -313,6 +371,7 @@ public class InputC extends java.util.Observable {
 		notifyObservers(connector);
 	}
 
+	// Check Direction according to input
 	public String checkDirection(String s) {
 		String output = "";
 		int temp = checkCurrentRoom();
@@ -400,6 +459,8 @@ public class InputC extends java.util.Observable {
 		return output;
 	}
 
+
+	// Commands the player is able to do (for rooms)
 	public String roomCommands(String s) {
 		String temp = " ";
 		if (s.contains(" ")) {
@@ -407,60 +468,123 @@ public class InputC extends java.util.Observable {
 		}
 		String output = "";
 
+		// Allows the player to see the Item, puzzle, or monster in the room they are currently in
 		if (s.equalsIgnoreCase("Look") || s.equalsIgnoreCase("L")) {
+
 			connector.setDescription("Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: "
 					+ rList.get(checkCurrentRoom()).getDescription());
 			output = "\nItem List: " + itemList() + "\nPuzzle Name: " + checkRoomPuzzle() + "\nMonster(s): "
 					+ checkRoomMonster();
-		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Pickup"))) {
+		}
+
+		// "Pickup" command; Allows the player to pick up the item in the current room they are in
+		else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Pickup"))) {
+
+			// If the item does not exist
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
 			}
+
+			// If there is an item in the room
 			if (rList.get(checkCurrentRoom()).pickupItem(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
 				player.addInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)));
 				output = "Item added to inventory";
-			} else
+			}
+
+			// If there is no item in the room
+			else
 				output = "Item not in room";
-		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Drop"))) {
+		}
+
+
+		// "Drop" command; Allows the player to drop the item in the current room they are in
+		else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Drop"))) {
+
+			// If the item does not exist
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
 			}
+
+			// If there is an item in the player's inventory
 			if (player.inventoryCheck(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
 				player.dropInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)));
 				rList.get(checkCurrentRoom()).addInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)));
 				output = "Item dropped into room";
-			} else
-				output = "Item not in inventory";
+			}
 
-		} else if (s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")) {
+			// If there is no item in the inventory
+			else
+				output = "Item not in inventory";
+		}
+
+
+		// "Inventory" command; Allows the player to check their inventory
+		else if (s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")) {
 			output = "Inventory: " + showInventory();
-		} else if (s.equalsIgnoreCase("Solve")) {
+		}
+
+
+		// "Solve" command; allows the player to enter the puzzle state if a puzzle exists in the current room they are in
+		else if (s.equalsIgnoreCase("Solve")) {
+
+			// Informs the player they have entered the puzzle state
 			if (!rList.get(checkCurrentRoom()).getPuzzleID().equalsIgnoreCase("0")) {
 				((Player) player).setPlayerState("2");
 				output = "You are now puzzling";
-			} else {
+			}
+
+			// Informs the player there is no puzzle in the room they are currently in
+			else {
 				output = "No puzzle in the room";
 			}
-		} else if (s.equalsIgnoreCase("Fight")) {
+
+		}
+
+
+		// "Fight" command; allows the player to enter the battle state if a monster exists in the current room they are in
+		else if (s.equalsIgnoreCase("Fight")) {
+
+			// Informs the player they have entered the battle state
 			if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
 				((Player) player).setPlayerState("3");
 				output = "You are now in battle";
-				// r.list.get(checkCurrentRoom()).getMonsterID())
-			} else {
+				// r.list.get(checkCurrentRoom()).getMonsterID())  ===> Unused command
+			}
+
+			// Informs the player there is no monster in the room they are currently in
+			else {
 				output = "There is no monster in this room";
 			}
 
-		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Examine"))) {
+		}
+
+
+		// "Examine" command; allows the player to see the description of an item
+		else if ( temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Examine")) ) {
+
+			// informs the player they cannot examine the
 			if (convertIName(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "You cannot examine that item";
-			} else if (rList.get(checkCurrentRoom())
-					.checkInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
+			}
+
+			// showcases the description of the item if it is in the current room
+			else if (rList.get(checkCurrentRoom()).checkInventory(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
 				output = "Description: " + itemDesc(convertIName(temp.substring(temp.indexOf(" ") + 1)));
-			} else if (player.inventoryCheck(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
+			}
+
+			// showcases the description of the item if it is in the player's inventory
+			else if (player.inventoryCheck(convertIName(temp.substring(temp.indexOf(" ") + 1)))) {
 				output = "Description: " + showInventoryDesc(convertIName(temp.substring(temp.indexOf(" ") + 1)));
-			} else
+			}
+
+			// informs the player the item they are trying to examine is not in the room
+			else
 				output = "Item not in room";
-		} else if (s.equalsIgnoreCase("save")) {
+		}
+
+
+		// Save's the player's current progress in the game
+		else if (s.equalsIgnoreCase("save")) {
 			String item = player.getInventory().toString();
 			try {
 
@@ -481,123 +605,218 @@ public class InputC extends java.util.Observable {
 					System.out.println("A row has been inserted successfully");
 				}
 
-			} catch (SQLException e) {
+			}
+			catch (SQLException e) {
 				e.printStackTrace();
 			}
 
 			output = "Game successfully Saved";
-		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Equip"))) {
+		}
+
+
+		// "Equip" command; allows the player to equip an item from their inventory
+		else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Equip"))) {
+
+			// If the player has the item they are trying to equip...
 			if (player.getInventory().contains(getItemID(temp.substring(temp.indexOf(" ") + 1)))) {
+
+				// Equips item to player
 				if (((Player) player).getEquipped().equalsIgnoreCase("None")) {
 					((Player) player).setEquipped(getItemID(temp.substring(temp.indexOf(" ") + 1)),
 							iList.get(getItem(temp.substring(temp.indexOf(" ") + 1))).getItemBoost(),
 							temp.substring(temp.indexOf(" ") + 1));
 					output = "Item equipped";
-				} else {
+				}
+
+				// Player already has the item equipped
+				else {
 					output = "Weapon already equipped";
 				}
-			} else {
+			}
+
+			// Player is unable to equip item
+			else {
 				output = "Unable to equip item";
 			}
-		} else if (s.equalsIgnoreCase(("unequip"))) {
+		}
+
+
+		// "UnEquip" command; allows the player to un-equip an item
+		else if (s.equalsIgnoreCase(("unequip"))) {
+
+			// Un-equips item from player
 			if (!((Player) player).getEquipped().equalsIgnoreCase("None")) {
 				((Player) player).setUnequip(iList.get(getItem(temp.substring(temp.indexOf(" ") + 1))).getItemBoost(),
 						getItemID(((Player) player).getEquipped()));
 				output = "Item Unequipped";
-			} else
+			}
+
+			// Player cannot un-equip item
+			else
 				output = "Cannot unequip";
-		} else if (s.equalsIgnoreCase("heal")) {
+		}
+
+
+		// "heal" command; allows the player to heal themselves using an item
+		else if (s.equalsIgnoreCase("heal")) {
+
+			// if the player has an item that can heal, it will increase player health
 			if (player.getInventory().contains(iList.get(0).getId())) {
 				player.dropInventory(iList.get(0).getId());
 				player.addHealth(iList.get(0).getItemBenefit());
+				output = "You healed yourself!";
 			}
+
+			// Player cannot heal
+			else {
+				output = "Cannot heal";
+			}
+
 		}
 
 		return output;
 	}
 
-	// Hello World
 
+	// Commands the player is able to do (for puzzles)
 	public String puzzleCommands(String s) {
 		String output = "";
 		Puzzle p = getCurrentPuzzle();
+
+		// "give up" command; allows the player to stop doing the puzzle and receive the reward
 		if (s.equalsIgnoreCase("give up")) {
 			((Player) player).setPlayerState("1");
 			((Player) player).addInventory(p.getReward());
 			rList.get(checkCurrentRoom()).setPuzzleID("0");
 			output = "Puzzle Skipped";
-		} else if (s.equalsIgnoreCase("leave")) {
+		}
+
+		// "leave" command; allows the player to stop doing the puzzle
+		else if (s.equalsIgnoreCase("leave")) {
 			((Player) player).setPlayerState("1");
 			output = "Left Puzzle";
-		} else if (s.equalsIgnoreCase(p.getSolution())) {
-			if ((((Player) player).getInventory().contains(p.getItemRequired_1()) || (p.getItemRequired_1()
-					.equalsIgnoreCase("0"))
-					&& (((Player) player).getInventory().contains(p.getItemRequired_2())
-							|| (p.getItemRequired_2().equalsIgnoreCase("0"))
-									&& (((Player) player).getInventory().contains(p.getItemRequired_3())
-											|| (p.getItemRequired_3().equalsIgnoreCase("0"))
-													&& (((Player) player).getInventory().contains(p.getItemRequired_4())
-															|| (p.getItemRequired_4().equalsIgnoreCase("0"))))))) {
+		}
+
+		// If player answers the puzzle...
+		else if (s.equalsIgnoreCase(p.getSolution())) {
+			//with required item(s)
+			if ((((Player) player).getInventory().contains(p.getItemRequired_1())
+					|| (p.getItemRequired_1().equalsIgnoreCase("0"))
+						&& (((Player) player).getInventory().contains(p.getItemRequired_2())
+						|| (p.getItemRequired_2().equalsIgnoreCase("0"))
+							&& (((Player) player).getInventory().contains(p.getItemRequired_3())
+							|| (p.getItemRequired_3().equalsIgnoreCase("0"))
+								&& (((Player) player).getInventory().contains(p.getItemRequired_4())
+								|| (p.getItemRequired_4().equalsIgnoreCase("0"))))))) {
+
 				((Player) player).setPlayerState("1");
 				((Player) player).addInventory(p.getReward());
 				rList.get(checkCurrentRoom()).setPuzzleID("0");
 				output = p.getCompletion();
-			} else {
+
+			}
+
+			//without required item(s)
+			else {
 				output = "Missing required item";
 			}
-		} else if (s.equalsIgnoreCase("observe")) {
+		}
+
+		// "Observe" command; Allows the player to view puzzle description
+		else if (s.equalsIgnoreCase("observe")) {
 			output = p.getDescription();
-		} else if (s.equalsIgnoreCase("hint")) {
+		}
+
+		// "hint" command; Allows the player to view puzzle hint(s)
+		else if (s.equalsIgnoreCase("hint")) {
+
+			// If there are no hints available
 			if (p.getHint1().equalsIgnoreCase("0")) {
 				output = "No Hints GL ;-)";
-			} else {
+			}
+
+			// Hint 1
+			else {
 				output = "\nHint 1: " + p.getHint1();
 			}
+
+			// Hint 2
 			if (!p.getHint2().equalsIgnoreCase("0")) {
 				output += "\nHint 2: " + p.getHint2();
 			}
+
+			// Hint 3
 			if (!p.getHint3().equalsIgnoreCase("0")) {
 				output += "\nHint 3: " + p.getHint3();
 			}
+
+			// Hint 4
 			if (!p.getHint4().equalsIgnoreCase("0")) {
 				output += "\nHint 4: " + p.getHint4();
 			}
+
 		}
+
 		return output;
 	}
 
+
+	// Commands the player is able to do (for battles)
 	public String monsterCommands(String s) {
 		String output = "";
 		String temp = " ";
+
 		if (s.contains(" ")) {
 			temp = s;
 		}
+
+		// "pull out" command; allows the player to stop doing the battle and receive the reward
 		Monster m = getCurrentMonster();
 		if (s.equalsIgnoreCase("pull out")) {
 			((Player) player).setPlayerState("1");
 			((Player) player).addInventory(m.getItemReward());
 			rList.get(checkCurrentRoom()).setMonsterID("0");
 			output = "Battle Skipped";
-		} else if (s.equalsIgnoreCase("retreat")) {
+		}
+
+		// "retreat" command; allows the player to stop doing the battle
+		else if (s.equalsIgnoreCase("retreat")) {
 			((Player) player).setPlayerState("1");
 			output = "Left Battle";
-		} else if (s.equalsIgnoreCase("inspect")) {
+		}
+
+		// "inspect" command; allows the player view the monster's name, description, health, and attack power
+		else if (s.equalsIgnoreCase("inspect")) {
+
+			// Displays monster's name, description, health, and attack power
 			if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
 				output = "Monster Name: " + m.getName() + "\nMonster Description: " + m.getDescription()
 						+ "\nMonster Health: " + m.getHealth() + "\nAttack Power: " + m.getAttack();
 			}
-		} else if (s.equalsIgnoreCase("attack")) {
+
+		}
+
+		// "attack" command; allows the player to attack the monster
+		else if (s.equalsIgnoreCase("attack")) {
 			if (Integer.parseInt(((Monster) m).getHealth()) > 0) {
+
+				// Displays Monster health and player health after calculations are done for monster and player health for all monsters except "MN6_VP" (Vampire)
 				if (!((Monster) m).getID().equalsIgnoreCase("MN6_VP")) {
 
 					m.MonsterGetsAttacked(((Player) player).getAttack());
 					((Player) player).PlayerGetsAttacked(m.getAttack());
 					output = "Monster health: " + m.getHealth() + "\nPlayer Health: " + ((Player) player).getHealth();
 
-				} else {
+				}
+
+				// Informs the player the monster is immune to attacks
+				else {
 					output = "Immune to attacks";
 				}
-			} else {
+			}
+
+			// Informs the player the monster is defeated and rewards the player with an item
+			else {
 				m.setID("0");
 				output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + m.getItemReward();
 				//monsterDrop();
@@ -606,8 +825,14 @@ public class InputC extends java.util.Observable {
 				((Player) player).setPlayerState("1");
 			}
 
-		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("use")) {
+		}
+
+		// "use" command; allows the player to use an item
+		else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("use")) {
+
 			if (((Player) player).getInventory().contains(temp.substring(temp.indexOf(" ") + 1))) {
+
+				// Player will defeat MN6_VP (Vampire) instantly if they have the required item
 				if (((Monster) m).getID().equalsIgnoreCase("MN6_VP")
 						&& (temp.substring(temp.indexOf(" ") + 1).equalsIgnoreCase("garlic")
 								|| temp.substring(temp.indexOf(" ") + 1).equalsIgnoreCase("stake"))) {
@@ -619,6 +844,7 @@ public class InputC extends java.util.Observable {
 					((Player) player).addInventory("AR_HP");
 					((Player) player).setPlayerState("1");
 				}
+
 			}
 		}
 		return output;
