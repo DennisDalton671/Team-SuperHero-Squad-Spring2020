@@ -16,10 +16,6 @@ public class StartUpController implements EventHandler<ActionEvent> {
 		this.model = model;
 		this.view = view;
 	}
-
-	public void addModel(SaveLoader m){
-		this.model = m;
-	}
 	
 	public void handle(ActionEvent event) {
 		// TODO Auto-generated method stub

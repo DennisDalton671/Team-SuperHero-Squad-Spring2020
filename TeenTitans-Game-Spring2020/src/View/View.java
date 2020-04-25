@@ -2,6 +2,8 @@ package View;
 
 import java.util.ArrayList;
 import java.util.Observable;
+
+import Driver.Main;
 import Model.Connector;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,6 +28,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
 
 /* The display for the entire game. Includes all of the buttons and panes that are in the game and made for a typical
  * 1920x1080 HD display
@@ -36,6 +39,8 @@ public class View extends BorderPane implements java.util.Observer {
 	public static final int width = 1920;
 	public static final int height = 1080;
 	
+	private Stage primaryStage;
+	
 	private Label title;
 	
 	private GridPane grid1;
@@ -45,7 +50,6 @@ public class View extends BorderPane implements java.util.Observer {
 	private ScrollPane sp1;
 	private Button continueGame;
 	private ImageView image = new ImageView();
-	private ImageView image2 = new ImageView();
 	
 	private GridPane grid2;
 	private GridPane grid3;
@@ -64,10 +68,12 @@ public class View extends BorderPane implements java.util.Observer {
 	private Button southButton;
 	private Button westButton;
 	
-	public View() {
+	public View(Stage stage) {
 		
+		this.primaryStage = stage;
 		defaultSetup();
 		buildMenu();
+		
 
 	}
 	
@@ -140,6 +146,19 @@ public class View extends BorderPane implements java.util.Observer {
 				
 			}
 			
+			if (((Connector) obj).isRestart()) {
+				Main main = new Main();	
+				this.primaryStage.close();
+				Stage primaryStage = new Stage();
+				try {
+					primaryStage.setFullScreen(true);
+					main.start(primaryStage);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			
 			health.setText(((Connector) obj).getHealth());
 			attack.setText(((Connector) obj).getAttack());
 			equipped.setText(((Connector) obj).getEquipped());
@@ -161,15 +180,12 @@ public class View extends BorderPane implements java.util.Observer {
 				table.getItems().add(((ArrayList) obj).get(x));
 			}
 		}
-		//this.display.appendText(((Connector)obj).getOutput() + "\n");
 	}
 	
 	public void defaultSetup() {
 		title = new Label("Mansion Escape");
 
 		this.setPadding(new Insets(20, 20, 20, 20));
-		
-		image2.setImage(new Image("file:Resource/CreepyHome.gif"));
 		
 		this.setStyle(("-fx-background-image: url(file:Resource/CreepyHome.gif); " + "-fx-background-position: center center; " + "-fx-background-repeat: no-repeat;" + "-fx-background-size: 100% 100%"));
 		
@@ -234,7 +250,7 @@ public class View extends BorderPane implements java.util.Observer {
 		Label healthD = new Label("Health = ");
 		Label attackD = new Label("Attack = ");
 		Label equippedD = new Label("Equipped = ");
-		Label inventoryD = new Label("Inventory = ");
+		Label inventoryD = new Label("");
 		
 		setLabel(health);
 		setLabel(healthD);
@@ -247,6 +263,8 @@ public class View extends BorderPane implements java.util.Observer {
 		TableColumn inventoryC = new TableColumn<Object, Object>("Inventory");
         inventoryC.setCellValueFactory(new PropertyValueFactory("items"));
 		
+        inventoryC.setMinWidth(250);
+        
         inventory.getColumns().setAll(inventoryC);
         
         grid3.add(healthD, 0, 0);
@@ -350,6 +368,10 @@ public class View extends BorderPane implements java.util.Observer {
         TableColumn roomCol = new TableColumn("Current Room");
         roomCol.setCellValueFactory(new PropertyValueFactory("room"));
         
+        saveCol.setMinWidth(150);
+        roomCol.setMinWidth(250);
+        
+        
         table.getColumns().setAll(saveCol, roomCol);
         
         grid1.getChildren().remove(loadSaves);
@@ -367,4 +389,5 @@ public class View extends BorderPane implements java.util.Observer {
 	public Object getSave() {
 		return table.getSelectionModel().getSelectedItem();
 	}
+	
 }

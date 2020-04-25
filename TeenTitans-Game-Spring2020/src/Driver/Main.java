@@ -37,12 +37,10 @@ public class Main extends Application {
 
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
-
-		View view = new View();
+		View view = new View(primaryStage);
 		Scene scene = new Scene(view);
 		InputC c = new InputC();
 		SaveLoader s = new SaveLoader();
-
 		c.addObserver(view);
 		s.addObserver(view);
 

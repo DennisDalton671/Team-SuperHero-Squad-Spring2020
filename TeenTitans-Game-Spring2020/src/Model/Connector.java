@@ -16,11 +16,13 @@ public class Connector {
 	private ArrayList<Inventory> list;
 	private boolean lose;
 	private boolean win;
+	private static boolean restart;
 
 	public Connector() {
 		list = new ArrayList<Inventory>();
 		lose = false;
 		win = false;
+		restart = false;
 	}
 	
 	public String getOutput() {
@@ -111,7 +113,12 @@ public class Connector {
 		this.win = win;
 	}
 	
-	
-	
+	public boolean isRestart() {
+		return restart;
+	}
+
+	public void setRestart(boolean restart) {
+		Connector.restart = restart;
+	}
 	
 }

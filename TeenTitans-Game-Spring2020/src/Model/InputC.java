@@ -27,10 +27,12 @@ public class InputC extends java.util.Observable {
 	ArrayList<Monster> mList;
 	ArrayList<Player> plList;
 
-	/* In the constructor we get all the data from the database and store it into array list so the model can access the data whenever it needs it 
-	 * and also creates the connector object to send to the view model.
+	/*
+	 * In the constructor we get all the data from the database and store it into
+	 * array list so the model can access the data whenever it needs it and also
+	 * creates the connector object to send to the view model.
 	 */
-	
+
 	public InputC() {
 
 		url = "jdbc:ucanaccess://Resource/SoftDevPro_Final_One_For_Real_JK.accdb";
@@ -64,7 +66,6 @@ public class InputC extends java.util.Observable {
 				String key = rs.getString(12);
 				rList.add(new Room(room_id, room_name, floor, room_desc, monster_id, item_id, puzzle_id, north_id,
 						south_id, west_id, east_id, key));
-				System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -120,7 +121,6 @@ public class InputC extends java.util.Observable {
 				pList.add(new Puzzle(puzzle_id, puzzle_name, puzzle_desc, hint1, hint2, hint3, hint4, solution, reward,
 						penalty, room_puzzle, completion, itemRequired_1, itemRequired_2, itemRequired_3,
 						itemRequired_4));
-				System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -143,7 +143,6 @@ public class InputC extends java.util.Observable {
 
 				mList.add(new Monster(monster_id, health_point, attack_point, room_id, monster, monster_desc,
 						defeat_message, item_reward));
-				System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -172,13 +171,13 @@ public class InputC extends java.util.Observable {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		for (int x = 0; x < rList.size(); x++) {
-			System.out.println(rList.get(x).getInventory().toString());
-		}
 	}
 
-	/* The load player method loads the information from the database to retrieve the data from a previous save for the player */
-	
+	/*
+	 * The load player method loads the information from the database to retrieve
+	 * the data from a previous save for the player
+	 */
+
 	public void loadPlayer(Object save) {
 
 		if (!((SaveFile) save).getId().equalsIgnoreCase("1")) {
@@ -195,7 +194,6 @@ public class InputC extends java.util.Observable {
 							rList.get(x).setPuzzleID(rs.getString(4));
 						}
 					}
-					System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -216,7 +214,6 @@ public class InputC extends java.util.Observable {
 					player.setRoom(rs.getString(6));
 					((Player) player).setInventory(rs.getString(7));
 
-					System.out.println(rs.getString(1) + "\t\t\t" + rs.getString(2));
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -224,17 +221,18 @@ public class InputC extends java.util.Observable {
 		}
 	}
 
-	/* This method checks the current user input and decides which course of action it should take based on the players current state and the 
-	 * input the player inputed. This method also checks to see if the player won or lost and stores the information.
+	/*
+	 * This method checks the current user input and decides which course of action
+	 * it should take based on the players current state and the input the player
+	 * inputed. This method also checks to see if the player won or lost and stores
+	 * the information.
 	 */
-	
+
 	public void checkUserInput(String s) {
 		String temp = " ";
 		if (s.contains(" ")) {
 			temp = s;
 		}
-
-		System.out.println(((Player) player).getPlayerState());
 
 		if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
 
@@ -250,7 +248,8 @@ public class InputC extends java.util.Observable {
 		if (((Player) player).getPlayerState().equalsIgnoreCase("3")) {
 
 			if (s.equalsIgnoreCase("pull out") || s.equalsIgnoreCase("retreat") || s.equalsIgnoreCase("inspect")
-					|| s.equalsIgnoreCase("attack") || temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("use")) {
+					|| s.equalsIgnoreCase("attack") || temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("use")
+					|| s.equalsIgnoreCase("a")) {
 				connector.setOutput(monsterCommands(s));
 			} else {
 				connector.setOutput("No none battling inputs while battling");
@@ -286,7 +285,19 @@ public class InputC extends java.util.Observable {
 				player.setRoom("RM_3");
 			}
 		}
+		if (s.equalsIgnoreCase("restart")) {
+			connector.setRestart(true);
+		}
 
+		if (s.equalsIgnoreCase("quit")) {
+			System.exit(0);;
+		}
+		
+		if (s.equalsIgnoreCase("up up down down left right left right b a")) {
+			player.setHealth("666");
+			player.setAttack("999");
+		}
+		
 		// rList.get(checkCurrentRoom()).setMap("default.jpg");
 		connector.setImage(rList.get(checkCurrentRoom()).getMap());
 		connector.setList(showInventoryD());
@@ -307,10 +318,12 @@ public class InputC extends java.util.Observable {
 		connector.clearList();
 	}
 
-	/* The initial startup of the program and gets all the initial information to send to the view initial. Also called if the user wants to restart the game.
+	/*
+	 * The initial startup of the program and gets all the initial information to
+	 * send to the view initial. Also called if the user wants to restart the game.
 	 * Very seldom used but very important for the initial startup of the game.
 	 */
-	
+
 	public void startup() {
 		connector.setDescription("Room Name: " + rList.get(checkCurrentRoom()).getName() + "\nRoom Description: "
 				+ rList.get(checkCurrentRoom()).getDescription());
@@ -324,10 +337,12 @@ public class InputC extends java.util.Observable {
 		notifyObservers(connector);
 	}
 
-	/* Checks the input for the direction that was inputed and moves the player to the direction they inputed, otherwise
-	 * the game will notify the user that there is no room in that direction.
+	/*
+	 * Checks the input for the direction that was inputed and moves the player to
+	 * the direction they inputed, otherwise the game will notify the user that
+	 * there is no room in that direction.
 	 */
-	
+
 	public String checkDirection(String s) {
 		String output = "";
 		int temp = checkCurrentRoom();
@@ -415,10 +430,12 @@ public class InputC extends java.util.Observable {
 		return output;
 	}
 
-	/* If the user is in the navigation state the game will direct the users input here and decide what to do with given input, It has multiple functions from 
+	/*
+	 * If the user is in the navigation state the game will direct the users input
+	 * here and decide what to do with given input, It has multiple functions from
 	 * starting a fight to equipping items and so on.
 	 */
-	
+
 	public String roomCommands(String s) {
 		String temp = " ";
 		if (s.contains(" ")) {
@@ -472,8 +489,7 @@ public class InputC extends java.util.Observable {
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Examine"))) {
 			if (getItemID(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "You cannot examine that item";
-			} else if (rList.get(checkCurrentRoom())
-					.checkInventory(getItemID(temp.substring(temp.indexOf(" ") + 1)))) {
+			} else if (rList.get(checkCurrentRoom()).checkInventory(getItemID(temp.substring(temp.indexOf(" ") + 1)))) {
 				output = "Description: " + itemDesc(getItemID(temp.substring(temp.indexOf(" ") + 1)));
 			} else if (player.inventoryCheck(getItemID(temp.substring(temp.indexOf(" ") + 1)))) {
 				output = "Description: " + showInventoryDesc(getItemID(temp.substring(temp.indexOf(" ") + 1)));
@@ -495,48 +511,40 @@ public class InputC extends java.util.Observable {
 				PreparedStatement.setString(7, player.getInventory().toString());
 
 				int row = PreparedStatement.executeUpdate();
-				if (row > 0) {
-					System.out.println("A row has been inserted successfully");
-				}
-
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 			try {
-			
+
 				Connection con = DriverManager.getConnection(url);
 				Statement st = con.createStatement();
-				ResultSet rs = st.executeQuery(
-						"SELECT LAST (saveID) FROM Player");
-				
+				ResultSet rs = st.executeQuery("SELECT LAST (saveID) FROM Player");
+
 				rs.next();
-				
+
 				String roomSave = rs.getString(1);
-				
+
 				roomSave = roomSave.substring(0, roomSave.indexOf("."));
-				
-				String createTable = "CREATE TABLE roomsave" + roomSave + " (RoomID CHAR(255), Inventory CHAR(255), Monster CHAR(255), Puzzle CHAR(255))";
-				
+
+				String createTable = "CREATE TABLE roomsave" + roomSave
+						+ " (RoomID CHAR(255), Inventory CHAR(255), Monster CHAR(255), Puzzle CHAR(255))";
+
 				Statement stmt = con.createStatement();
 				stmt.executeUpdate(createTable);
-				
+
 				for (int x = 0; x < rList.size(); x++) {
-				String playerSave1 = "INSERT INTO roomsave" + roomSave + " (RoomID, Inventory, Monster, Puzzle) VALUES (?,?,?,?)";
-				
-				PreparedStatement PreparedStatement = con.prepareStatement(playerSave1);
+					String playerSave1 = "INSERT INTO roomsave" + roomSave
+							+ " (RoomID, Inventory, Monster, Puzzle) VALUES (?,?,?,?)";
 
-				PreparedStatement.setString(1, rList.get(x).getId());
-				PreparedStatement.setString(2, rList.get(x).getInventory().toString());
-				PreparedStatement.setString(3, rList.get(x).getMonsterID());
-				PreparedStatement.setString(4, rList.get(x).getPuzzleID());
+					PreparedStatement PreparedStatement = con.prepareStatement(playerSave1);
 
-				int row = PreparedStatement.executeUpdate();
-				if (row > 0) {
-					System.out.println("A row has been inserted successfully");
+					PreparedStatement.setString(1, rList.get(x).getId());
+					PreparedStatement.setString(2, rList.get(x).getInventory().toString());
+					PreparedStatement.setString(3, rList.get(x).getMonsterID());
+					PreparedStatement.setString(4, rList.get(x).getPuzzleID());
+
+					int row = PreparedStatement.executeUpdate();
 				}
-				
-				
-			}
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -571,8 +579,10 @@ public class InputC extends java.util.Observable {
 		return output;
 	}
 
-	/* If the user is in the puzzle state it will send its inputs here and check to see which commands the user inputed and decided what to 
-	 * do while inside the puzzle state. Such as a hint or solving the puzzle.
+	/*
+	 * If the user is in the puzzle state it will send its inputs here and check to
+	 * see which commands the user inputed and decided what to do while inside the
+	 * puzzle state. Such as a hint or solving the puzzle.
 	 */
 
 	public String puzzleCommands(String s) {
@@ -623,10 +633,12 @@ public class InputC extends java.util.Observable {
 		return output;
 	}
 
-	/* If the player is in the monster combat state it will direct the user input here and will check what to do with the user input
-	 * and how the battle will be dne with the current monster the player is fighting.
+	/*
+	 * If the player is in the monster combat state it will direct the user input
+	 * here and will check what to do with the user input and how the battle will be
+	 * dne with the current monster the player is fighting.
 	 */
-	
+
 	public String monsterCommands(String s) {
 		String output = "";
 		String temp = " ";
@@ -647,13 +659,12 @@ public class InputC extends java.util.Observable {
 				output = "Monster Name: " + m.getName() + "\nMonster Description: " + m.getDescription()
 						+ "\nMonster Health: " + m.getHealth() + "\nAttack Power: " + m.getAttack();
 			}
-		} else if (s.equalsIgnoreCase("attack")) {
-			
+		} else if (s.equalsIgnoreCase("attack") || s.equalsIgnoreCase("a")) {
 
-					m.MonsterGetsAttacked(((Player) player).getAttack());
-					((Player) player).PlayerGetsAttacked(m.getAttack());
-					if (Integer.parseInt(((Monster) m).getHealth()) > 0) {
-						if (!((Monster) m).getID().equalsIgnoreCase("MN6_VP")) {
+			m.MonsterGetsAttacked(((Player) player).getAttack());
+			((Player) player).PlayerGetsAttacked(m.getAttack());
+			if (Integer.parseInt(((Monster) m).getHealth()) > 0) {
+				if (!((Monster) m).getID().equalsIgnoreCase("MN6_VP")) {
 					output = "Monster health: " + m.getHealth() + "\nPlayer Health: " + ((Player) player).getHealth();
 
 				} else {
@@ -662,7 +673,7 @@ public class InputC extends java.util.Observable {
 			} else {
 				m.setID("0");
 				output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + m.getItemReward();
-				//monsterDrop();
+				// monsterDrop();
 				((Player) player).addInventory(m.getItemReward());
 				((Player) player).addInventory("AR_HP");
 				((Player) player).setPlayerState("1");
@@ -676,7 +687,7 @@ public class InputC extends java.util.Observable {
 					((Player) player).getInventory().remove(getItemID(temp.substring(temp.indexOf(" ") + 1)));
 					m.setID("0");
 					output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + m.getItemReward();
-					//monsterDrop();
+					// monsterDrop();
 					((Player) player).addInventory(m.getItemReward());
 					((Player) player).addInventory("AR_HP");
 					((Player) player).setPlayerState("1");
@@ -686,8 +697,11 @@ public class InputC extends java.util.Observable {
 		return output;
 	}
 
-	/* The check room to the directional room methods will return the location the next room is in the array list give it to the program to work with. */
-	
+	/*
+	 * The check room to the directional room methods will return the location the
+	 * next room is in the array list give it to the program to work with.
+	 */
+
 	public int checkCurrentRoom() {
 		for (int x = 0; x < rList.size(); x++) {
 			if (rList.get(x).getId().equals(player.getRoom())) {
@@ -732,11 +746,14 @@ public class InputC extends java.util.Observable {
 		}
 		return -1;
 	}
-	
-	/* The getItemId will convert the given item name into an id for the program to use, the get item will find the item in the array list 
-	 * and return the location of the item in the array list. The item list will return the item list in the current room in string format.
+
+	/*
+	 * The getItemId will convert the given item name into an id for the program to
+	 * use, the get item will find the item in the array list and return the
+	 * location of the item in the array list. The item list will return the item
+	 * list in the current room in string format.
 	 */
-	
+
 	public String getItemID(String name) {
 		for (int x = 0; x < iList.size(); x++) {
 			if (iList.get(x).getItemName().equalsIgnoreCase(name)) {
@@ -768,7 +785,7 @@ public class InputC extends java.util.Observable {
 	}
 
 	/* convertMName will take the name of the monster and convert it into its ID */
-	
+
 	public String convertMName(String name) {
 		for (int x = 0; x < mList.size(); x++) {
 			if (mList.get(x).getName().equalsIgnoreCase(rList.get(checkCurrentRoom()).getMonsterID())) {
@@ -779,7 +796,7 @@ public class InputC extends java.util.Observable {
 	}
 
 	/* Show inventory will show the players inventory for the user to see */
-	
+
 	public String showInventory() {
 		ArrayList<String> temp = ((Player) player).showInventory();
 		String output = "";
@@ -794,8 +811,11 @@ public class InputC extends java.util.Observable {
 		return output;
 	}
 
-	/* Gets the inventory of the player and combines it with more information for the display. */
-	
+	/*
+	 * Gets the inventory of the player and combines it with more information for
+	 * the display.
+	 */
+
 	public ArrayList<String> showInventoryD() {
 		ArrayList<String> temp = ((Player) player).showInventory();
 		ArrayList<String> temp2 = new ArrayList<String>();
@@ -808,8 +828,11 @@ public class InputC extends java.util.Observable {
 		return temp2;
 	}
 
-	/* the check methods checks to see if a monster or a puzzle are in the same room as the player */
-	
+	/*
+	 * the check methods checks to see if a monster or a puzzle are in the same room
+	 * as the player
+	 */
+
 	public String checkRoomPuzzle() {
 		if (!rList.get(checkCurrentRoom()).getPuzzleID().equalsIgnoreCase("0")) {
 			for (int x = 0; x < pList.size(); x++) {
@@ -832,8 +855,11 @@ public class InputC extends java.util.Observable {
 		return "None";
 	}
 
-	/* itemDesc retrieves the description of the item with the given id. showInventoryDesc displays the description of an item in the users inventory */
-	
+	/*
+	 * itemDesc retrieves the description of the item with the given id.
+	 * showInventoryDesc displays the description of an item in the users inventory
+	 */
+
 	public String itemDesc(String id) {
 		String item = "";
 		for (int x = 0; x < iList.size(); x++) {
@@ -861,8 +887,11 @@ public class InputC extends java.util.Observable {
 		return output;
 	}
 
-	/* getCurrentPuzzle and monster both get the monster in the room with the user and puzzle in the same room as the user */
-	
+	/*
+	 * getCurrentPuzzle and monster both get the monster in the room with the user
+	 * and puzzle in the same room as the user
+	 */
+
 	public Puzzle getCurrentPuzzle() {
 		for (int x = 0; x < pList.size(); x++) {
 			if (pList.get(x).getName().equalsIgnoreCase(checkRoomPuzzle())) {
