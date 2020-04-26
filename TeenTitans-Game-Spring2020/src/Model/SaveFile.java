@@ -6,12 +6,11 @@ public class SaveFile {
 
 	private String id;
 	private String room;
-	
+
 	public SaveFile(String saveID, String room_id) {
 		this.id = saveID;
 		this.room = room_id;
-		
-		
+
 	}
 
 	public String getId() {
@@ -29,7 +28,5 @@ public class SaveFile {
 	public void setRoom(String room) {
 		this.room = room;
 	}
-	
-	
-	
+
 }

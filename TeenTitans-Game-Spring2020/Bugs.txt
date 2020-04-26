@@ -1,1 +1,0 @@
-Unequipping item does not reset attack stats to original

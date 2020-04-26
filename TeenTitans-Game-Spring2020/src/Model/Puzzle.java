@@ -1,44 +1,46 @@
 package Model;
 
-/* Stores all of the infromation about a puzzle */
+/* Stores all of the information about a puzzle */
 
 public class Puzzle {
 
-    private String id;
-    private String name;
-    private String description;
-    private String hint1;
-    private String hint2;
-    private String hint3;
-    private String hint4;
-    private String solution;
-    private String reward;
-    private String penalty;
-    private String room_puzzle;
-    private String completion;
-    private String itemRequired_1;
-    private String itemRequired_2;
-    private String itemRequired_3;
-    private String itemRequired_4;
-    
-    public Puzzle(String id, String name, String description, String hint1, String hint2, String hint3, String hint4, String solution, String reward, String penalty, String room_puzzle, String completion, String itemRequired_1, String itemRequired_2, String itemRequired_3, String itemRequired_4) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.hint1 = hint1;
-        this.hint2 = hint2;
-        this.hint3 = hint3;
-        this.hint4 = hint4;
-        this.solution = solution;
-        this.reward = reward;
-        this.penalty = penalty;
-        this.room_puzzle = room_puzzle;
-        this.completion = completion;
-        this.itemRequired_1 = itemRequired_1;
-        this.itemRequired_2 = itemRequired_2;
-        this.itemRequired_3 = itemRequired_3;
-        this.itemRequired_4 = itemRequired_4;
-    }
+	private String id;
+	private String name;
+	private String description;
+	private String hint1;
+	private String hint2;
+	private String hint3;
+	private String hint4;
+	private String solution;
+	private String reward;
+	private String penalty;
+	private String room_puzzle;
+	private String completion;
+	private String itemRequired_1;
+	private String itemRequired_2;
+	private String itemRequired_3;
+	private String itemRequired_4;
+
+	public Puzzle(String id, String name, String description, String hint1, String hint2, String hint3, String hint4,
+			String solution, String reward, String penalty, String room_puzzle, String completion,
+			String itemRequired_1, String itemRequired_2, String itemRequired_3, String itemRequired_4) {
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.hint1 = hint1;
+		this.hint2 = hint2;
+		this.hint3 = hint3;
+		this.hint4 = hint4;
+		this.solution = solution;
+		this.reward = reward;
+		this.penalty = penalty;
+		this.room_puzzle = room_puzzle;
+		this.completion = completion;
+		this.itemRequired_1 = itemRequired_1;
+		this.itemRequired_2 = itemRequired_2;
+		this.itemRequired_3 = itemRequired_3;
+		this.itemRequired_4 = itemRequired_4;
+	}
 
 	public String getId() {
 		return id;
@@ -168,9 +170,6 @@ public class Puzzle {
 		this.itemRequired_4 = itemRequired_4;
 	}
 
-    // Getters
-
-    
-    
+	// Getters
 
 }
