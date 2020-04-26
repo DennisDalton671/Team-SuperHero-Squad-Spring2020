@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 /* Stores all of the information about the player */
 
-public class Player extends Entity{
+public class Player extends Entity {
 
 	private String equipped;
 	private String playerState;
-	
+
 	public Player(String ID, String health, String attack, String room, String equipped, String playerState) {
 		super(ID, health, attack, room);
 		this.equipped = equipped;
@@ -18,22 +18,24 @@ public class Player extends Entity{
 
 	public boolean checkKey(String key) {
 		for (int x = 0; x < super.getInventory().size(); x++) {
-			if (key.equalsIgnoreCase(super.getInventory().get(x))) return true;
+			if (key.equalsIgnoreCase(super.getInventory().get(x)))
+				return true;
 		}
 		return false;
 	}
-	
+
 	public void addItem(String id) {
 		super.addInventory(id);
 	}
-	
+
 	public void removeItem(String id) {
 		super.dropInventory(id);
 	}
-		
+
 	public ArrayList<String> showInventory() {
 		ArrayList<String> temp = new ArrayList<String>();
-		if (super.getInventory().size() == 0) temp.add("Empty");
+		if (super.getInventory().size() == 0)
+			temp.add("Empty");
 		for (int x = 0; x < super.getInventory().size(); x++) {
 			temp.add(super.getInventory().get(x));
 		}
@@ -56,7 +58,7 @@ public class Player extends Entity{
 	public void setEquipped1(String equipped) {
 		this.equipped = equipped;
 	}
-	
+
 	public void setUnequip(String attack, String id) {
 		super.addInventory(id);
 		equipped = "None";
@@ -64,7 +66,7 @@ public class Player extends Entity{
 		temp -= Integer.parseInt(attack);
 		super.setAttack(Integer.toString(temp));
 	}
-	
+
 	public String getPlayerState() {
 		return playerState;
 	}
@@ -76,5 +78,5 @@ public class Player extends Entity{
 	public void PlayerGetsAttacked(String i) {
 		super.setHealth(Integer.toString(Integer.parseInt(super.getHealth()) - Integer.parseInt(i)));
 	}
-	
+
 }

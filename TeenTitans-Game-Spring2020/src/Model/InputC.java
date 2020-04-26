@@ -37,7 +37,7 @@ public class InputC extends java.util.Observable {
 	public InputC() {
 
 		keyCheck = true;
-		
+
 		url = "jdbc:ucanaccess://Resource/SoftDevPro_Final_One_For_Real_JK.accdb";
 		rList = new ArrayList<Room>();
 		iList = new ArrayList<Item>();
@@ -242,7 +242,7 @@ public class InputC extends java.util.Observable {
 			rList.get(checkCurrentRoom()).setPuzzleID("0");
 			keyCheck = false;
 		}
-		
+
 		if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
 
 			if (s.equalsIgnoreCase("Give up") || s.equalsIgnoreCase("leave")
@@ -299,15 +299,16 @@ public class InputC extends java.util.Observable {
 		}
 
 		if (s.equalsIgnoreCase("quit")) {
-			System.exit(0);;
+			System.exit(0);
+			;
 		}
-		
+
 		if (s.equalsIgnoreCase("up up down down left right left right b a")) {
 			player.setHealth("666");
 			player.setAttack("999");
 			connector.setOutput("Konami Code Accepted");
 		}
-		
+
 		// rList.get(checkCurrentRoom()).setMap("default.jpg");
 		connector.setImage(rList.get(checkCurrentRoom()).getMap());
 		connector.setList(showInventoryD());
@@ -379,7 +380,8 @@ public class InputC extends java.util.Observable {
 		}
 		// if the Answer is EAST
 		else if (s.equalsIgnoreCase("EAST")) {
-			if (player.getRoom().equalsIgnoreCase("RM_28") && !rList.get(checkCurrentRoom()).getPuzzleID().equalsIgnoreCase(("0"))) {
+			if (player.getRoom().equalsIgnoreCase("RM_28")
+					&& !rList.get(checkCurrentRoom()).getPuzzleID().equalsIgnoreCase(("0"))) {
 				output = "Puzzle Required to enter Observatory.";
 				return output;
 			}
@@ -524,7 +526,6 @@ public class InputC extends java.util.Observable {
 				PreparedStatement.setString(6, player.getRoom());
 				PreparedStatement.setString(7, player.getInventory().toString());
 
-				int row = PreparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -557,7 +558,6 @@ public class InputC extends java.util.Observable {
 					PreparedStatement.setString(3, rList.get(x).getMonsterID());
 					PreparedStatement.setString(4, rList.get(x).getPuzzleID());
 
-					int row = PreparedStatement.executeUpdate();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -786,7 +786,7 @@ public class InputC extends java.util.Observable {
 		}
 		return "false";
 	}
-	
+
 	public int getItem(String name) {
 		for (int x = 0; x < iList.size(); x++) {
 			if (iList.get(x).getItemName().equalsIgnoreCase(name)) {

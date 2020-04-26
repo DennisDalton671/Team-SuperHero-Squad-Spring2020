@@ -7,26 +7,26 @@ import javafx.event.EventHandler;
 
 /* This controller initializes the game and is shows the intial display*/
 
-public class ChangeViewController implements EventHandler<ActionEvent>{
+public class ChangeViewController implements EventHandler<ActionEvent> {
 
 	private InputC model;
 	private View view;
-	
+
 	public ChangeViewController(InputC model, View view) {
 		this.model = model;
 		this.view = view;
-		
+
 	}
-	
+
 	public void addModel(InputC model) {
 		this.model = model;
 	}
-	
+
 	public void handle(ActionEvent arg0) {
 		// TODO Auto-generated method stub
-		//model.updateView();
+		// model.updateView();
 		view.buildGame();
 		model.startup();
 	}
-	
+
 }
