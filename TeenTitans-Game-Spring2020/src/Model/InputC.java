@@ -21,6 +21,7 @@ public class InputC extends java.util.Observable {
 	Entity player;
 	Entity monster;
 	Room room;
+	boolean keyCheck;
 	ArrayList<Room> rList;
 	ArrayList<Item> iList;
 	ArrayList<Puzzle> pList;
@@ -35,6 +36,8 @@ public class InputC extends java.util.Observable {
 
 	public InputC() {
 
+		keyCheck = true;
+		
 		url = "jdbc:ucanaccess://Resource/SoftDevPro_Final_One_For_Real_JK.accdb";
 		rList = new ArrayList<Room>();
 		iList = new ArrayList<Item>();
@@ -234,6 +237,12 @@ public class InputC extends java.util.Observable {
 			temp = s;
 		}
 
+		if (player.getInventory().contains("AR_KEY5") && keyCheck) {
+			rList.get(checkCurrentRoom()).setMonsterID("0");
+			rList.get(checkCurrentRoom()).setPuzzleID("0");
+			keyCheck = false;
+		}
+		
 		if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
 
 			if (s.equalsIgnoreCase("Give up") || s.equalsIgnoreCase("leave")
@@ -296,6 +305,7 @@ public class InputC extends java.util.Observable {
 		if (s.equalsIgnoreCase("up up down down left right left right b a")) {
 			player.setHealth("666");
 			player.setAttack("999");
+			connector.setOutput("Konami Code Accepted");
 		}
 		
 		// rList.get(checkCurrentRoom()).setMap("default.jpg");
@@ -369,6 +379,10 @@ public class InputC extends java.util.Observable {
 		}
 		// if the Answer is EAST
 		else if (s.equalsIgnoreCase("EAST")) {
+			if (player.getRoom().equalsIgnoreCase("RM_28") && !rList.get(checkCurrentRoom()).getPuzzleID().equalsIgnoreCase(("0"))) {
+				output = "Puzzle Required to enter Observatory.";
+				return output;
+			}
 			if (rList.get(temp).getEastID() == null) {
 				output = "You can not go that way";
 			} else if (rList.get(temp).getEastID() != null) {
@@ -527,7 +541,7 @@ public class InputC extends java.util.Observable {
 				roomSave = roomSave.substring(0, roomSave.indexOf("."));
 
 				String createTable = "CREATE TABLE roomsave" + roomSave
-						+ " (RoomID CHAR(255), Inventory CHAR(255), Monster CHAR(255), Puzzle CHAR(255))";
+						+ " (RoomID CHAR(255), Inventory VARCHAR(4000), Monster CHAR(255), Puzzle CHAR(255))";
 
 				Statement stmt = con.createStatement();
 				stmt.executeUpdate(createTable);
@@ -573,6 +587,7 @@ public class InputC extends java.util.Observable {
 			if (player.getInventory().contains(iList.get(0).getId())) {
 				player.dropInventory(iList.get(0).getId());
 				player.addHealth(iList.get(0).getItemBenefit());
+				output = "You have been healed";
 			}
 		}
 
@@ -672,7 +687,7 @@ public class InputC extends java.util.Observable {
 				}
 			} else {
 				m.setID("0");
-				output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + m.getItemReward();
+				output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + getItemName(m.getItemReward());
 				// monsterDrop();
 				((Player) player).addInventory(m.getItemReward());
 				((Player) player).addInventory("AR_HP");
@@ -680,13 +695,13 @@ public class InputC extends java.util.Observable {
 			}
 
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase("use")) {
-			if (((Player) player).getInventory().contains(temp.substring(temp.indexOf(" ") + 1))) {
+			if (((Player) player).getInventory().contains(getItemID(temp.substring(temp.indexOf(" ") + 1)))) {
 				if (((Monster) m).getID().equalsIgnoreCase("MN6_VP")
 						&& (temp.substring(temp.indexOf(" ") + 1).equalsIgnoreCase("garlic")
 								|| temp.substring(temp.indexOf(" ") + 1).equalsIgnoreCase("stake"))) {
 					((Player) player).getInventory().remove(getItemID(temp.substring(temp.indexOf(" ") + 1)));
 					m.setID("0");
-					output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + m.getItemReward();
+					output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + getItemName(m.getItemReward());
 					// monsterDrop();
 					((Player) player).addInventory(m.getItemReward());
 					((Player) player).addInventory("AR_HP");
@@ -763,6 +778,15 @@ public class InputC extends java.util.Observable {
 		return "false";
 	}
 
+	public String getItemName(String id) {
+		for (int x = 0; x < iList.size(); x++) {
+			if (iList.get(x).getId().equalsIgnoreCase(id)) {
+				return iList.get(x).getItemName();
+			}
+		}
+		return "false";
+	}
+	
 	public int getItem(String name) {
 		for (int x = 0; x < iList.size(); x++) {
 			if (iList.get(x).getItemName().equalsIgnoreCase(name)) {
