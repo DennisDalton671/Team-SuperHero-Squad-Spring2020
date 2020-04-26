@@ -1,21 +1,18 @@
 package Controller;
 
 import Model.InputC;
-import View.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/* This controller initializes the south button to work in the game */
+
 public class SouthInput implements EventHandler<ActionEvent>{
 	private InputC model;
-	private View view;
 	
-	public SouthInput(InputC model, View view) {
+	public SouthInput(InputC model) {
 		this.model = model;
-		this.view = view;
-		
 	}
 
-	
 	public void addModel(InputC m){
 		this.model = m;
 	}

@@ -1,6 +1,10 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+/* Stores all of the information about a room */
 
 public class Room {
 
@@ -9,7 +13,6 @@ public class Room {
     private String floor;
     private String description;
     private String monsterID;
-    private String roomItemID;
     private String puzzleID;
     private String NorthID;
     private String SouthID;
@@ -24,12 +27,16 @@ public class Room {
     public Room (String id, String name, String floor, String description, String monsterID, String itemID, String puzzleID, String NorthID, String SouthID, String WestID, String EastID, String key) {
     	this.roomItemInventory = new ArrayList<String>();
     	this.id = id;
-        this.id = id;
         this.name = name;
         this.floor = floor;
         this.description = description;
         this.monsterID = monsterID;
-        this.roomItemInventory.add(itemID);
+        if (!itemID.contains("0")) {
+        	List<String> inventoryL = Arrays.asList(itemID.substring(0, itemID.length()).split(", "));
+        	this.roomItemInventory = new ArrayList<String>(inventoryL);
+        } else {
+        	this.roomItemInventory = new ArrayList<String>();	
+        }
         this.puzzleID = puzzleID;
         this.NorthID = NorthID;
         this.SouthID = SouthID;
@@ -92,8 +99,14 @@ public class Room {
     public void setMap(String map) { this.map = map;}
 
     
+    public void setInventory(String s) {
+    	List<String> inventoryL = Arrays.asList(s.substring(1, s.length() - 1).split(", "));
+        this.roomItemInventory = new ArrayList<String>(inventoryL);
+    }
 
-
+    public ArrayList<String> getInventory() {
+    	return roomItemInventory;
+    }
 
 
 

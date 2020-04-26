@@ -1,46 +1,61 @@
-<<<<<<< HEAD
-=======
-s
->>>>>>> origin/splouis
 
 			|￣￣￣￣￣￣|
 			|   Help    |
 			|  Commands | 
 			|           |
 			| ＿＿＿＿＿_| 
-			(\__/) || 
+			(\__/  || 
 			(•ㅅ•) || 
 			/ 　 づ
-------Directions------
+
+             ===============================
+             ===== Navigation Commands =====
+             ===============================
+
+======================
+>>>>> Directions <<<<<
+======================
 North, NORTH, north ---- Go up
 South, SOUTH, south ---- Go Down
 East, EAST, east ------- Go Left
 West, WEST, west ------- Go Right
 
-
--------Actions--------
-Inventory or I --------------- Displays picked up items
-Help ------------------------- Displays list of commands
-Look or L -------------------- Looks for monsters in room
-<<<<<<< HEAD
-Examine ---------------------- Displays monster stats
+=======================
+>>>>>>> Actions <<<<<<<
+=======================
 Drop + item ------------------ Drop item
-Solve ------------------------ Enter Puzzle State
-Hint ------------------------- Get puzzle hint
-fight ------------------------ Enter Battle State
-Examine ---------------------- Display more item details
-=======
+Equip + item ----------------- Equips item
 Examine + item --------------- Display more item details
-Drop + item ------------------ Drop item
+Fight ------------------------ Enter Battle State
+Heal ------------------------- Heals the player using an item
+Help ------------------------- Displays list of commands
+Inventory or I --------------- Displays picked up items
+Look or L -------------------- Looks for monsters, puzzles, and items
+Pickup + item ---------------- Picks up item in current room
+reset ------------------------ Resets the game
+Save ------------------------- Save Game
 Solve ------------------------ Enter Puzzle State
-Observe ---------------------- Displays Puzzle Description
+Unequip + item --------------- Un-equips item
+
+
+             ===========================
+             ===== Puzzle Commands =====
+             ===========================
+Give Up ---------------------- Ignore Puzzle/ Auto Clear
 Hint ------------------------- Displays Puzzle Hint
 Leave ------------------------ Exit Puzzle State
-Give Up ---------------------- Ignore Puzzle/ Auto Clear
-Fight ------------------------ Enter Battle State
-Cease ------------------------ Ignore Fight/ Auto Win
-Check ------------------------ Displays Monster Bio & Stats
+Observe ---------------------- Displays Puzzle Description
+
+
+             ===========================
+             ===== Battle Commands =====
+             ===========================
+Attack ----------------------- attacks the monster
+Inspect ---------------------- Displays monster stats
+Pull out --------------------- Ignore Fight/ Auto Win
 Retreat ---------------------- Leave Battle State
-Examine ---------------------- Displays monster stats
-Save ------------------------- Save Game
->>>>>>> origin/splouis
+Use -------------------------- use an item on the monster
+
+
+
+

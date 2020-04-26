@@ -1,5 +1,7 @@
 package Model;
 
+/* Stores all the information of a given item object */
+
 public class Item {
 
     private String id;

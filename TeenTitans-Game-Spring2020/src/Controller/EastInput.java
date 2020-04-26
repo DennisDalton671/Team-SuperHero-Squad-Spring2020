@@ -1,20 +1,17 @@
 package Controller;
 
 import Model.InputC;
-import View.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/* This controller initializes the east button to work in the game */
+
 public class EastInput implements EventHandler<ActionEvent>{
 	private InputC model;
-	private View view;
 	
-	public EastInput(InputC model, View view) {
+	public EastInput(InputC model) {
 		this.model = model;
-		this.view = view;
-		
 	}
-
 	
 	public void addModel(InputC m){
 		this.model = m;

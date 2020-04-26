@@ -5,6 +5,8 @@ import View.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/* This controller initializes the game and is shows the intial display*/
+
 public class ChangeViewController implements EventHandler<ActionEvent>{
 
 	private InputC model;

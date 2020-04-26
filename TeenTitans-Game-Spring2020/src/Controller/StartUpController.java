@@ -5,6 +5,8 @@ import View.View;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 
+/* This controller initializes the load game button */
+
 public class StartUpController implements EventHandler<ActionEvent> {
 
 	private SaveLoader model;
@@ -13,11 +15,6 @@ public class StartUpController implements EventHandler<ActionEvent> {
 	public StartUpController(SaveLoader model, View view) {
 		this.model = model;
 		this.view = view;
-	}
-
-
-	public void addModel(SaveLoader m){
-		this.model = m;
 	}
 	
 	public void handle(ActionEvent event) {
