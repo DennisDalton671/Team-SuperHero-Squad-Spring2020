@@ -599,6 +599,7 @@ public class InputC extends java.util.Observable {
 				output = "You have been healed";
 
 			}
+			output = "You don't have any health potions available";
 		}
 
 		return output;
