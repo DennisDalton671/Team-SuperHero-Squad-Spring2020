@@ -588,8 +588,9 @@ public class InputC extends java.util.Observable {
 				player.dropInventory(iList.get(0).getId());
 				player.addHealth(iList.get(0).getItemBenefit());
 				output = "You have been healed";
-			}
-		} output = "You do not have any health potions to heal";
+			}else
+				output = "You do not have any health potions to heal";
+		} 
 
 		return output;
 	}
