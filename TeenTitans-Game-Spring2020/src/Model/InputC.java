@@ -891,8 +891,13 @@ public class InputC extends java.util.Observable {
 			if (rList.get(checkCurrentRoom()).checkInventory(iList.get(x).getId())) {
 				if (iList.get(x).getId().equalsIgnoreCase(id)) {
 					item += "[" + iList.get(x).getDescription() + "] ";
-				}
+					if (!iList.get(x).getItemBoost().equalsIgnoreCase("0")) {
+						item += " [ + " + iList.get(x).getItemBoost() + " Attack ]";
+					}else
+						item += "[ + " + iList.get(x).getItemBenefit() + "Health ]";
+				} 
 			}
+
 		}
 		return item;
 	}
@@ -905,9 +910,15 @@ public class InputC extends java.util.Observable {
 				if (iList.get(x).getId().equalsIgnoreCase(temp.get(y))) {
 					if (temp.get(y).equalsIgnoreCase(id)) {
 						output += iList.get(x).getDescription();
+						if (!iList.get(x).getItemBoost().equalsIgnoreCase("0")) {
+							output += "      + " + iList.get(x).getItemBoost() + " Attack ";
+						} else
+							output += "      + " + iList.get(x).getItemBenefit() + "Health ";
 					}
 				}
+
 			}
+
 		}
 		return output;
 	}
