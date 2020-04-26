@@ -237,6 +237,17 @@ public class InputC extends java.util.Observable {
 			temp = s;
 		}
 
+		if (s.equalsIgnoreCase("craft")) {
+			if (player.getInventory().contains("AR_WP2") && player.getInventory().contains("AR_WP4")) {
+				player.addInventory("AR_VP1");
+				player.dropInventory("AR_WP4");
+				player.dropInventory("AR_WP2");
+				connector.setOutput("You've got the power, the Stake it is now in your inventory");
+			} else {
+				connector.setOutput("You do not have the materials to craft anything");
+			}
+		}
+
 		if (player.getInventory().contains("AR_KEY5") && keyCheck) {
 			rList.get(checkCurrentRoom()).setMonsterID("0");
 			rList.get(checkCurrentRoom()).setPuzzleID("0");
@@ -588,9 +599,9 @@ public class InputC extends java.util.Observable {
 				player.dropInventory(iList.get(0).getId());
 				player.addHealth(iList.get(0).getItemBenefit());
 				output = "You have been healed";
-			}else
+			} else
 				output = "You do not have any health potions to heal";
-		} 
+		}
 
 		return output;
 	}
@@ -893,9 +904,11 @@ public class InputC extends java.util.Observable {
 					item += "[" + iList.get(x).getDescription() + "] ";
 					if (!iList.get(x).getItemBoost().equalsIgnoreCase("0")) {
 						item += " [ + " + iList.get(x).getItemBoost() + " Attack ]";
-					}else
-						item += "[ + " + iList.get(x).getItemBenefit() + "Health ]";
-				} 
+					} else if (!iList.get(x).getItemBenefit().equalsIgnoreCase("0")) {
+						item += "[ + " + iList.get(x).getItemBenefit() + " Health ]";
+					}
+					item += "";
+				}
 			}
 
 		}
@@ -912,13 +925,15 @@ public class InputC extends java.util.Observable {
 						output += iList.get(x).getDescription();
 						if (!iList.get(x).getItemBoost().equalsIgnoreCase("0")) {
 							output += "      + " + iList.get(x).getItemBoost() + " Attack ";
-						} else
-							output += "      + " + iList.get(x).getItemBenefit() + "Health ";
+						} else if (!iList.get(x).getItemBenefit().equalsIgnoreCase("0")) {
+							output += "[ + " + iList.get(x).getItemBenefit() + " Health ]";
+						}
+						output += "";
 					}
+
 				}
 
 			}
-
 		}
 		return output;
 	}
