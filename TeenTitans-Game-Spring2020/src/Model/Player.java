@@ -60,6 +60,7 @@ public class Player extends Entity {
 	}
 
 	public void setUnequip(String attack, String id) {
+		System.out.println(attack);
 		super.addInventory(id);
 		equipped = "None";
 		int temp = Integer.parseInt(super.getAttack());

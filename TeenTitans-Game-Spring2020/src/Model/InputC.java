@@ -578,7 +578,7 @@ public class InputC extends java.util.Observable {
 			}
 		} else if (s.equalsIgnoreCase(("unequip"))) {
 			if (!((Player) player).getEquipped().equalsIgnoreCase("None")) {
-				((Player) player).setUnequip(iList.get(getItem(temp.substring(temp.indexOf(" ") + 1))).getItemBoost(),
+				((Player) player).setUnequip(iList.get(getItem(((Player) player).getEquipped())).getItemBoost(),
 						getItemID(((Player) player).getEquipped()));
 				output = "Item Unequipped";
 			} else
