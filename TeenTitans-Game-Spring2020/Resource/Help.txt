@@ -26,6 +26,7 @@ West, WEST, west ------- Go Right
 Drop + item ------------------ Drop item
 Equip + item ----------------- Equips item
 Examine + item --------------- Display more item details
+Craft ------------------------ Craft Stake
 Fight ------------------------ Enter Battle State
 Heal ------------------------- Heals the player using an item
 Help ------------------------- Displays list of commands
