@@ -53,10 +53,13 @@ public class Player extends Entity {
 		temp += Integer.parseInt(attack);
 		super.setAttack(Integer.toString(temp));
 		super.getInventory().remove(equipped);
+<<<<<<< HEAD
 	}
 
 	public void setEquipped1(String equipped) {
 		this.equipped = equipped;
+=======
+>>>>>>> 9000c3e9637ea0629556b0ae229f077350f81a1c
 	}
 
 	public void setUnequip(String attack, String id) {
@@ -66,7 +69,11 @@ public class Player extends Entity {
 		temp -= Integer.parseInt(attack);
 		super.setAttack(Integer.toString(temp));
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 9000c3e9637ea0629556b0ae229f077350f81a1c
 	public String getPlayerState() {
 		return playerState;
 	}
@@ -78,5 +85,9 @@ public class Player extends Entity {
 	public void PlayerGetsAttacked(String i) {
 		super.setHealth(Integer.toString(Integer.parseInt(super.getHealth()) - Integer.parseInt(i)));
 	}
+<<<<<<< HEAD
 
+=======
+	
+>>>>>>> 9000c3e9637ea0629556b0ae229f077350f81a1c
 }

@@ -69,19 +69,30 @@ public class Entity {
 	public ArrayList<String> getInventory() {
 		return inventory;
 	}
+<<<<<<< HEAD
 
 	public void setInventory(ArrayList<String> s) {
 		inventory = s;
 	}
 
+=======
+	
+	public void setInventory(ArrayList<String> s) {
+		inventory = s;
+	}
+	
+>>>>>>> 9000c3e9637ea0629556b0ae229f077350f81a1c
 	public void addHealth(String s) {
 		int temp = Integer.parseInt(health);
 		temp = Integer.parseInt(health) + Integer.parseInt(s);
 		health = Integer.toString(temp);
 	}
+<<<<<<< HEAD
 
 	public void setInventory(String s) {
 		List<String> inventoryL = Arrays.asList(s.substring(1, s.length() - 1).split(", "));
 		this.inventory = new ArrayList<String>(inventoryL);
 	}
+=======
+>>>>>>> 9000c3e9637ea0629556b0ae229f077350f81a1c
 }
