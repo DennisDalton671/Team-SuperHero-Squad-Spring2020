@@ -34,7 +34,6 @@ import javafx.stage.Stage;
  * 1920x1080 HD display
  */
 
-@SuppressWarnings("deprecation")
 public class View extends BorderPane implements java.util.Observer {
 
 	public static final int width = 1920;
@@ -154,7 +153,6 @@ public class View extends BorderPane implements java.util.Observer {
 
 		// TODO Auto-generated method stub
 		if (obj instanceof Connector) {
-<<<<<<< HEAD
 
 			if (((Connector) obj).isLose()) {
 				this.getChildren().clear();
@@ -185,8 +183,6 @@ public class View extends BorderPane implements java.util.Observer {
 				}
 			}
 
-=======
->>>>>>> 9000c3e9637ea0629556b0ae229f077350f81a1c
 			health.setText(((Connector) obj).getHealth());
 			attack.setText(((Connector) obj).getAttack());
 			equipped.setText(((Connector) obj).getEquipped());

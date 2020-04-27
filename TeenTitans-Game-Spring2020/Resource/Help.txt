@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-s
->>>>>>> origin/splouis
 
 			|￣￣￣￣￣￣|
 			|   Help    |
@@ -24,7 +20,6 @@ South, SOUTH, south ---- Go Down
 East, EAST, east ------- Go Left
 West, WEST, west ------- Go Right
 
-<<<<<<< HEAD
 =======================
 >>>>>>> Actions <<<<<<<
 =======================
@@ -64,38 +59,3 @@ Use + item ------------------- Use an item on the monster
 
 
 
-
-=======
-
--------Actions--------
-Inventory or I --------------- Displays picked up items
-Help ------------------------- Displays list of commands
-Look or L -------------------- Looks for monsters in room
-<<<<<<< HEAD
-Examine ---------------------- Displays monster stats
-Drop + item ------------------ Drop item
-Solve ------------------------ Enter Puzzle State
-Hint ------------------------- Get puzzle hint
-<<<<<<< HEAD
-Fight ------------------------ Enter Battle State
-Examine + item ---------------------- Display more item details
-=======
-fight ------------------------ Enter Battle State
-Examine ---------------------- Display more item details
-=======
-Examine + item --------------- Display more item details
-Drop + item ------------------ Drop item
-Solve ------------------------ Enter Puzzle State
-Observe ---------------------- Displays Puzzle Description
-Hint ------------------------- Displays Puzzle Hint
-Leave ------------------------ Exit Puzzle State
-Give Up ---------------------- Ignore Puzzle/ Auto Clear
-Fight ------------------------ Enter Battle State
-Cease ------------------------ Ignore Fight/ Auto Win
-Check ------------------------ Displays Monster Bio & Stats
-Retreat ---------------------- Leave Battle State
-Examine ---------------------- Displays monster stats
-Save ------------------------- Save Game
->>>>>>> origin/splouis
->>>>>>> d7345e492c07ffaa75e7aaf6f41d98fa025d6621
->>>>>>> 9000c3e9637ea0629556b0ae229f077350f81a1c

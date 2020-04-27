@@ -89,21 +89,15 @@ public class Connector {
 	}
 
 	public void setEquipped(String equipped) {
-<<<<<<< HEAD
 		if (equipped.equalsIgnoreCase("0") || equipped.equalsIgnoreCase(""))
 			this.equipped = "None";
 		else
 			this.equipped = equipped;
-=======
-		if (equipped.equalsIgnoreCase("0") || equipped.equalsIgnoreCase("")) this.equipped = "None";
-		else this.equipped = equipped;
->>>>>>> 9000c3e9637ea0629556b0ae229f077350f81a1c
 	}
 
 	public String getHealth() {
 		return health;
 	}
-<<<<<<< HEAD
 
 	public boolean isLose() {
 		return lose;
@@ -129,9 +123,4 @@ public class Connector {
 		Connector.restart = restart;
 	}
 
-=======
-	
-	
-	
->>>>>>> 9000c3e9637ea0629556b0ae229f077350f81a1c
 }

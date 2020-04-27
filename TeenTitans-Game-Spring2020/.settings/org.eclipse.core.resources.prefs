@@ -1,13 +1,6 @@
 =\=\=\=\=\=\=
 <<<<<<<=HEAD
->>>>>>>=origin/splouis
+>>>>>>>=9000c3e9637ea0629556b0ae229f077350f81a1c
 eclipse.preferences.version=1
 encoding//Resource/Help.txt=UTF-8
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 encoding//src/BaseClasses/AttackState.java=UTF-8
-=======
-encoding//src/Model/AttackState.java=UTF-8
->>>>>>> origin/splouis
->>>>>>> 9000c3e9637ea0629556b0ae229f077350f81a1c

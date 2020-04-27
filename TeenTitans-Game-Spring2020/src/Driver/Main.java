@@ -41,7 +41,6 @@ public class Main extends Application {
 		launch(args);
 	}
 
-	@SuppressWarnings("deprecation")
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		View view = new View(primaryStage);
