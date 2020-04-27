@@ -37,7 +37,7 @@ public class InputC extends java.util.Observable {
 	public InputC() {
 
 		keyCheck = true;
-		
+
 		url = "jdbc:ucanaccess://Resource/SoftDevPro_Final_One_For_Real_JK.accdb";
 		rList = new ArrayList<Room>();
 		iList = new ArrayList<Item>();
@@ -237,12 +237,23 @@ public class InputC extends java.util.Observable {
 			temp = s;
 		}
 
+		if (s.equalsIgnoreCase("craft")) {
+			if (player.getInventory().contains("AR_WP2") && player.getInventory().contains("AR_WP4")) {
+				player.addInventory("AR_VP1");
+				player.dropInventory("AR_WP4");
+				player.dropInventory("AR_WP2");
+				connector.setOutput("You've got the power, the Stake it is now in your inventory");
+			} else {
+				connector.setOutput("You do not have the materials to craft anything");
+			}
+		}
+
 		if (player.getInventory().contains("AR_KEY5") && keyCheck) {
 			rList.get(checkCurrentRoom()).setMonsterID("0");
 			rList.get(checkCurrentRoom()).setPuzzleID("0");
 			keyCheck = false;
 		}
-		
+
 		if (((Player) player).getPlayerState().equalsIgnoreCase("2")) {
 
 			if (s.equalsIgnoreCase("Give up") || s.equalsIgnoreCase("leave")
@@ -299,15 +310,16 @@ public class InputC extends java.util.Observable {
 		}
 
 		if (s.equalsIgnoreCase("quit")) {
-			System.exit(0);;
+			System.exit(0);
+			;
 		}
-		
+
 		if (s.equalsIgnoreCase("up up down down left right left right b a")) {
 			player.setHealth("666");
 			player.setAttack("999");
 			connector.setOutput("Konami Code Accepted");
 		}
-		
+
 		// rList.get(checkCurrentRoom()).setMap("default.jpg");
 		connector.setImage(rList.get(checkCurrentRoom()).getMap());
 		connector.setList(showInventoryD());
@@ -379,7 +391,8 @@ public class InputC extends java.util.Observable {
 		}
 		// if the Answer is EAST
 		else if (s.equalsIgnoreCase("EAST")) {
-			if (player.getRoom().equalsIgnoreCase("RM_28") && !rList.get(checkCurrentRoom()).getPuzzleID().equalsIgnoreCase(("0"))) {
+			if (player.getRoom().equalsIgnoreCase("RM_28")
+					&& !rList.get(checkCurrentRoom()).getPuzzleID().equalsIgnoreCase(("0"))) {
 				output = "Puzzle Required to enter Observatory.";
 				return output;
 			}
@@ -524,7 +537,6 @@ public class InputC extends java.util.Observable {
 				PreparedStatement.setString(6, player.getRoom());
 				PreparedStatement.setString(7, player.getInventory().toString());
 
-				int row = PreparedStatement.executeUpdate();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -557,7 +569,6 @@ public class InputC extends java.util.Observable {
 					PreparedStatement.setString(3, rList.get(x).getMonsterID());
 					PreparedStatement.setString(4, rList.get(x).getPuzzleID());
 
-					int row = PreparedStatement.executeUpdate();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -578,7 +589,7 @@ public class InputC extends java.util.Observable {
 			}
 		} else if (s.equalsIgnoreCase(("unequip"))) {
 			if (!((Player) player).getEquipped().equalsIgnoreCase("None")) {
-				((Player) player).setUnequip(iList.get(getItem(temp.substring(temp.indexOf(" ") + 1))).getItemBoost(),
+				((Player) player).setUnequip(iList.get(getItem(((Player) player).getEquipped())).getItemBoost(),
 						getItemID(((Player) player).getEquipped()));
 				output = "Item Unequipped";
 			} else
@@ -588,7 +599,8 @@ public class InputC extends java.util.Observable {
 				player.dropInventory(iList.get(0).getId());
 				player.addHealth(iList.get(0).getItemBenefit());
 				output = "You have been healed";
-			}
+			} else
+				output = "You do not have any health potions to heal";
 		}
 
 		return output;
@@ -786,7 +798,7 @@ public class InputC extends java.util.Observable {
 		}
 		return "false";
 	}
-	
+
 	public int getItem(String name) {
 		for (int x = 0; x < iList.size(); x++) {
 			if (iList.get(x).getItemName().equalsIgnoreCase(name)) {
@@ -890,8 +902,15 @@ public class InputC extends java.util.Observable {
 			if (rList.get(checkCurrentRoom()).checkInventory(iList.get(x).getId())) {
 				if (iList.get(x).getId().equalsIgnoreCase(id)) {
 					item += "[" + iList.get(x).getDescription() + "] ";
+					if (!iList.get(x).getItemBoost().equalsIgnoreCase("0")) {
+						item += " [ + " + iList.get(x).getItemBoost() + " Attack ]";
+					} else if (!iList.get(x).getItemBenefit().equalsIgnoreCase("0")) {
+						item += "[ + " + iList.get(x).getItemBenefit() + " Health ]";
+					}
+					item += "";
 				}
 			}
+
 		}
 		return item;
 	}
@@ -904,8 +923,16 @@ public class InputC extends java.util.Observable {
 				if (iList.get(x).getId().equalsIgnoreCase(temp.get(y))) {
 					if (temp.get(y).equalsIgnoreCase(id)) {
 						output += iList.get(x).getDescription();
+						if (!iList.get(x).getItemBoost().equalsIgnoreCase("0")) {
+							output += "      + " + iList.get(x).getItemBoost() + " Attack ";
+						} else if (!iList.get(x).getItemBenefit().equalsIgnoreCase("0")) {
+							output += "[ + " + iList.get(x).getItemBenefit() + " Health ]";
+						}
+						output += "";
 					}
+
 				}
+
 			}
 		}
 		return output;

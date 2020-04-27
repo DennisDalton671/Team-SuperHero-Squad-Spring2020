@@ -24,7 +24,7 @@ public class Connector {
 		win = false;
 		restart = false;
 	}
-	
+
 	public String getOutput() {
 		return output;
 	}
@@ -32,11 +32,11 @@ public class Connector {
 	public void setOutput(String output) {
 		this.output = output;
 	}
-	
+
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
+
 	public String getImage() {
 		return image;
 	}
@@ -50,7 +50,7 @@ public class Connector {
 			this.list.add(new Inventory(list.get(x)));
 		}
 	}
-	
+
 	public void clearList() {
 		list.clear();
 	}
@@ -89,8 +89,10 @@ public class Connector {
 	}
 
 	public void setEquipped(String equipped) {
-		if (equipped.equalsIgnoreCase("0") || equipped.equalsIgnoreCase("")) this.equipped = "None";
-		else this.equipped = equipped;
+		if (equipped.equalsIgnoreCase("0") || equipped.equalsIgnoreCase(""))
+			this.equipped = "None";
+		else
+			this.equipped = equipped;
 	}
 
 	public String getHealth() {
@@ -112,7 +114,7 @@ public class Connector {
 	public void setWin(boolean win) {
 		this.win = win;
 	}
-	
+
 	public boolean isRestart() {
 		return restart;
 	}
@@ -120,5 +122,5 @@ public class Connector {
 	public void setRestart(boolean restart) {
 		Connector.restart = restart;
 	}
-	
+
 }

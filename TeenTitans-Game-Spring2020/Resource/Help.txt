@@ -15,7 +15,7 @@
 ======================
 >>>>> Directions <<<<<
 ======================
-North, NORTH, north ---- Go up
+North, NORTH, north ---- Go Up
 South, SOUTH, south ---- Go Down
 East, EAST, east ------- Go Left
 West, WEST, west ------- Go Right
@@ -26,16 +26,17 @@ West, WEST, west ------- Go Right
 Drop + item ------------------ Drop item
 Equip + item ----------------- Equips item
 Examine + item --------------- Display more item details
+Craft ------------------------ Craft Stake
 Fight ------------------------ Enter Battle State
 Heal ------------------------- Heals the player using an item
 Help ------------------------- Displays list of commands
 Inventory or I --------------- Displays picked up items
 Look or L -------------------- Looks for monsters, puzzles, and items
 Pickup + item ---------------- Picks up item in current room
-reset ------------------------ Resets the game
+Reset ------------------------ Resets the game
 Save ------------------------- Save Game
 Solve ------------------------ Enter Puzzle State
-Unequip + item --------------- Un-equips item
+Unequip ---------------------- Un-equips item
 
 
              ===========================
@@ -50,11 +51,11 @@ Observe ---------------------- Displays Puzzle Description
              ===========================
              ===== Battle Commands =====
              ===========================
-Attack ----------------------- attacks the monster
+Attack ----------------------- Attacks the monster
 Inspect ---------------------- Displays monster stats
 Pull out --------------------- Ignore Fight/ Auto Win
 Retreat ---------------------- Leave Battle State
-Use -------------------------- use an item on the monster
+Use + item ------------------- Use an item on the monster
 
 
 
