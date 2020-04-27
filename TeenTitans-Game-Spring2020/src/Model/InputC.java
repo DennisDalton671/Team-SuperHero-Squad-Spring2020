@@ -537,6 +537,8 @@ public class InputC extends java.util.Observable {
 				PreparedStatement.setString(6, player.getRoom());
 				PreparedStatement.setString(7, player.getInventory().toString());
 
+				PreparedStatement.execute();
+				
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
@@ -564,11 +566,15 @@ public class InputC extends java.util.Observable {
 
 					PreparedStatement PreparedStatement = con.prepareStatement(playerSave1);
 
+					
+					
 					PreparedStatement.setString(1, rList.get(x).getId());
 					PreparedStatement.setString(2, rList.get(x).getInventory().toString());
 					PreparedStatement.setString(3, rList.get(x).getMonsterID());
 					PreparedStatement.setString(4, rList.get(x).getPuzzleID());
 
+					PreparedStatement.execute();
+					
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
