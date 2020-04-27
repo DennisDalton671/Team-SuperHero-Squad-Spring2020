@@ -537,6 +537,7 @@ public class InputC extends java.util.Observable {
 				PreparedStatement.setString(6, player.getRoom());
 				PreparedStatement.setString(7, player.getInventory().toString());
 
+				PreparedStatement.execute();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
