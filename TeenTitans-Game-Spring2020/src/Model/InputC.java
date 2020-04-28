@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.File;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -10,6 +11,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
 
 /* The main class of the model and controls all the user inputs and how to deal with them */
 
@@ -35,7 +39,8 @@ public class InputC extends java.util.Observable {
 	 */
 
 	public InputC() {
-
+		
+		playSound("ThunderClap.wav");
 		keyCheck = true;
 
 		url = "jdbc:ucanaccess://Resource/SoftDevPro_Final_One_For_Real_JK.accdb";
@@ -222,6 +227,7 @@ public class InputC extends java.util.Observable {
 				e.printStackTrace();
 			}
 		}
+		playSound("Save.wav");
 	}
 
 	/*
@@ -242,8 +248,10 @@ public class InputC extends java.util.Observable {
 				player.addInventory("AR_VP1");
 				player.dropInventory("AR_WP4");
 				player.dropInventory("AR_WP2");
+				playSound("ThePower.wav");
 				connector.setOutput("You've got the power, the Stake it is now in your inventory");
 			} else {
+				playSound("Nani!.wav");
 				connector.setOutput("You do not have the materials to craft anything");
 			}
 		}
@@ -262,6 +270,7 @@ public class InputC extends java.util.Observable {
 				connector.setOutput(puzzleCommands(s));
 			} else {
 				connector.setOutput("No none puzzling inputs while puzzling");
+				playSound("GodNo.wav");
 			}
 
 		}
@@ -272,6 +281,7 @@ public class InputC extends java.util.Observable {
 					|| s.equalsIgnoreCase("a")) {
 				connector.setOutput(monsterCommands(s));
 			} else {
+				playSound("GodNo.wav");
 				connector.setOutput("No none battling inputs while battling");
 			}
 		} else if (((Player) player).getPlayerState().equalsIgnoreCase("1")) {
@@ -294,6 +304,7 @@ public class InputC extends java.util.Observable {
 
 				ProcessBuilder help = new ProcessBuilder("Notepad.exe", "Resource/Help.txt");
 				help.start();
+				playSound("Noob.wav");
 
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -303,6 +314,7 @@ public class InputC extends java.util.Observable {
 		if (s.equalsIgnoreCase("look") || s.equalsIgnoreCase("l")) {
 			if (((Player) player).getRoom().equalsIgnoreCase("RM_16")) {
 				player.setRoom("RM_3");
+				playSound("BoneCrack.wav");
 			}
 		}
 		if (s.equalsIgnoreCase("reset")) {
@@ -318,6 +330,7 @@ public class InputC extends java.util.Observable {
 			player.setHealth("666");
 			player.setAttack("999");
 			connector.setOutput("Konami Code Accepted");
+			playSound("MarioStar.wav");
 		}
 
 		// rList.get(checkCurrentRoom()).setMap("default.jpg");
@@ -328,11 +341,13 @@ public class InputC extends java.util.Observable {
 		connector.setEquipped(((Player) player).getEquipped());
 
 		if (Integer.parseInt(((Player) player).getHealth()) <= 0) {
+			playSound("ScaryScream.wav");
 			connector.setLose(true);
 		}
 
 		if (((Player) player).getRoom().equalsIgnoreCase("RM_7")) {
 			connector.setWin(true);
+			playSound("VictoryScreech.wav");
 		}
 
 		setChanged();
@@ -381,6 +396,7 @@ public class InputC extends java.util.Observable {
 						output = "Room Unlocked\n" + rList.get(temp).getName();
 					} else {
 						output = "Key Required";
+						playSound("Nani!.wav");
 					}
 				} else {
 					player.setRoom(rList.get(temp).getNorthID());
@@ -406,6 +422,7 @@ public class InputC extends java.util.Observable {
 						output = "Room Unlocked\n" + rList.get(temp).getName();
 					} else {
 						output = "Key Required";
+						playSound("Nani!.wav");
 					}
 				} else {
 					player.setRoom(rList.get(temp).getEastID());
@@ -426,6 +443,7 @@ public class InputC extends java.util.Observable {
 						output = "Room Unlocked\n" + rList.get(temp).getName();
 					} else {
 						output = "Key Required";
+						playSound("Nani!.wav");
 					}
 				} else {
 					player.setRoom(rList.get(temp).getSouthID());
@@ -446,6 +464,7 @@ public class InputC extends java.util.Observable {
 						output = "Room Unlocked\n" + rList.get(temp).getName();
 					} else {
 						output = "Key Required";
+						playSound("Nani!.wav");
 					}
 				} else {
 					player.setRoom(rList.get(temp).getWestID());
@@ -478,12 +497,16 @@ public class InputC extends java.util.Observable {
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Pickup"))) {
 			if (getItemID(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
+				playSound("GodNo.wav");
 			}
 			if (rList.get(checkCurrentRoom()).pickupItem(getItemID(temp.substring(temp.indexOf(" ") + 1)))) {
 				player.addInventory(getItemID(temp.substring(temp.indexOf(" ") + 1)));
+				playSound("Candy.wav");
 				output = "Item added to inventory";
-			} else
+			} else {
 				output = "Item not in room";
+				playSound("GodNo.wav");
+			}
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Drop"))) {
 			if (getItemID(temp.substring(temp.indexOf(" ") + 1)).equalsIgnoreCase("false")) {
 				output = "Item does not exist";
@@ -492,8 +515,10 @@ public class InputC extends java.util.Observable {
 				player.dropInventory(getItemID(temp.substring(temp.indexOf(" ") + 1)));
 				rList.get(checkCurrentRoom()).addInventory(getItemID(temp.substring(temp.indexOf(" ") + 1)));
 				output = "Item dropped into room";
+				playSound("Bruh.wav");
 			} else
 				output = "Item not in inventory";
+			playSound("GodNo.wav");
 
 		} else if (s.equalsIgnoreCase("Inventory") || s.equalsIgnoreCase("I")) {
 			output = "Inventory: " + showInventory();
@@ -503,6 +528,7 @@ public class InputC extends java.util.Observable {
 				output = "You are now puzzling";
 			} else {
 				output = "No puzzle in the room";
+				playSound("GodNo.wav");
 			}
 		} else if (s.equalsIgnoreCase("Fight")) {
 			if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
@@ -511,6 +537,7 @@ public class InputC extends java.util.Observable {
 				// r.list.get(checkCurrentRoom()).getMonsterID())
 			} else {
 				output = "There is no monster in this room";
+				playSound("GodNo.wav");
 			}
 
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Examine"))) {
@@ -574,6 +601,7 @@ public class InputC extends java.util.Observable {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			playSound("WhatASave.wav");
 			output = "Game successfully Saved";
 		} else if (temp.substring(0, temp.indexOf(" ")).equalsIgnoreCase(("Equip"))) {
 			if (player.getInventory().contains(getItemID(temp.substring(temp.indexOf(" ") + 1)))) {
@@ -587,6 +615,7 @@ public class InputC extends java.util.Observable {
 				}
 			} else {
 				output = "Unable to equip item";
+				playSound("GodNo.wav");
 			}
 		} else if (s.equalsIgnoreCase(("unequip"))) {
 			if (!((Player) player).getEquipped().equalsIgnoreCase("None")) {
@@ -595,6 +624,7 @@ public class InputC extends java.util.Observable {
 				output = "Item Unequipped";
 			} else
 				output = "Cannot unequip";
+			playSound("GodNo.wav");
 		} else if (s.equalsIgnoreCase("heal")) {
 			if (player.getInventory().contains(iList.get(0).getId())) {
 				player.dropInventory(iList.get(0).getId());
@@ -617,6 +647,7 @@ public class InputC extends java.util.Observable {
 		String output = "";
 		Puzzle p = getCurrentPuzzle();
 		if (s.equalsIgnoreCase("give up")) {
+			playSound("RageQuit.wav");
 			((Player) player).setPlayerState("1");
 			((Player) player).addInventory(p.getReward());
 			rList.get(checkCurrentRoom()).setPuzzleID("0");
@@ -633,12 +664,14 @@ public class InputC extends java.util.Observable {
 											|| (p.getItemRequired_3().equalsIgnoreCase("0"))
 													&& (((Player) player).getInventory().contains(p.getItemRequired_4())
 															|| (p.getItemRequired_4().equalsIgnoreCase("0"))))))) {
+				playSound("Yousmart.wav");
 				((Player) player).setPlayerState("1");
 				((Player) player).addInventory(p.getReward());
 				rList.get(checkCurrentRoom()).setPuzzleID("0");
 				output = p.getCompletion();
 			} else {
 				output = "Missing required item";
+				playSound("Nani!.wav");
 			}
 		} else if (s.equalsIgnoreCase("observe")) {
 			output = p.getDescription();
@@ -675,6 +708,7 @@ public class InputC extends java.util.Observable {
 		}
 		Monster m = getCurrentMonster();
 		if (s.equalsIgnoreCase("pull out")) {
+			playSound("RageQuit.wav");
 			((Player) player).setPlayerState("1");
 			((Player) player).addInventory(m.getItemReward());
 			rList.get(checkCurrentRoom()).setMonsterID("0");
@@ -693,12 +727,13 @@ public class InputC extends java.util.Observable {
 			((Player) player).PlayerGetsAttacked(m.getAttack());
 			if (Integer.parseInt(((Monster) m).getHealth()) > 0) {
 				if (!((Monster) m).getID().equalsIgnoreCase("MN6_VP")) {
+					playSound("SwordClash.wav");
 					output = "Monster health: " + m.getHealth() + "\nPlayer Health: " + ((Player) player).getHealth();
-
 				} else {
 					output = "Immune to attacks";
 				}
 			} else {
+				playSound("SwordClash.wav");
 				m.setID("0");
 				output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + getItemName(m.getItemReward());
 				// monsterDrop();
@@ -960,5 +995,17 @@ public class InputC extends java.util.Observable {
 			}
 		}
 		return null;
+	}
+
+	public void playSound(String soundName) {
+		try {
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundName).getAbsoluteFile());
+			Clip clip = AudioSystem.getClip();
+			clip.open(audioInputStream);
+			clip.start();
+		} catch (Exception ex) {
+			System.out.println("Error with playing sound.");
+			ex.printStackTrace();
+		}
 	}
 }

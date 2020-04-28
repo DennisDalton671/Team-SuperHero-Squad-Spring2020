@@ -1,7 +1,12 @@
 package View;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Observable;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 import Driver.Main;
 import Model.Connector;
@@ -78,6 +83,7 @@ public class View extends BorderPane implements java.util.Observer {
 		buildMenu();
 
 	}
+	
 
 	public void addInputController(EventHandler<ActionEvent> controller) {
 		inputButton = new Button("Input");
@@ -126,9 +132,10 @@ public class View extends BorderPane implements java.util.Observer {
 	}
 
 	public void addAttackInput(EventHandler<ActionEvent> controller) {
-		attackButton = new Button("Attck");
+		attackButton = new Button("Attack");
 		setButton(attackButton);
 		attackButton.setOnAction(controller);
+		
 	}
 
 	public void addLookInput(EventHandler<ActionEvent> controller) {
@@ -355,7 +362,7 @@ public class View extends BorderPane implements java.util.Observer {
 	}
 
 	public Button setButton(Button b) {
-		b.setStyle("-fx-font-size: 40");
+		b.setStyle("-fx-font-size: 30");
 		b.setBackground(new Background(new BackgroundFill(Color.DEEPSKYBLUE, null, null)));
 		b.setMinHeight(100);
 		b.setMinWidth(125);
