@@ -532,6 +532,7 @@ public class InputC extends java.util.Observable {
 			}
 		} else if (s.equalsIgnoreCase("Fight")) {
 			if (!rList.get(checkCurrentRoom()).getMonsterID().equalsIgnoreCase("0")) {
+				playSound("Round1.wav");
 				((Player) player).setPlayerState("3");
 				output = "You are now in battle";
 				// r.list.get(checkCurrentRoom()).getMonsterID())
@@ -630,6 +631,7 @@ public class InputC extends java.util.Observable {
 				player.dropInventory(iList.get(0).getId());
 				player.addHealth(iList.get(0).getItemBenefit());
 				output = "You have been healed";
+				playSound("Heal.wav");
 			} else
 				output = "You do not have any health potions to heal";
 		}
@@ -733,7 +735,7 @@ public class InputC extends java.util.Observable {
 					output = "Immune to attacks";
 				}
 			} else {
-				playSound("SwordClash.wav");
+				playSound("KO.wav");
 				m.setID("0");
 				output = m.getMonsterDefeatedMessage() + "\nItems Rewarded: " + getItemName(m.getItemReward());
 				// monsterDrop();
